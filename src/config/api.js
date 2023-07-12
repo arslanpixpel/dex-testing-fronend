@@ -1,4 +1,4 @@
-export const JS_NODE_URL = "http://localhost:8000";
+export const JS_NODE_URL = "https://motionless-stole-jay.cyclic.app";
 export const JSON_RPC_URL = "https://json-rpc-proxy-0.dev-site.space";
 export const NETWORK = "testnet";
 
