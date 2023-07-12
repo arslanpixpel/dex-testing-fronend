@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  color: white;
+}
+
+hr {
+  border-top: 4px dashed rgb(4, 0, 255);
+}
+
+textarea {
+  resize: none;
+}
+
+@layer components {
+  .input-autofill {
+    @apply autofill:shadow-[inset_0_0_0px_1000px_var(--color-dark-200)] autofill:text-fill-white autofill:caret-white;
+  }
+}
