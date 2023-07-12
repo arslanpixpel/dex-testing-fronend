@@ -1,9 +1,9 @@
-export const JS_NODE_URL = "https://motionless-stole-jay.cyclic.app";
+export const JS_NODE_URL = "https://motionless-stole-jay.cyclic.app/api/v1";
 export const JSON_RPC_URL = "https://json-rpc-proxy-0.dev-site.space";
 export const NETWORK = "testnet";
 
 export const PIXPEL_CONTRACT_METHODS = {
-  // swap
+  // swaps
   tokenToCcdAmount: "getTokenToCcdSwapAmount",
   ccdToTokenAmount: "getCcdToTokenSwapAmount",
   tokenToTokenAmount: "getTokenToTokenSwapAmount",
