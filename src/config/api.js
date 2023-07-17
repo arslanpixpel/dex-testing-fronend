@@ -1,4 +1,4 @@
-export const JS_NODE_URL = "https://motionless-stole-jay.cyclic.app/api/v1";
+export const JS_NODE_URL = "https://concordium-servernode.dev-site.space/api/v1";
 export const JSON_RPC_URL = "https://json-rpc-proxy-0.dev-site.space";
 export const NETWORK = "testnet";
 
