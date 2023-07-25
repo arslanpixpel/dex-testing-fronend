@@ -39,11 +39,12 @@ export async function invokeContract(
     customParameter ||
     (params
       ? await serializeParamsWithReattempt({
-        params: [serializationContractName || contractName, schemaBuffer, methodName, params],
-      })
+          params: [serializationContractName || contractName, schemaBuffer, methodName, params],
+        })
       : undefined);
 
   const client = provider?.getJsonRpcClient() || customRpcClient;
+
   const contractContext = {
     parameter,
     contract,

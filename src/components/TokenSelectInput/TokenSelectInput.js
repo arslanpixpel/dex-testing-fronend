@@ -131,8 +131,9 @@ const TokenSelectInput = ({
                       >
                         <img className="h-6" src={content.images?.thumbnail?.url} alt="" />
                         <div
-                          className={`text-base font-medium ${isDisabled ? "" : "hover:text-app-blue"
-                            }`}
+                          className={`text-base font-medium ${
+                            isDisabled ? "" : "hover:text-app-blue"
+                          }`}
                         >
                           {getShortTokenName(content.symbol)}
                         </div>

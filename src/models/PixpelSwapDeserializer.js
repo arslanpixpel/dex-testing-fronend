@@ -37,6 +37,7 @@ export class PixpelSwapDeserializer {
       PIXPEL_SWAP_CONTRACT_INFO.contractName,
       PIXPEL_CONTRACT_METHODS.operatorOf,
     );
+
     return deserializedValue[0];
   }
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MainButton } from "../../../components/Button/MainButton";
 
 // Utils
-import { getShortTokenName, getTokenUiAmount, parseTokenAddress } from "../../../utils/format";
+import { getShortTokenName, getTokenUiAmount } from "../../../utils/format";
 import { isSameToken } from "../utils";
 // Actions
 import { setLiquidityTokenTo } from "../../../store/reducers/SwapMaster/liquiditySlice";
@@ -17,11 +17,9 @@ const LiquidityPools = ({ openLiquidityForm }) => {
   const tokenList = useSelector(s => s.swapMaster.tokenList);
   const exchanges = useSelector(s => s.swapMaster.exchanges);
   const dispatch = useDispatch();
-
   const isTokenListLoaded = useSelector(s => s.swapMaster.isTokenListLoaded);
 
   if (!isTokenListLoaded) return null;
-
   const handleOpenForm =
     (tokenToData, isUnstakeMode = false, isCreateMode = false) =>
     () => {
@@ -36,7 +34,8 @@ const LiquidityPools = ({ openLiquidityForm }) => {
         address &&
         exchanges.length &&
         exchanges.every(exchange => {
-          const { index, subindex } = parseTokenAddress(exchange.token.address);
+          const { index, subindex } = exchange.token;
+          console.log(index, subindex);
 
           return !isSameToken(
             { index: address.index, subindex: address.subindex, tokenId },
@@ -57,7 +56,7 @@ const LiquidityPools = ({ openLiquidityForm }) => {
       {exchanges.reduce((acc, { token, lpTokensHolderBalance }, i) => {
         const tokenFrom = tokenList[0];
         const tokenTo = tokenList.find(({ address, tokenId }) => {
-          const { index, subindex } = parseTokenAddress(token.address);
+          const { index, subindex } = token.address;
 
           return (
             address &&

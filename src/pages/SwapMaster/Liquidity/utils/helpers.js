@@ -11,42 +11,35 @@ import {
 import { CCD_DECIMALS } from "../../../../config";
 
 export const getFromPerToAmount = ({ values, exchangeData, tokenFrom, tokenTo }) => {
-  try {
-    const fromAmount = BigNumber(
-      exchangeData
-        ? getTokenUiAmount(BigNumber(exchangeData.ccdBalance), tokenFrom.decimals)
-        : values.from,
-    );
-    const toAmount = BigNumber(
-      exchangeData
-        ? getTokenUiAmount(BigNumber(exchangeData.tokenBalance), tokenTo.decimals)
-        : values.to,
-    );
-    const result = fromAmount.dividedBy(toAmount).decimalPlaces(CCD_DECIMALS);
+  const fromAmount = BigNumber(
+    exchangeData
+      ? getTokenUiAmount(BigNumber(exchangeData.ccdBalance), tokenFrom.decimals)
+      : values.from,
+  );
+  const toAmount = BigNumber(
+    exchangeData
+      ? getTokenUiAmount(BigNumber(exchangeData.tokenBalance), tokenTo.decimals)
+      : values.to,
+  );
+  const result = fromAmount.dividedBy(toAmount).decimalPlaces(CCD_DECIMALS);
 
-    return checkIfValidBigNumber(result) ? result.toFixed() : "0";
-  } catch (error) {
-    console.error(error);
-  }
+  return checkIfValidBigNumber(result) ? result.toFixed() : "0";
 };
 
 export const getToPerFromAmount = ({ values, exchangeData, tokenFrom, tokenTo }) => {
-  try {
-    const fromAmount = BigNumber(
-      exchangeData
-        ? getTokenUiAmount(BigNumber(exchangeData.ccdBalance), tokenFrom.decimals)
-        : values.from,
-    );
-    const toAmount = BigNumber(
-      exchangeData
-        ? getTokenUiAmount(BigNumber(exchangeData.tokenBalance), tokenTo.decimals)
-        : values.to,
-    );
-    const result = toAmount.dividedBy(fromAmount).decimalPlaces(tokenTo.decimals);
-    return checkIfValidBigNumber(result) ? result.toFixed() : "0";
-  } catch (error) {
-    console.error(error);
-  }
+  const fromAmount = BigNumber(
+    exchangeData
+      ? getTokenUiAmount(BigNumber(exchangeData.ccdBalance), tokenFrom.decimals)
+      : values.from,
+  );
+  const toAmount = BigNumber(
+    exchangeData
+      ? getTokenUiAmount(BigNumber(exchangeData.tokenBalance), tokenTo.decimals)
+      : values.to,
+  );
+  const result = toAmount.dividedBy(fromAmount).decimalPlaces(tokenTo.decimals);
+
+  return checkIfValidBigNumber(result) ? result.toFixed() : "0";
 };
 
 export const getPoolShare = (values, exchangeData) => {

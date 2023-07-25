@@ -4,7 +4,6 @@ import { useFormContext } from "react-hook-form";
 
 // Utils
 import { getAmount, getFromPerToAmount, getSwapBalances, getToPerFromAmount } from "./utils";
-import { parseTokenAddress } from "../../../utils/format";
 import { isSameToken } from "../utils";
 
 // Actions
@@ -43,7 +42,7 @@ export const useSwapDataUpdate = () => {
       return (
         isCCD ||
         exchanges.some(exchange => {
-          const { index, subindex } = parseTokenAddress(exchange.token.address);
+          const { index, subindex } = exchange.token.address;
           const isFilledPool = exchange.ccdBalance > 0 && exchange.tokenBalance > 0;
 
           return (

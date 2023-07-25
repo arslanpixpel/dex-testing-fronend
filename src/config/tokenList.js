@@ -1,23 +1,5 @@
 import { CCD_DECIMALS } from "./main";
 
-/**
- * @typedef TokenData
- * @type {Object}
- * @property {number} id Token id (for internal purposes only)
- * @property {string} title Token title
- * @property {string} url Url of token image
- * @property {Object} [address] Token Contract Address.
- * @property  {number} address.index Token Contract Address index
- * @property  {number} address.subindex Token Contract Address subindex
- * @property {string} [tokenId] Token id
- * @property {number} decimals Token decimals
- */
-
-/**
- * Predefined list of tokens
- *
- * @type {Array.<TokenData>}
- */
 export const TOKEN_LIST = [
   {
     id: 1,

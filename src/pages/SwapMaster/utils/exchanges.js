@@ -1,5 +1,5 @@
 // Utils
-import { parseTokenAddress, toParamContractAddress } from "../../../utils/format";
+import { toParamContractAddress } from "../../../utils/format";
 import { invokeContract } from "../../../models/ConcordiumContractClient";
 import { PixpelSwapDeserializer } from "../../../models/PixpelSwapDeserializer";
 import { isSameToken } from "./tokens";
@@ -52,7 +52,7 @@ export const getExchanges = () => async (dispatch, getState) => {
 
 export const getCurrentExchange = (exchanges, tokenToData) =>
   exchanges.find(({ token }) => {
-    const { index, subindex } = parseTokenAddress(token.address);
+    const { index, subindex } = token.address;
 
     return isSameToken(
       { index, subindex, tokenId: token.id },

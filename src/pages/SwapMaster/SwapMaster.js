@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes, useParams, Navigate, useNavigate } from "react-router-dom";
 
 // Components
 import Swap from "./Swap/Swap";
 import Link from "../../components/Link/Link";
 import Liquidity from "./Liquidity/Liquidity";
 import LiquidityCreateTokenModal from "./Liquidity/LiquidityCreateTokenModal";
+import Deposit from "../CCD-Bridge";
 
 // Utils
 import { getTokenList } from "./utils";
@@ -16,6 +17,12 @@ import { setLiquidityActiveWindow } from "../../store/reducers/SwapMaster/liquid
 
 // Constants
 import { LIQUIDITY_WINDOWS } from "./Liquidity/constants";
+import TransferHistory from "../CCD-Bridge/history/[direction]";
+import DepositOverview from "../CCD-Bridge/deposit/overview";
+import DepositTransactionStatus from "../CCD-Bridge/deposit/[tx]";
+import Withdraw from "../CCD-Bridge/withdraw/index";
+import WithdrawOverview from "../CCD-Bridge/withdraw/overview";
+import WithdrawTransactionStatus from "../CCD-Bridge/withdraw/[tx]";
 
 const buttonList = [
   {
@@ -30,17 +37,26 @@ const buttonList = [
     buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
     path: "liquidity",
   },
+  {
+    id: 5,
+    title: "Bridge",
+    buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
+    path: "bridge",
+  },
 ];
 
 const SwapMaster = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleClickArrow = () => {
+    navigate(-1);
     dispatch(setLiquidityActiveWindow(LIQUIDITY_WINDOWS.pools));
   };
 
   const isLiquidityTab = params["*"] === "liquidity";
+  const isMainBridgeTab = params["*"] !== "bridge";
 
   useEffect(() => {
     dispatch(getTokenList());
@@ -52,7 +68,7 @@ const SwapMaster = () => {
         <div className="flex flex-row items-center justify-around w-full mb-5">
           <div
             className={`flex items-center justify-center w-12 h-12 rounded-lg bg-app-black-button hover:bg-app-blue cursor-pointer ${
-              isLiquidityTab ? "" : "opacity-50 pointer-events-none"
+              isLiquidityTab || isMainBridgeTab ? "" : "opacity-50 pointer-events-none"
             }`}
             onClick={handleClickArrow}
           >
@@ -83,7 +99,7 @@ const SwapMaster = () => {
                 key={idx}
                 title={button.title}
                 linkStyle={button.buttonStyle}
-                selected={params["*"] === button.path}
+                selected={params["*"].includes(button.path)}
                 to={button.path}
               />
             );
@@ -95,6 +111,13 @@ const SwapMaster = () => {
               <Route index element={<Navigate to="swap" replace />} />
               <Route path="swap" element={<Swap />} />
               <Route path="liquidity" element={<Liquidity />} />
+              <Route path="bridge" element={<Deposit />} />
+              <Route path="bridge/history/:direction" element={<TransferHistory />} />
+              <Route path="bridge/deposit/overview" element={<DepositOverview />} />
+              <Route path="bridge/deposit/:tx" element={<DepositTransactionStatus />} />
+              <Route path="bridge/withdraw" element={<Withdraw />} />
+              <Route path="bridge/withdraw/overview" element={<WithdrawOverview />} />
+              <Route path="bridge/withdraw/:tx" element={<WithdrawTransactionStatus />} />
             </Routes>
           </div>
         </div>

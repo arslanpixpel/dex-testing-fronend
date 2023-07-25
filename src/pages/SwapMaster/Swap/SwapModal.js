@@ -34,8 +34,6 @@ const SwapModal = () => {
     setIsProcessing(true);
     let txnHash;
 
-    console.log(values);
-
     try {
       const outcomes = await dispatch(handleSwap({ amountFrom: values.from, amountTo: values.to }));
 

@@ -6,7 +6,7 @@ import DepositFiat from "./DepositFiat/DepositFiat";
 import BankSuccessCard from "./DepositFiat/BankSuccessCard";
 import OrderBuy from "./OrderBuy/OrderBuy";
 import OrderSell from "./OrderSell/OrderSell";
-import { useAppContext } from "../../contexts/AppContext";
+import { useAppContext } from  "../../contexts/AppContext";
 
 const buttonList = [
   {

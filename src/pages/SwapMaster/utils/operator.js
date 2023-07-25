@@ -11,8 +11,7 @@ import {
   PIXPEL_SWAP_CONTRACT_INFO,
 } from "../../../config";
 import { SchemaType } from "@concordium/browser-wallet-api-helpers";
-// import PixpelSwapJsonSchema from "../../../config/pixpel_swap_schema.json";
-import ReplicaSwapJsonSchema from "../../../config/replica_swap4_schema.json";
+import PixpelSwapJsonSchema from "../../../config/pixpel_swap_schema.json";
 
 /**
  *
@@ -39,7 +38,7 @@ export const updateOperator = async ({
     serializationContractName: PIXPEL_SWAP_CONTRACT_INFO.contractName,
     schemaWithContext: {
       type: SchemaType.Parameter,
-      value: ReplicaSwapJsonSchema.entrypoints.updateOperator.parameter,
+      value: PixpelSwapJsonSchema.entrypoints.updateOperator.parameter,
     },
   };
 

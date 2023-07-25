@@ -1,12 +1,13 @@
-import TradeViewChart from "../../components/TradeChart/index";
 // import TradeViewChart from 'react-crypto-chart'
 import React from "react";
-import { Button } from "../../components";
 import Select from "react-select";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { Button } from "../../components";
+import TradeViewChart from "../../components/TradeChart/index";
 
 import "./Exchange.scss";
+
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },

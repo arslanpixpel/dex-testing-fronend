@@ -35,6 +35,7 @@ export const getTokenToCcdSwapAmount = async ({ tokenData, amount }) => {
 
 export const getCcdToTokenSwapAmount = async ({ tokenData, amount }) => {
   const { address, tokenId, decimals } = tokenData;
+
   const returnedValue = await invokeContract(
     null,
     PIXPEL_SWAP_CONTRACT_INFO,

@@ -80,8 +80,6 @@ const LiquidityCreateTokenModal = () => {
       tokenId,
     };
 
-    console.log(request);
-
     try {
       setIsProcessing(true);
       const response = await pixpelRequest.post("/tokens/add", request);

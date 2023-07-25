@@ -1,9 +1,9 @@
-export const JS_NODE_URL = "https://concordium-servernode.dev-site.space/api/v1";
+export const JS_NODE_URL = "https://concordium-servernode.dev-site.space";
 export const JSON_RPC_URL = "https://json-rpc-proxy-0.dev-site.space";
 export const NETWORK = "testnet";
 
 export const PIXPEL_CONTRACT_METHODS = {
-  // swaps
+  // swap
   tokenToCcdAmount: "getTokenToCcdSwapAmount",
   ccdToTokenAmount: "getCcdToTokenSwapAmount",
   tokenToTokenAmount: "getTokenToTokenSwapAmount",
