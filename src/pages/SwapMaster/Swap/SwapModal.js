@@ -132,10 +132,12 @@ const SwapModal = () => {
       // const ResponcePrice = 20;
       // const ToPerFromAmount = 20;
       const ToPerFromAmount = parseFloat(toPerFromAmount.replace(/\s+/g, ""));
-      console.log(ToPerFromAmount, "toPerFromAmount");
-      console.log(response?.data?.filteredOrders);
+      console.log(
+        response?.data?.filteredOrders.filter(i => !i.paid && i.tokenToid === tokenTo.id),
+        "toPerFromAmount",
+      );
       response?.data?.filteredOrders
-        .filter(i => !i.paid)
+        .filter(i => !i.paid && i.tokenToid === tokenTo.id)
         .forEach(async a => {
           const ResponcePrice = a?.price;
 
@@ -143,7 +145,7 @@ const SwapModal = () => {
             ResponcePrice === 0;
           }
 
-          if (ToPerFromAmount >= ResponcePrice) {
+          if (ToPerFromAmount <= ResponcePrice) {
             const apiUrl2 =
               (process.env.REACT_APP_DEX_API || "http://localhost:8000") +
               "/api/v1/tokens/tokenswap";
@@ -154,16 +156,22 @@ const SwapModal = () => {
                   id: tokenTo.tokenId,
                 },
                 min_token_amount: getTokenRawAmount(
-                  a.tokentovalue,
+                  ToPerFromAmount * a.tokenfromvalue,
                   tokenTo?.decimals || 6,
                 ).toString(),
               },
               b: [
                 {
                   token_id: tokenTo.tokenId,
-                  amount: a.tokentovalue.toString(),
+                  amount: getTokenRawAmount(
+                    ToPerFromAmount * a.tokenfromvalue,
+                    tokenTo?.decimals || 6,
+                  ).toString(),
                   from: {
-                    Account: ["3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U"],
+                    Account: [
+                      process.env.REACT_APP_ADMIN_WALLET ||
+                        "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
+                    ],
                   },
                   to: {
                     Account: [a.address],
