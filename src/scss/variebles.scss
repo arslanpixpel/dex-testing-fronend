@@ -1,0 +1,79 @@
+//settings
+$gutter: 30px;
+$gutter-col: 5px;
+
+//colors
+$color-red: #f6465d;
+$color-green: #2ebd85;
+$color-blue: #0095c8;
+$color-white: #fff;
+$color-black: #000;
+$color-dark-100: #48515f;
+$color-dark-200: #37404c;
+$color-dark-300: #29313c;
+$color-dark-400: #1f2630;
+$color-gray: #717a8b;
+
+:root {
+  --color-dark-200: #{$color-dark-200};
+}
+
+$color-bg: $color-dark-400;
+$color-link: $color-white;
+$color-text: $color-white;
+// fonts settings
+$font-family: "Poppins", sans-serif;
+
+@mixin font-root($fz: 18px, $lh: 27px, $fw: 400) {
+  font-weight: $fw;
+  font-size: $fz;
+  line-height: $lh;
+}
+
+@mixin font-h1($fz: 60px, $lh: 90px, $fw: 600) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin font-h2($fz: 40px, $lh: 60px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin font-h3($fz: 24px, $lh: 36px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin font-h4($fz: 22px, $lh: 33px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin font-h5($fz: 20px, $lh: 30px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin font-h6($fz: 18px, $lh: 27px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin font-bold($fz: 18px, $lh: 27px, $fw: 600) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin text-medium($fz: 18px, $lh: 27px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin text-regular($fz: 18px, $lh: 27px, $fw: 400) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin text-small-bold($fz: 16px, $lh: 24px, $fw: 600) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin text-small-medium($fz: 16px, $lh: 24px, $fw: 500) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
+
+@mixin text-small-medium($fz: 16px, $lh: 24px, $fw: 400) {
+  @include font-root($fz: $fz, $lh: $lh, $fw: $fw);
+}
