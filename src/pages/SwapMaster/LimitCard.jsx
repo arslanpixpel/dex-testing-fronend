@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { AccountAddress, AccountTransactionType, CcdAmount } from "@concordium/web-sdk";
 import { detectConcordiumProvider } from "@concordium/browser-wallet-api-helpers";
+import { JS_NODE_URL } from "../../config";
 // import { WebClient } from "concordium_web_sdk__WEBPACK_IMPORTED_MODULE_6__";
 
 const currencyList = [
@@ -110,7 +111,8 @@ const LimitCard = () => {
       const txHash = await provider.sendTransaction(account, AccountTransactionType.Transfer, {
         amount: new CcdAmount(BigInt(tokenFromValue + "000000")),
         toAddress: new AccountAddress(
-          process.env.ADMIN_ADDRESS || "4D3RtGf7zbg7JtBrrsjXVuTMCNgDcnr5M1TKpXqTTBtHENTWtR",
+          process.env.REACT_APP_ADMIN_ADDRESS ||
+            "4D3RtGf7zbg7JtBrrsjXVuTMCNgDcnr5M1TKpXqTTBtHENTWtR",
         ),
       });
 
@@ -128,7 +130,7 @@ const LimitCard = () => {
 
       console.log(requestBody, "payload");
 
-      const apiUrl = (process.env.REACT_APP_DEX_API || "http://localhost:8000") + "/api/v1/tokens/limit";
+      const apiUrl = (JS_NODE_URL || "http://localhost:8000") + "/api/v1/tokens/limit";
 
       await axios.post(apiUrl, requestBody);
 

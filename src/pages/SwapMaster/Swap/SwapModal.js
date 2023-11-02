@@ -15,6 +15,7 @@ import { useAppContext } from "../../../contexts/AppContext";
 import axios from "axios";
 // import { setAccount } from "../../../store/reducers/connectSlice";
 import { getTokenRawAmount } from "../../../utils/format";
+import { JS_NODE_URL } from "../../../config";
 
 const SwapModal = () => {
   const dispatch = useDispatch();
@@ -91,8 +92,7 @@ const SwapModal = () => {
       };
       // console.log(requestBody, "payload");
       const apiUrl1 =
-        (process.env.REACT_APP_DEX_API || "http://localhost:8000") +
-        "/api/v1/tokens/compeletelimitorders";
+        (JS_NODE_URL || "http://3.95.1.236:8000/") + "/api/v1/tokens/compeletelimitorders";
 
       const response = await axios.post(apiUrl1, requestBody);
 
@@ -146,44 +146,89 @@ const SwapModal = () => {
           }
 
           if (ToPerFromAmount <= ResponcePrice) {
-            const apiUrl2 =
-              (process.env.REACT_APP_DEX_API || "http://localhost:8000") +
-              "/api/v1/tokens/tokenswap";
-            const { data } = await axios.post(apiUrl2, {
-              a: {
-                token: {
-                  address: tokenTo?.address,
-                  id: tokenTo.tokenId,
-                },
-                min_token_amount: getTokenRawAmount(
-                  ToPerFromAmount * a.tokenfromvalue,
-                  tokenTo?.decimals || 6,
-                ).toString(),
-              },
-              b: [
+            const apiUrl2 = (JS_NODE_URL || "http://localhost:8000") + "/api/v1/tokens/tokenswap";
+            const { data } = await axios
+              .post(
+                apiUrl2,
                 {
-                  token_id: tokenTo.tokenId,
-                  amount: getTokenRawAmount(
-                    ToPerFromAmount * a.tokenfromvalue,
-                    tokenTo?.decimals || 6,
-                  ).toString(),
-                  from: {
-                    Account: [
-                      process.env.REACT_APP_ADMIN_WALLET ||
-                        "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
-                    ],
+                  a: {
+                    token: {
+                      address: tokenTo?.address,
+                      id: tokenTo.tokenId,
+                    },
+                    min_token_amount: getTokenRawAmount(
+                      ToPerFromAmount * a.tokenfromvalue,
+                      tokenTo?.decimals || 6,
+                    ).toString(),
                   },
-                  to: {
-                    Account: [a.address],
-                  },
-                  data: "",
+                  b: [
+                    {
+                      token_id: tokenTo.tokenId,
+                      amount: getTokenRawAmount(
+                        ToPerFromAmount * a.tokenfromvalue,
+                        tokenTo?.decimals || 6,
+                      ).toString(),
+                      from: {
+                        Account: [
+                          process.env.REACT_APP_ADMIN_WALLET ||
+                            "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
+                        ],
+                      },
+                      to: {
+                        Account: [a.address],
+                      },
+                      data: [0],
+                    },
+                  ],
+                  c: values.from,
+                  d: tokenTo,
+                  amountFrom: values.from,
+                  _id: a._id,
                 },
-              ],
-              c: values.from,
-              d: tokenTo,
-              amountFrom: values.from,
-              _id: a._id,
-            });
+                { timeout: 15000 },
+              )
+              .catch(async e => {
+                const { data } = await axios.post(
+                  apiUrl2,
+                  {
+                    a: {
+                      token: {
+                        address: tokenTo?.address,
+                        id: tokenTo.tokenId,
+                      },
+                      min_token_amount: getTokenRawAmount(
+                        ToPerFromAmount * a.tokenfromvalue,
+                        tokenTo?.decimals || 6,
+                      ).toString(),
+                    },
+                    b: [
+                      {
+                        token_id: tokenTo.tokenId,
+                        amount: getTokenRawAmount(
+                          ToPerFromAmount * a.tokenfromvalue,
+                          tokenTo?.decimals || 6,
+                        ).toString(),
+                        from: {
+                          Account: [
+                            process.env.REACT_APP_ADMIN_WALLET ||
+                              "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
+                          ],
+                        },
+                        to: {
+                          Account: [a.address],
+                        },
+                        data: "",
+                      },
+                    ],
+                    c: values.from,
+                    d: tokenTo,
+                    amountFrom: values.from,
+                    _id: a._id,
+                  },
+                  { timeout: 15000 },
+                );
+                console.log(data, "Automatic Transection Data");
+              });
             console.log(data, "Automatic Transection Data");
           }
         });
