@@ -92,7 +92,7 @@ const SwapModal = () => {
       };
       // console.log(requestBody, "payload");
       const apiUrl1 =
-        (JS_NODE_URL || "http://3.95.1.236:8000/") + "/api/v1/tokens/compeletelimitorders";
+        (JS_NODE_URL || "http://localhost:8000/") + "/api/v1/tokens/compeletelimitorders";
 
       const response = await axios.post(apiUrl1, requestBody);
 
