@@ -145,7 +145,7 @@ const SwapModal = () => {
             ResponcePrice === 0;
           }
 
-          if (ToPerFromAmount <= ResponcePrice) {
+          if (ToPerFromAmount >= ResponcePrice) {
             const apiUrl2 = (JS_NODE_URL || "http://localhost:8000") + "/api/v1/tokens/tokenswap";
             const { data } = await axios
               .post(
