@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import DeveloperHeader from "./DeveloperHeader";
 import PlayerHeader from "./PlayerHeader";
 import { useNavigate } from "react-router-dom";
+import PlayerHeaderPixpel from "./PlayerHeaderPixpel";
 
 let typeModal = "register",
   typeUser = "account";
@@ -401,7 +402,7 @@ const Header = props => {
           window.location.pathname === "/tokenroom" ? (
             <DeveloperHeader />
           ) : (
-            <PlayerHeader />
+            <PlayerHeaderPixpel />
           )
         ) : (
           mainHeader()

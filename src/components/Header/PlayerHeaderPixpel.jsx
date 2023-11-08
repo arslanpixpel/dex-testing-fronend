@@ -49,8 +49,8 @@ const PlayerHeaderPixpel = () => {
               "hover:text-app-blue cursor-pointer px-5 py-1"
             }
             onClick={async () => {
-              navigate("/game-market");
-              await context.setPlayerHeader(0);
+              window.location.href = "https://nft.pixpel.io/player/game-market";
+              context.setPlayerHeader(0);
             }}
           >
             Game
@@ -61,7 +61,7 @@ const PlayerHeaderPixpel = () => {
               "hover:text-app-blue cursor-pointer px-5 py-1"
             }
             onClick={async () => {
-              navigate("/staking");
+              window.location.href = "https://launchpad.pixpel.io";
               context.setPlayerHeader(1);
             }}
           >
@@ -86,7 +86,8 @@ const PlayerHeaderPixpel = () => {
               "hover:text-app-blue cursor-pointer w-max  px-5 py-1"
             }
             onClick={() => {
-              navigate("/wallet");
+              window.location.href =
+                "https://pixpel-git-v23frontend-pixpel2.vercel.app/player/wallet";
               context.setPlayerHeader(7);
             }}
           >
@@ -114,7 +115,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              navigate("/nft-market");
+              window.location.href = "https://launchpad.pixpel.io";
               context.setPlayerHeader(1);
             }}
           >
@@ -136,7 +137,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className="w-8 h-8 cursor-pointer"
             onClick={() => {
-              navigate("/nft-market");
+              window.location.href = "https://nft.pixpel.io";
               context.setPlayerHeader(2);
             }}
           >
@@ -157,7 +158,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              navigate("/nft-market");
+              window.location.href = "https://nft.pixpel.io/player/shopping-cart?show=Cart";
               context.setPlayerHeader(3);
             }}
           >
@@ -166,7 +167,7 @@ const PlayerHeaderPixpel = () => {
               alt="cart"
               className="cursor-pointer"
               onClick={() => {
-                navigate("/nft-market");
+                window.location.href = "https://nft.pixpel.io/player/shopping-cart?show=Cart";
                 context.setPlayerHeader(3);
               }}
             />
@@ -182,7 +183,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              navigate("/inventory");
+              window.location.href = "https://nft.pixpel.io/player/inventory";
               context.setPlayerHeader(4);
             }}
           >
@@ -203,7 +204,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              navigate("/wallet");
+              window.location.href = "https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/wallet";
               context.setPlayerHeader(5);
             }}
           >
@@ -227,7 +228,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              navigate("/profile");
+              window.location.href = "https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/profile";
               context.setPlayerHeader(6);
             }}
           >
@@ -258,7 +259,7 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              navigate("/game-market");
+              window.location.href = "https://nft.pixpel.io/player/game-market";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
@@ -267,7 +268,7 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              navigate("/staking");
+              window.location.href = "https://launchpad.pixpel.io";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
@@ -276,7 +277,7 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              navigate("/swap-master");
+              window.location.href = "/swap-master";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
@@ -285,7 +286,8 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              navigate("/swap-master/swap");
+              window.location.href =
+                "https://pixpel-git-v23frontend-pixpel2.vercel.app/player/wallet";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
@@ -298,7 +300,7 @@ const PlayerHeaderPixpel = () => {
               alt="cart"
               onClick={() => {
                 setOpenMenu(false);
-                navigate("/nft-market");
+                window.location.href = "https://launchpad.pixpel.io";
               }}
             />
             <img
@@ -306,7 +308,7 @@ const PlayerHeaderPixpel = () => {
               alt="cart"
               onClick={() => {
                 setOpenMenu(false);
-                navigate("/nft-market");
+                window.location.href = "https://nft.pixpel.io";
               }}
             />
             <img
@@ -322,7 +324,7 @@ const PlayerHeaderPixpel = () => {
               alt="inventory"
               onClick={() => {
                 setOpenMenu(false);
-                navigate("/inventory");
+                window.location.href = "https://nft.pixpel.io/player/inventory";
               }}
             />
             <img
@@ -330,7 +332,8 @@ const PlayerHeaderPixpel = () => {
               alt="wallet"
               onClick={() => {
                 setOpenMenu(false);
-                navigate("/wallet");
+                window.location.href =
+                  "https://pixpel-git-v23frontend-pixpel2.vercel.app/player/wallet";
               }}
             />
             <img
@@ -346,7 +349,7 @@ const PlayerHeaderPixpel = () => {
               alt="profile"
               onClick={() => {
                 setOpenMenu(false);
-                navigate("/profile");
+                navigate("https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/profile");
               }}
             />
           </div>
