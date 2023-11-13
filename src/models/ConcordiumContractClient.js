@@ -49,8 +49,9 @@ export async function invokeContract(
           params: [serializationContractName || contractName, schemaBuffer, methodName, params],
         })
       : undefined);
-
-  const client = provider?.getJsonRpcClient() || customRpcClient;
+  // const client = provider?.getJsonRpcClient() || customRpcClient;
+  console.log(customRpcClient, "customRpcClient");
+  const client = provider?.getGrpcClient() || customRpcClient;
 
   const contractContext = {
     parameter,
@@ -141,6 +142,7 @@ export async function updateContract(
     methodName,
     paramJson,
   );
+  console.log(parameter, "parameter");
   let txnHash = await provider.sendTransaction(
     account,
     AccountTransactionType.Update,
@@ -257,7 +259,8 @@ export function serializeParams(contractName, schema, methodName, params) {
 function _wait(provider, txnHash, res, rej) {
   setTimeout(() => {
     provider
-      .getJsonRpcClient()
+      // .getJsonRpcClient()
+      .getGrpcClient()
       .getTransactionStatus(txnHash)
       .then(txnStatus => {
         if (!txnStatus) {

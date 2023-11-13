@@ -7,7 +7,7 @@ import { invokeContract } from "../../../models/ConcordiumContractClient";
 // Constants
 import { CIS2_CONTRACT_METHODS, PIXPEL_SWAP_CONTRACT_INFO } from "../../../config";
 import { PixpelSwapDeserializer } from "../../../models/PixpelSwapDeserializer";
-
+import { AccountAddress } from "@concordium/web-sdk";
 const getBalanceParameter = ({ tokenId, account }) => {
   const numberOfQueriesBuffer = Buffer.from("0100", "hex");
   const contractIdBuffer = Buffer.from(tokenId, "hex");
@@ -60,15 +60,33 @@ export const getBalance =
     return new PixpelSwapDeserializer(returnedValue).readBalanceOf();
   };
 
+// export const getCCDBalance = () => async (_, getState) => {
+//   const { account, provider } = getState().connect;
+
+//   if (!account || !provider) return;
+
+//   const client = provider.getGrpcClient();
+//   console.log(client, "client");
+//   const blockHash = (await client.getConsensusStatus()).bestBlock;
+//   console.log(blockHash, "blockHash");
+//   const accountInfo = await client.getAccountInfo(account.fromBase58(account), blockHash);
+
+//   console.log(accountInfo, "accountInfo");
+
+//   return accountInfo.accountAmount;
+// };
+
 export const getCCDBalance = () => async (_, getState) => {
   const { account, provider } = getState().connect;
 
   if (!account || !provider) return;
 
-  const client = provider.getJsonRpcClient();
+  const client = provider.getGrpcClient();
+
+  const accountAddress = new AccountAddress(account);
   const blockHash = (await client.getConsensusStatus()).bestBlock;
 
-  const accountInfo = await client.getAccountInfo(account, blockHash);
+  const accountInfo = await client.getAccountInfo(accountAddress, blockHash);
 
   return accountInfo.accountAmount;
 };
