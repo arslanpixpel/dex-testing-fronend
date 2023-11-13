@@ -259,8 +259,8 @@ export function serializeParams(contractName, schema, methodName, params) {
 function _wait(provider, txnHash, res, rej) {
   setTimeout(() => {
     provider
-      // .getJsonRpcClient()
-      .getGrpcClient()
+      .getJsonRpcClient()
+      // .getGrpcClient()
       .getTransactionStatus(txnHash)
       .then(txnStatus => {
         if (!txnStatus) {
