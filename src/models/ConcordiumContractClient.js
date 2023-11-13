@@ -256,26 +256,63 @@ export function serializeParams(contractName, schema, methodName, params) {
   return serializeUpdateContractParameters(contractName, methodName, params, schema);
 }
 
+// function _wait(provider, txnHash, res, rej) {
+//   setTimeout(() => {
+//     provider
+//       // .getJsonRpcClient()
+//       .getGrpcClient()
+//       .getTransactionStatus(txnHash)
+//       .then(txnStatus => {
+//         if (!txnStatus) {
+//           return rej("Transaction Status is null");
+//         }
+
+//         console.info(`txn : ${txnHash}, status: ${txnStatus?.status}`);
+
+//         if (txnStatus?.status === TransactionStatusEnum.Finalized) {
+//           return res(txnStatus.outcomes);
+//         }
+
+//         _wait(provider, txnHash, res, rej);
+//       })
+//       .catch(err => rej(err));
+//   }, 1000);
+// }
+
 function _wait(provider, txnHash, res, rej) {
   setTimeout(() => {
-    provider
-      // .getJsonRpcClient()
-      .getGrpcClient()
-      .getTransactionStatus(txnHash)
-      .then(txnStatus => {
-        if (!txnStatus) {
+    try {
+      const grpcTxnStatus = provider.getGrpcClient().getTransactionStatus(txnHash);
+      console.log(grpcTxnStatus, "grpcTxnStatus");
+      if (!grpcTxnStatus) {
+        return rej("Transaction Status is null");
+      }
+
+      console.info(`txn : ${txnHash}, status: ${grpcTxnStatus.status}`);
+
+      if (grpcTxnStatus.status === TransactionStatusEnum.Finalized) {
+        return res(grpcTxnStatus.outcomes);
+      }
+
+      _wait(provider, txnHash, res, rej);
+    } catch (error) {
+      try {
+        const jsonRpcTxnStatus = provider.getJsonRpcClient().getTransactionStatus(txnHash);
+        if (!jsonRpcTxnStatus) {
           return rej("Transaction Status is null");
         }
 
-        console.info(`txn : ${txnHash}, status: ${txnStatus?.status}`);
+        console.info(`txn : ${txnHash}, status: ${jsonRpcTxnStatus.status}`);
 
-        if (txnStatus?.status === TransactionStatusEnum.Finalized) {
-          return res(txnStatus.outcomes);
+        if (jsonRpcTxnStatus.status === TransactionStatusEnum.Finalized) {
+          return res(jsonRpcTxnStatus.outcomes);
         }
 
         _wait(provider, txnHash, res, rej);
-      })
-      .catch(err => rej(err));
+      } catch (error) {
+        return rej(error);
+      }
+    }
   }, 1000);
 }
 
