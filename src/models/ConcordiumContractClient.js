@@ -284,22 +284,29 @@ export function serializeParams(contractName, schema, methodName, params) {
 
 function _wait(provider, txnHash, res, rej) {
   console.log(provider, txnHash, "params for wait");
+
   setTimeout(() => {
     provider
       .getGrpcClient()
-      .getTransactionByHash(txnHash)
-      .then(txnReceipt => {
-        if (!txnReceipt) {
-          return rej("Transaction Receipt is null");
+      .GetFinalizedBlocks(TransactionStatusEnum.Finalized, TransactionStatusEnum.Finalized)
+      .then(blocks => {
+        for (const block of blocks) {
+          for (const transaction of block.transactions) {
+            if (transaction.hash === txnHash) {
+              if (transaction.receipt.status === TransactionStatusEnum.Finalized) {
+                return res(transaction.receipt.outcomes);
+              } else {
+                console.info(`txn: ${txnHash}, receipt: ${transaction.receipt.status}`);
+                _wait(provider, txnHash, res, rej);
+
+                return;
+              }
+            }
+          }
         }
 
-        console.info(`txn : ${txnHash}, receipt: ${txnReceipt?.status}`);
-
-        if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
-          return res(txnReceipt.outcomes);
-        }
-
-        _wait(provider, txnHash, res, rej);
+        console.error("Transaction receipt not found");
+        rej("Transaction receipt not found");
       })
       .catch(err => rej(err));
   }, 1000);
