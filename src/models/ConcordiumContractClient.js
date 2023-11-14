@@ -287,7 +287,7 @@ function _wait(provider, txnHash, res, rej) {
   setTimeout(() => {
     provider
       .getGrpcClient()
-      .getTransactionReceipt(txnHash)
+      .getTransactionByHash(txnHash)
       .then(txnReceipt => {
         if (!txnReceipt) {
           return rej("Transaction Receipt is null");
