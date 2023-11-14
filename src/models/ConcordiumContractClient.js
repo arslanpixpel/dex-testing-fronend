@@ -167,7 +167,7 @@ export async function updateContract(
     "txnhashprovider",
   );
   //const outcomes = await waitForTransaction(provider, txnHash);
-  const outcomes = await provider.waitForTransaction(txnHash);
+  const outcomes = await provider.getGrpcClient().waitForTransaction(txnHash);
 
   return ensureValidOutcome(outcomes);
 }
