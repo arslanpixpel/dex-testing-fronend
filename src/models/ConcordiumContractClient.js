@@ -135,6 +135,7 @@ export async function updateContract(
   maxContractExecutionEnergy = BigInt(9999),
   ccdUiAmount = 0,
 ) {
+  console.log(provider, "provider");
   const { schemaBuffer, contractName, serializationContractName, schemaWithContext } = contractInfo;
   const parameter = serializeParams(
     serializationContractName || contractName,
@@ -257,6 +258,8 @@ export function serializeParams(contractName, schema, methodName, params) {
 }
 
 // function _wait(provider, txnHash, res, rej) {
+//   // eslint-disable-next-line no-undef
+//   console.log(provider, txnHash, "params fro wait");
 //   setTimeout(() => {
 //     provider
 //       // .getJsonRpcClient()
@@ -280,39 +283,25 @@ export function serializeParams(contractName, schema, methodName, params) {
 // }
 
 function _wait(provider, txnHash, res, rej) {
+  console.log(provider, txnHash, "params for wait");
   setTimeout(() => {
-    try {
-      const grpcTxnStatus = provider.getGrpcClient().getTransactionStatus(txnHash);
-      console.log(grpcTxnStatus, "grpcTxnStatus");
-      if (!grpcTxnStatus) {
-        return rej("Transaction Status is null");
-      }
-
-      console.info(`txn : ${txnHash}, status: ${grpcTxnStatus.status}`);
-
-      if (grpcTxnStatus.status === TransactionStatusEnum.Finalized) {
-        return res(grpcTxnStatus.outcomes);
-      }
-
-      _wait(provider, txnHash, res, rej);
-    } catch (error) {
-      try {
-        const jsonRpcTxnStatus = provider.getJsonRpcClient().getTransactionStatus(txnHash);
-        if (!jsonRpcTxnStatus) {
-          return rej("Transaction Status is null");
+    provider
+      .getGrpcClient()
+      .getTransactionReceipt(txnHash)
+      .then(txnReceipt => {
+        if (!txnReceipt) {
+          return rej("Transaction Receipt is null");
         }
 
-        console.info(`txn : ${txnHash}, status: ${jsonRpcTxnStatus.status}`);
+        console.info(`txn : ${txnHash}, receipt: ${txnReceipt?.status}`);
 
-        if (jsonRpcTxnStatus.status === TransactionStatusEnum.Finalized) {
-          return res(jsonRpcTxnStatus.outcomes);
+        if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
+          return res(txnReceipt.outcomes);
         }
 
         _wait(provider, txnHash, res, rej);
-      } catch (error) {
-        return rej(error);
-      }
-    }
+      })
+      .catch(err => rej(err));
   }, 1000);
 }
 
