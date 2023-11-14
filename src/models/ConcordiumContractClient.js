@@ -166,7 +166,8 @@ export async function updateContract(
     `${contractName}.${methodName}`,
     "txnhashprovider",
   );
-  const outcomes = await waitForTransaction(provider, txnHash);
+  //const outcomes = await waitForTransaction(provider, txnHash);
+  const outcomes = await provider.waitForTransaction(txnHash);
 
   return ensureValidOutcome(outcomes);
 }
