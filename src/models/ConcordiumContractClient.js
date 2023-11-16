@@ -166,8 +166,7 @@ export async function updateContract(
     `${contractName}.${methodName}`,
     "txnhashprovider",
   );
-  //const outcomes = await waitForTransaction(provider, txnHash);
-  const outcomes = await provider.getGrpcClient().waitForTransaction(txnHash);
+  const outcomes = await waitForTransaction(provider, txnHash);
 
   return ensureValidOutcome(outcomes);
 }
@@ -288,7 +287,7 @@ function _wait(provider, txnHash, res, rej) {
   setTimeout(() => {
     provider
       .getGrpcClient()
-      .client.getTransactionStatus(txnHash)
+      .waitForTransactionFinalization(txnHash)
       .then(txnReceipt => {
         if (!txnReceipt) {
           return rej("Transaction Receipt is null");
