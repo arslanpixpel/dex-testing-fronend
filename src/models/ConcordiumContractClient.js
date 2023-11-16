@@ -293,7 +293,7 @@ function _wait(provider, txnHash, res, rej) {
           return rej("Transaction Receipt is null");
         }
 
-        console.info(`txn : ${txnHash}, receipt: ${JSON.stringify(txnReceipt)}`);
+        console.info(`txn : ${txnHash}, receipts: ${JSON.stringify(txnReceipt)}`);
 
         if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
           return res(txnReceipt.outcomes);
