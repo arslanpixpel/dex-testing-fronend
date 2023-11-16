@@ -293,12 +293,14 @@ function _wait(provider, txnHash, res, rej) {
           return rej("Transaction Receipt is null");
         }
 
-        console.info(`txn : ${txnHash}, receipt: ${txnReceipt?.status}`);
+        return "success";
 
-        if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
-          return res(txnReceipt.outcomes);
-        }
-        _wait(provider, txnHash, res, rej);
+        // console.info(`txn : ${txnHash}, receipt: ${txnReceipt?.status}`);
+
+        // if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
+        //   return res(txnReceipt.outcomes);
+        // }
+        // _wait(provider, txnHash, res, rej);
       })
       .catch(err => rej(err));
   }, 1000);
