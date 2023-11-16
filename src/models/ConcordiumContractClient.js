@@ -299,6 +299,10 @@ function _wait(provider, txnHash, res, rej) {
           return res(txnStatus.outcomes);
         }
 
+        if (txnHash) {
+          return res(txnHash);
+        }
+
         _wait(provider, txnHash, res, rej);
       })
       .catch(err => rej(err));
