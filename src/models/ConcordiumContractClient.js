@@ -166,9 +166,12 @@ export async function updateContract(
     `${contractName}.${methodName}`,
     "txnhashprovider",
   );
-  const outcomes = await waitForTransaction(provider, txnHash);
+  //const outcomes = await waitForTransaction(provider, txnHash);
+  const outcomes = await provider.getGrpcClient().waitForTransactionFinalization(txnHash);
+  console.log(outcomes, "outcomes");
+  // return ensureValidOutcome(outcomes);
 
-  return ensureValidOutcome(outcomes);
+  return outcomes;
 }
 
 /**
@@ -295,6 +298,7 @@ function _wait(provider, txnHash, res, rej) {
 
         console.info(`txn : ${txnHash}, status:`, txnStatus?.status);
 
+        console.log(txnStatus?.status, "txnStatus?.status ");
         if (txnStatus === TransactionStatusEnum.Finalized) {
           return res(txnStatus.outcomes);
         }

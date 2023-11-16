@@ -244,6 +244,7 @@ const SwapModal = () => {
             Owner: true,
           }),
         );
+        console.log(outcomes, "outcomes");
 
         if (outcomes) {
           const targetOutcome = Object.values(outcomes)[0];
