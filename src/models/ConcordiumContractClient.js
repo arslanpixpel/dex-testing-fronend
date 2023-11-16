@@ -284,23 +284,30 @@ export function serializeParams(contractName, schema, methodName, params) {
 
 function _wait(provider, txnHash, res, rej) {
   console.log(provider, txnHash, "params for wait");
-  setTimeout(() => {
-    provider
-      .getGrpcClient()
-      .waitForTransactionFinalization(txnHash)
-      .then(txnReceipt => {
-        if (!txnReceipt) {
-          return rej("Transaction Receipt is null");
-        }
+  setTimeout(async () => {
+    const status = await provider.getGrpcClient().waitForTransactionFinalization(txnHash);
 
-        console.info(`txn : ${txnHash}, receipts: ${JSON.stringify(txnReceipt)}`);
+    if (!status) {
+      return rej("Transaction Receipt is null");
+    }
 
-        if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
-          return res(txnReceipt.outcomes);
-        }
-        _wait(provider, txnHash, res, rej);
-      })
-      .catch(err => rej(err));
+    return res(status);
+    // provider
+    //   .getGrpcClient()
+    //   .waitForTransactionFinalization(txnHash)
+    //   .then(txnReceipt => {
+    //     if (!txnReceipt) {
+    //       return rej("Transaction Receipt is null");
+    //     }
+
+    //     console.info(`txn : ${txnHash}, receipts: ${JSON.stringify(txnReceipt)}`);
+
+    //     if (txnReceipt?.status === TransactionStatusEnum.Finalized) {
+    //       return res(txnReceipt.outcomes);
+    //     }
+    //     _wait(provider, txnHash, res, rej);
+    //   })
+    //   .catch(err => rej(err));
   }, 1000);
 }
 
