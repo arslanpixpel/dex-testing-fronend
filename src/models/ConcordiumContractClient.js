@@ -293,7 +293,7 @@ function _wait(provider, txnHash, res, rej) {
           return rej("Transaction Status is null");
         }
 
-        console.info(`txn : ${txnHash}, status: ${txnStatus}`);
+        console.info(`txn : ${txnHash}, status:`, txnStatus?.status);
 
         if (txnStatus === TransactionStatusEnum.Finalized) {
           return res(txnStatus.outcomes);
