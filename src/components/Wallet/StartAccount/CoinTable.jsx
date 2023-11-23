@@ -6,24 +6,19 @@ import BuyButton from "./BuyButton";
 import { useRouter } from "next/router";
 import axios from 'axios'
 
-interface CheckER {
-  walletAddress: string | any;
-}
-
 interface Cointable {
   idx: number;
 }
 
-const CoinTable = (props: Cointable) => {
-    const navigate = useRouter();
-    const [tempTable, setTempTable] = useState(tableList);
+const CoinTable: React.FC<Cointable> = (props) => {
+  const navigate = useRouter();
+  const [tempTable, setTempTable] = useState(tableList);
 
-    useEffect(() => {
-        
-async function fetchDataDex<T extends CheckER>() {
-            const response = await axios.post('https://api.pixpel.io/api/v1/tokens/getlimitordersbywallet', {
-                walletAddress: "4dgSpWaZf4Z5yDFE5hb6XpaioDv6kao7UF3wvZiMbFkynSdh1A"
-            });
+  useEffect(() => {
+    async function fetchDataDex() {
+      const response = await axios.post('https://api.pixpel.io/api/v1/tokens/getlimitordersbywallet', {
+        walletAddress: "4dgSpWaZf4Z5yDFE5hb6XpaioDv6kao7UF3wvZiMbFkynSdh1A"
+      });
         
             console.log(response.data);
         
