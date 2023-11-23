@@ -24,7 +24,7 @@ export const changeSwapDirection = () => async (dispatch, getState) => {
 
 const swapTokenToCcd = async ({ tokenData, amountFrom, amountTo, provider, account }) => {
   const { address, decimals, tokenId, contractName } = tokenData;
-
+  console.log(address);
   await updateOperator({ provider, account, tokenAddress: address, contractName });
 
   return updateContract(
