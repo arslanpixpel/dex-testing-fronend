@@ -6,11 +6,11 @@ import BuyButton from "./BuyButton";
 import { useRouter } from "next/router";
 import axios from 'axios'
 
-interface CoinTable {
+interface Cointable {
     idx: number;
 }
 
-const CoinTable = (props: CoinTable) => {
+const CoinTable = (props: Cointable) => {
     const navigate = useRouter();
     const [tempTable, setTempTable] = useState(tableList);
 
