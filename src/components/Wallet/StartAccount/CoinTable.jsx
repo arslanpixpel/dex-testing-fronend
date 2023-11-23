@@ -6,8 +6,12 @@ import BuyButton from "./BuyButton";
 import { useRouter } from "next/router";
 import axios from 'axios'
 
+interface CheckER {
+  walletAddress: string | any;
+}
+
 interface Cointable {
-    idx: number;
+  idx: number;
 }
 
 const CoinTable = (props: Cointable) => {
@@ -16,10 +20,7 @@ const CoinTable = (props: Cointable) => {
 
     useEffect(() => {
         
-    interface CheckER {
-        walletAddress: string | any;
-    }
-        async function fetchDataDex<T extends CheckER>() {
+async function fetchDataDex<T extends CheckER>() {
             const response = await axios.post('https://api.pixpel.io/api/v1/tokens/getlimitordersbywallet', {
                 walletAddress: "4dgSpWaZf4Z5yDFE5hb6XpaioDv6kao7UF3wvZiMbFkynSdh1A"
             });
