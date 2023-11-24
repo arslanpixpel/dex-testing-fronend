@@ -3,27 +3,22 @@ import { tableList, tablefiatList } from "../dataList";
 import SwapButton from "./SwapButton";
 import TradeButton from "./TradeButton";
 import BuyButton from "./BuyButton";
-import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
-interface Cointable {
-  idx: number;
-}
-
-const CoinTable: React.FC<Cointable> = (props) => {
-  const navigate = useRouter();
-  const [tempTable, setTempTable] = useState(tableList);
+ 
+const CoinTable = (props) => {
+    const navigate = useNavigate();
+    const [tempTable, setTempTable] = useState(tableList);
 
   useEffect(() => {
     async function fetchDataDex() {
       const response = await axios.post('https://api.pixpel.io/api/v1/tokens/getlimitordersbywallet', {
         walletAddress: "4dgSpWaZf4Z5yDFE5hb6XpaioDv6kao7UF3wvZiMbFkynSdh1A"
-      });
-        
-            console.log(response.data);
-        
+      })    
+            console.log("MY RESPONE", response.data);
            const arr = response.data ? response.data : undefined;
-           const mappedTable = arr.map((val: any) => ({
+           const mappedTable = arr.map((val) => ({
             id: val._id,
             Coin: val.tokenFromid,
             Total: val.tokenfromvalue,
@@ -43,11 +38,11 @@ const CoinTable: React.FC<Cointable> = (props) => {
  
 
     const handleSwapClick = () => {
-        navigate.push("/swap-master");
+        navigate("/swap-master");
     };
 
     const handleTradeClick = () => {
-        navigate.push("/exchange");
+        navigate("/exchange");
     };
 
     return (
@@ -94,7 +89,7 @@ const CoinTable: React.FC<Cointable> = (props) => {
                                         <TradeButton title="Trade" handleClick={handleTradeClick} />
                                         <BuyButton
                                             title="Buy"
-                                            handleClick={function (): void {
+                                            handleClick={function () {
                                                 console.log("Function not implemented.");
                                             }}
                                         />
