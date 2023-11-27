@@ -6,12 +6,14 @@ import { MainButton } from "../../../components/Button/MainButton";
 
 // Utils
 import { getShortTokenName, getTokenUiAmount, parseTokenAddress } from "../../../utils/format";
-import { isSameToken } from "../utils";
+import { getExchanges, isSameToken } from "../utils";
 // Actions
 import { setLiquidityTokenTo } from "../../../store/reducers/SwapMaster/liquiditySlice";
 
 // Constants
 import { CCD_DECIMALS } from "../../../config";
+import { pixpelRequest } from "../../../utils/axios";
+import { useEffect, useRef } from "react";
 
 const LiquidityPools = ({ openLiquidityForm }) => {
   const tokenList = useSelector(s => s.swapMaster.tokenList);
@@ -29,6 +31,9 @@ const LiquidityPools = ({ openLiquidityForm }) => {
 
       openLiquidityForm({ isUnstakeMode, isCreateMode });
     };
+
+  console.log(exchanges, "exchanges");
+  console.log(isTokenListLoaded, "isTokenListLoaded");
 
   // const handleCreateLiquidity = () => {
   //   const newExchangeTokenToData = tokenList.find(
@@ -64,6 +69,28 @@ const LiquidityPools = ({ openLiquidityForm }) => {
   //   );
   //   handleOpenForm(newExchangeTokenToData, false, true)();
   // };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    const saveUserExchangeData = async () => {
+      try {
+        const payload = exchanges;
+        const response = await pixpelRequest.post("/exchanges/updateexchange", payload);
+
+        console.log(response.data.message);
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    };
+
+    if (!hasEffectRun.current) {
+      saveUserExchangeData();
+      hasEffectRun.current = true;
+    }
+  }, []);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const hasEffectRun = useRef(false);
 
   const handleCreateLiquidity = () => {
     const newExchangeTokenToData = tokenList.find(
@@ -102,6 +129,8 @@ const LiquidityPools = ({ openLiquidityForm }) => {
             )
           );
         });
+        console.log(tokenFrom, "tokenfrom");
+        console.log(tokenList, "tokenList");
 
         if (!tokenTo) return acc;
 
