@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-const DropDownButton = ({ initialContent, contentList, fontSize, textColor, backgroundColor }) => {
+const DropDownButton = ({
+  initialContent,
+  contentList,
+  fontSize,
+  textColor,
+  backgroundColor,
+  callback,
+}) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [selectedContent, setSelectedContent] = useState(initialContent);
   const [bgColor, setBgColor] = useState("bg-app-black");
@@ -25,6 +32,9 @@ const DropDownButton = ({ initialContent, contentList, fontSize, textColor, back
   const selectHandleClick = contentTitle => {
     setSelectedContent(contentTitle);
     setShowDropDown(false);
+    if (callback) {
+      callback(contentTitle);
+    }
   };
 
   return (

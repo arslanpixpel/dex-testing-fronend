@@ -16,26 +16,32 @@ const currencyList = [
   {
     id: 1,
     title: "1 hour",
+    addTime: 3600000,
   },
   {
     id: 2,
     title: "5 hours",
+    addTime: 3600000 * 5,
   },
   {
     id: 3,
     title: "15 hours",
+    addTime: 3600000 * 15,
   },
   {
     id: 4,
     title: "1 day",
+    addTime: 3600000 * 24,
   },
   {
     id: 5,
     title: "3 days",
+    addTime: 3600000 * 24 * 3,
   },
   {
     id: 6,
     title: "5 days",
+    addTime: 3600000 * 24 * 5,
   },
 ];
 // const fromTokenList = [
@@ -80,6 +86,7 @@ const LimitCard = () => {
   const [SelectedTokenTo, setSelectedTokenTo] = useState(null);
   const [tokenFromValue, setTokenFromValue] = useState("");
   const [tokenToValue, setTokenToValue] = useState("");
+  const [addExpiry, setAddExpiry] = useState(3600000);
   const dispatch = useDispatch();
 
   const handleChangeFromValue = event => {
@@ -115,6 +122,7 @@ const LimitCard = () => {
             "4D3RtGf7zbg7JtBrrsjXVuTMCNgDcnr5M1TKpXqTTBtHENTWtR",
         ),
       });
+      let now = new Date(new Date().getTime() + addExpiry);
 
       const requestBody = {
         tokenfromName: selectedTokenFrom?.symbol,
@@ -126,6 +134,7 @@ const LimitCard = () => {
         tokenFromid: selectedTokenFrom.id,
         tokenToid: SelectedTokenTo.id,
         address: account,
+        expiry: now.getTime(),
       };
 
       console.log(requestBody, "payload");
@@ -285,6 +294,9 @@ const LimitCard = () => {
                 initialContent={currencyList[0].symbol}
                 backgroundColor="bg-app-black-button"
                 contentList={currencyList}
+                callback={expiry => {
+                  setAddExpiry(currencyList.filter(date => date.title === expiry)[0].addTime);
+                }}
               />
             </div>
           </div>

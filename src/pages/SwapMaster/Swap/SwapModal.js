@@ -132,12 +132,9 @@ const SwapModal = () => {
       // const ResponcePrice = 20;
       // const ToPerFromAmount = 20;
       const ToPerFromAmount = parseFloat(toPerFromAmount.replace(/\s+/g, ""));
-      console.log(
-        response?.data?.filteredOrders.filter(i => !i.paid && i.tokenToid === tokenTo.id),
-        "toPerFromAmount",
-      );
+      console.log(response?.data?.filteredOrders, "toPerFromAmount");
       response?.data?.filteredOrders
-        .filter(i => !i.paid && i.tokenToid === tokenTo.id)
+        .filter(i => !i.paid && i.tokenToid === tokenTo.id && new Date().getTime() < i.expiry)
         .forEach(async a => {
           const ResponcePrice = a?.price;
 
