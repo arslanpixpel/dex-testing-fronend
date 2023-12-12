@@ -64,7 +64,7 @@ const DeveloperHeaderPixpel = () => {
               "hover:text-app-blue cursor-pointer px-5 py-1"
             }
             onClick={async () => {
-              navigate("/staking");
+              window.location.href = "https://launchpad.pixpel.io";
               context.setDeveloperHeader(1);
             }}
           >

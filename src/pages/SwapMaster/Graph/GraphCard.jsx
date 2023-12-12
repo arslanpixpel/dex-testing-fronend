@@ -28,6 +28,7 @@ const GraphCard = () => {
   };
 
   const { chartData, percentDifference } = useChartData({ tokenFrom, tokenTo, period });
+  console.log({ tokenFrom, tokenTo, period, chartData });
 
   return (
     <div className="flex flex-col text-lg 2xl1:w-[815px] bg-app-black rounded-xl sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] ">
@@ -41,25 +42,25 @@ const GraphCard = () => {
         <div className="flex flex-row items-center mb-5 sm:mb-0">
           <div className="flex items-center justify-center h-16 px-2 mr-4 rounded-md w-60 bg-app-black-button">
             <div className="text-base 1xl:text-2xl">
-              {/* {!!chartData.length &&
-                chartData[hoveredPointIndex ?? chartData.length - 1].exchangeRate} */}
-              {40656.65839907}
+              {!!chartData.length &&
+                chartData[hoveredPointIndex ?? chartData.length - 1].exchangeRate}
+              {/* {40656.65839907} */}
             </div>
           </div>
-          {/* <div
+          <div
             className={`flex items-center justify-center w-24 h-12 px-2 ${
               percentDifference >= 0 ? "bg-green-600" : "bg-red-500"
             } rounded-md`}
           >
             <div className="text-sm 1xl:text-base">{percentDifference}%</div>
-          </div> */}
-          <div
+          </div>
+          {/* <div
             className={`flex items-center justify-center w-24 h-12 px-2 ${
               -1.59 >= 0 ? "bg-green-600" : "bg-red-500"
             } rounded-md`}
           >
             <div className="text-sm 1xl:text-base">{-1.59}%</div>
-          </div>
+          </div> */}
         </div>
         <div className="flex">
           <div className="flex items-center justify-center h-12 rounded-md w-36 bg-app-black-button">
@@ -68,7 +69,7 @@ const GraphCard = () => {
         </div>
       </div>
       <div className="flex items-center h-72 mt-7 relative border-dashed border-b-2 border-app-black">
-        {/* <Chart data={chartData} setHoveredPointIndex={setHoveredPointIndex} /> */}
+        <Chart data={chartData} setHoveredPointIndex={setHoveredPointIndex} />
         {/* <div className="mt-24 hidden 2xl:flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +102,7 @@ const GraphCard = () => {
             </defs>
           </svg>
         </div> */}
-        <div className="mt-6 flex">
+        {/* <div className="mt-6 flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="720"
@@ -132,10 +133,10 @@ const GraphCard = () => {
               </linearGradient>
             </defs>
           </svg>
-        </div>
+        </div> */}
         <div className="absolute right-0 bottom-0 rounded-2xl bg-app-black-button px-4 py-2 translate-y-1/2 text-sm">
-          {/* {!!chartData.length && chartData[chartData.length - 1].exchangeRate} */}
-          {"40703.6800000"}
+          {!!chartData.length && chartData[chartData.length - 1].exchangeRate}
+          {/* {"40703.6800000"} */}
         </div>
       </div>
       <div className="flex flex-row justify-end gap-3 mt-8">

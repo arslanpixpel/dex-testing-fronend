@@ -10,6 +10,9 @@ import axios from "axios";
 import { AccountAddress, AccountTransactionType, CcdAmount } from "@concordium/web-sdk";
 import { detectConcordiumProvider } from "@concordium/browser-wallet-api-helpers";
 import { JS_NODE_URL } from "../../config";
+import { useChartData } from "./Graph/hooks";
+import Loader from "../../components/Loader/Loader";
+import { setlimitSuccessModal } from "../../store/reducers/SwapMaster/swapSlice";
 // import { WebClient } from "concordium_web_sdk__WEBPACK_IMPORTED_MODULE_6__";
 
 const currencyList = [
@@ -87,7 +90,31 @@ const LimitCard = () => {
   const [tokenFromValue, setTokenFromValue] = useState("");
   const [tokenToValue, setTokenToValue] = useState("");
   const [addExpiry, setAddExpiry] = useState(3600000);
+  const [SwapDirection, setSwapDirection] = useState(false);
+  const [isProcessing, setisProcessing] = useState(false);
+
   const dispatch = useDispatch();
+
+  const openmodal = () => {
+    dispatch(setlimitSuccessModal({ modal: "confirm", isOpen: true }));
+  };
+
+  const PERIODS = [
+    { name: "day", label: "24H", description: "Past 24 Hours" },
+    { name: "week", label: "1W", description: "Past Week" },
+    { name: "month", label: "1M", description: "Past Month" },
+  ];
+  const [period, setPeriod] = useState(PERIODS[0]);
+  const { chartData, percentDifference } = useChartData({
+    selectedTokenFrom,
+    SelectedTokenTo,
+    period,
+  });
+  console.log(chartData, "chartData");
+  console.log(percentDifference, "percentDifference");
+  console.log(selectedTokenFrom, "selectedTokenFrom");
+  console.log(SelectedTokenTo, "SelectedTokenTo");
+  // const dispatch = useDispatch();
 
   const handleChangeFromValue = event => {
     setTokenFromValue(event.target.value);
@@ -102,7 +129,10 @@ const LimitCard = () => {
   };
 
   const handleSwapDirection = () => {
-    dispatch(changeSwapDirection());
+    //dispatch(changeSwapDirection());
+    setSelectedTokenFrom(SelectedTokenTo);
+    setSelectedTokenTo(selectedTokenFrom);
+    setSwapDirection(!SwapDirection);
   };
 
   const { tokenList } = useSelector(state => state.swapMaster);
@@ -112,6 +142,8 @@ const LimitCard = () => {
   // console.log("setselectedTokenTo", SelectedTokenTo?.symbol);
 
   const handlePlaceOrder = async () => {
+    setisProcessing(true);
+
     try {
       const provider = await detectConcordiumProvider();
       const account = await provider.connect();
@@ -144,6 +176,7 @@ const LimitCard = () => {
       await axios.post(apiUrl, requestBody);
 
       console.log(txHash);
+      setisProcessing(false);
     } catch (error) {
       console.error("Error making API request:", error);
     }
@@ -196,10 +229,10 @@ const LimitCard = () => {
 
   return (
     <>
-      <div className="flex flex-col sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] bg-app-black rounded-xl w-[815px]">
+      <div className="flex flex-col sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] bg-app-black rounded-xl max-w-[815px]">
         <div className="flex flex-col justify-between 2xs:flex-row">
-          <div className="text-lg font-normal ">From</div>
-          <div className="flex flex-row items-center text-gray-600">
+          <div className="text-lg font-normal ">{!SwapDirection ? "From" : "To"}</div>
+          {/* <div className="flex flex-row items-center text-gray-600">
             <div className="text-xs text-gray-500">Spot wallet available</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +249,7 @@ const LimitCard = () => {
               />
             </svg>
             <div className="text-xs text-gray-500">0 USDT</div>
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-row items-center justify-between h-16 py-3 pl-4 mt-3 rounded-lg xs:pl-8 bg-app-black-button">
           <div className="flex flex-row items-center justify-between w-125">
@@ -226,7 +259,7 @@ const LimitCard = () => {
               value={tokenFromValue}
               onChange={handleChangeFromValue}
             />
-            <div className="text-base text-gray-500 w-text-base">Max</div>
+            {/* <div className="text-base text-gray-500 w-text-base">Max</div> */}
           </div>
           <div className="flex-none">
             {/* <ImageDropDownButton
@@ -241,70 +274,19 @@ const LimitCard = () => {
               setselectedTokenFrom={setselectedTokenFrom}
             /> */}
             <ImageDropDownButton
-              // initialContent={tokenList[0]}
+              initialContent={tokenList[0]}
               contentList={tokenList}
               backgroundColor="bg-app-black-button"
               setSelectedTokenFrom={setSelectedTokenFrom}
               setSelectedTokenTo={setSelectedTokenTo}
+              SwapDirection={SwapDirection}
               dropdownType="from"
             />
           </div>
         </div>
-        <div className="flex flex-col pb-10 border-b-2 border-app-block border-b-gray-700">
-          <div className="flex flex-row justify-start gap-2 mt-5">
-            <div className="text-lg w-2/3 font-normal">Price</div>
-            <div className="w-1/3 text-lg font-normal">Expires in</div>
-          </div>
-          <div className="flex flex-col justify-start gap-2 mt-3 sm:flex-row">
-            <div className="flex flex-row items-center justify-between w-full h-16 py-5 pl-8 rounded-lg sm:w-2/3 bg-app-black-button">
-              <div className="w-3/4">
-                <input
-                  className="w-full bg-app-black-button"
-                  value={tokenToValue / tokenFromValue}
-                />
-              </div>
-              <div className="flex-none">
-                {/* <ImageDropDownButton
-                  initialContent={convert ? toTokenList[0] : fromTokenList[0]}
-                  contentList={!convert ? toTokenList : fromTokenList}
-                  backgroundColor=" bg-app-black-button"
-                /> */}
-                <div className="flex flex-row gap-2 items-center mr-6">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="7"
-                    viewBox="0 0 11 7"
-                    fill="none"
-                  >
-                    <path
-                      d="M1 1L5.5 5.5L10 1"
-                      stroke="#717A8B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <p className="text-gray-500">USDT</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-center  w-1/3 h-16 py-5 pl-5 rounded-lg bg-app-black-button justify-center pr-2">
-              <DropdownButton
-                initialContent={currencyList[0].symbol}
-                backgroundColor="bg-app-black-button"
-                contentList={currencyList}
-                callback={expiry => {
-                  setAddExpiry(currencyList.filter(date => date.title === expiry)[0].addTime);
-                }}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-center w-full -mt-6">
+        <div className="flex justify-center w-full mt-10">
           <div
-            className="flex items-center justify-center rounded-full cursor-pointer full bg-app-black-button hover:bg-[#717A8B] rotate-90"
-            style={{ marginBottom: "10px", width: "53px", height: "53px" }}
+            className="flex items-center justify-center rounded-full cursor-pointer full bg-app-black-button hover:bg-[#717A8B] p-3"
             onClick={() => {
               handleSwapDirection();
               handleConvert();
@@ -314,7 +296,7 @@ const LimitCard = () => {
           </div>
         </div>
         <div className="flex flex-row justify-between">
-          <div className="text-lg font-normal ">To</div>
+          <div className="text-lg font-normal ">{SwapDirection ? "From" : "To"}</div>
         </div>
         <div className="flex flex-row items-center justify-between h-16 py-3 pl-8 mt-3 rounded-lg bg-app-black-button">
           <div className="flex flex-row items-center justify-between w-3/4">
@@ -332,7 +314,7 @@ const LimitCard = () => {
               backgroundColor=" bg-app-black-button"
             /> */}
             <ImageDropDownButton
-              // initialContent={tokenList[1]}
+              initialContent2={tokenList[1]}
               contentList={tokenList}
               backgroundColor="bg-app-black-button"
               setSelectedTokenFrom={setSelectedTokenFrom}
@@ -341,6 +323,93 @@ const LimitCard = () => {
             />
           </div>
         </div>
+        <div className="flex flex-col pb-10 border-b-2 border-app-block border-b-gray-700">
+          <div className="flex flex-row justify-start gap-2 mt-5">
+            <div className="text-lg w-2/3 font-normal">Price</div>
+            <div className="w-1/3 text-lg font-normal md:flex hidden">Expires in</div>
+          </div>
+          <div className="flex flex-col justify-start gap-2 mt-3 md:flex-row">
+            <div className="flex flex-row items-center justify-between w-full h-16 py-5 pl-8 rounded-lg sm:w-2/3 bg-app-black-button">
+              <div className="w-3/4">
+                <input
+                  className="w-full bg-app-black-button"
+                  value={tokenToValue / tokenFromValue ? tokenToValue / tokenFromValue : ""}
+                />
+              </div>
+              <div className="flex-none">
+                {/* <ImageDropDownButton
+                  initialContent={convert ? toTokenList[0] : fromTokenList[0]}
+                  contentList={!convert ? toTokenList : fromTokenList}
+                  backgroundColor=" bg-app-black-button"
+                /> */}
+                {/* <div className="flex flex-row gap-2 items-center mr-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="7"
+                    viewBox="0 0 11 7"
+                    fill="none"
+                  >
+                    <path
+                      d="M1 1L5.5 5.5L10 1"
+                      stroke="#717A8B"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <p className="text-gray-500">USDT</p>
+                </div> */}
+              </div>
+            </div>
+            <div className="w-1/3 text-lg font-normal md:hidden flex">Expires in</div>
+            <div className="flex flex-row items-center  w-full md:w-1/3 h-16 py-5 pl-5 rounded-lg bg-app-black-button justify-end pr-2">
+              <DropdownButton
+                initialContent={currencyList[0].symbol}
+                backgroundColor="bg-app-black-button"
+                contentList={currencyList}
+                callback={expiry => {
+                  setAddExpiry(currencyList.filter(date => date.title === expiry)[0].addTime);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        {/* <div className="flex justify-center w-full -mt-6">
+          <div
+            className="flex items-center justify-center rounded-full cursor-pointer full bg-app-black-button hover:bg-[#717A8B] rotate-90"
+            style={{ marginBottom: "10px", width: "53px", height: "53px" }}
+            onClick={() => {
+              handleSwapDirection();
+              handleConvert();
+            }}
+          >
+            <SwapDirectionIcon />
+          </div>
+        </div> */}
+        {/* <div className="flex flex-row justify-between">
+          <div className="text-lg font-normal ">To</div>
+        </div>
+        <div className="flex flex-row items-center justify-between h-16 py-3 pl-8 mt-3 rounded-lg bg-app-black-button">
+          <div className="flex flex-row items-center justify-between w-3/4">
+            <input
+              className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
+              placeholder="Please enter 0.0004-50"
+              value={tokenToValue}
+              onChange={handleChangeToValue}
+            />
+          </div>
+          <div className="flex-none">
+            <ImageDropDownButton
+              // initialContent={tokenList[1]}
+              contentList={tokenList}
+              backgroundColor="bg-app-black-button"
+              setSelectedTokenFrom={setSelectedTokenFrom}
+              setSelectedTokenTo={setSelectedTokenTo}
+              dropdownType="to" // Specify the dropdown type
+            />
+          </div>
+        </div> */}
         <div className="flex flex-row justify-between mt-5 text-xs 1xs:text-base">
           <div>Price</div>
           <div>
@@ -361,7 +430,10 @@ const LimitCard = () => {
             handlePlaceOrder();
           }}
         >
-          <div className="text-lg">Place Older</div>
+          {isProcessing && <Loader size="md" />}
+          <div className="text-lg" onClick={openmodal}>
+            Place Older
+          </div>
         </div>
       </div>
     </>

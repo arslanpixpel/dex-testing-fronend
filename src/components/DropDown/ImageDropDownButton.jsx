@@ -120,6 +120,22 @@ const ImageDropDownButton = props => {
     setBgColor(props.backgroundColor);
   }, [props.backgroundColor]);
 
+  // useEffect(() => {
+  //   // Check if props.SwapDirection is true, then swap the values
+  //   if (props.SwapDirection) {
+  //     setSelectedTokenFrom(prevTokenTo => {
+  //       // eslint-disable-next-line no-unused-vars
+  //       setSelectedTokenTo(prevTokenFrom => prevTokenTo);
+  //       return prevTokenTo;
+  //     });
+  //   }
+  // }, [props.SwapDirection]);
+
+  // if (props.SwapDirection) {
+  //   setSelectedTokenFrom(selectedTokenTo);
+  //   setSelectedTokenTo(selectedTokenFrom);
+  // }
+
   const handleDropDown = () => {
     setShowDropDown(!showDropDown);
   };
@@ -149,13 +165,25 @@ const ImageDropDownButton = props => {
             src={
               props.dropdownType === "from"
                 ? selectedTokenFrom?.images?.thumbnail?.url
-                : selectedTokenTo?.images?.thumbnail?.url
+                : // ? selectedTokenFrom.images?.thumbnail.url
+                  // : props.initialContent.images.thumbnail.url
+                  selectedTokenTo?.images?.thumbnail?.url
+              // ? selectedTokenTo?.images?.thumbnail?.url
+              // : props.initialContent2?.images?.thumbnail?.url
             }
             alt=""
             className="w-7 h-7 rounded-full"
           />
           <div className="text-base font-medium">
-            {props.dropdownType === "from" ? selectedTokenFrom?.symbol : selectedTokenTo?.symbol}
+            {
+              props.dropdownType === "from"
+                ? selectedTokenFrom?.symbol
+                : // ? selectedTokenFrom?.symbol
+                  // : props.initialContent?.symbol
+                  selectedTokenTo?.symbol
+              // ? selectedTokenTo?.symbol
+              // : props.initialContent2?.symbol
+            }
           </div>
         </div>
         <div className="flex items-center">

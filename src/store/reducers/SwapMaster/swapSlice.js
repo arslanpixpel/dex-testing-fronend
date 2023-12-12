@@ -17,6 +17,7 @@ const initialState = {
       modalData: {},
     },
   },
+  limitsuccessmodal: false,
 };
 
 const swapSlice = createSlice({
@@ -63,6 +64,9 @@ const swapSlice = createSlice({
         if (stateModal !== modal) state.modals[stateModal].isOpen = false;
       });
     },
+    setlimitSuccessModal: (state, action) => {
+      state.limitsuccessmodal = action.payload;
+    },
     clearSwapState: () => initialState,
   },
 });
@@ -74,6 +78,7 @@ export const {
   setSwapBalances,
   setIsSwapModalOpen,
   clearSwapState,
+  setlimitSuccessModal,
 } = swapSlice.actions;
 
 export default swapSlice.reducer;
