@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setlimitSuccessModal } from "../../store/reducers/SwapMaster/swapSlice";
+import { clearSwapState } from "../../store/reducers/SwapMaster/swapSlice";
 
 // // Actions
 // import { setIsSwapModalOpen } from "../../../store/reducers/SwapMaster/swapSlice";
@@ -20,9 +21,11 @@ const LimitSuccessCard = () => {
     inverseprice: toPerFromAmount,
     txnhash,
   } = useSelector(s => s.swap.limitdata);
+
   const closemodal = () => {
     console.log("close modal");
     dispatch(setlimitSuccessModal(false));
+    dispatch(clearSwapState());
   };
 
   //   const onCloseModal = () => {
