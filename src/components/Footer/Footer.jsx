@@ -1,10 +1,14 @@
 import React from "react";
-import Facebook from "../../asssets/images/facebook.svg";
-import Twitter from "../../asssets/images/twitter.svg";
+// import Facebook from "../../asssets/images/facebook.svg";
+// import Twitter from "../../asssets/images/twitter.svg";
 import Telegram from "../../asssets/images/telegram.svg";
 import Discord from "../../asssets/images/discord.svg";
 import Linkedin from "../../asssets/images/linkedin.svg";
 import logo from "../../asssets/images/logo.svg";
+import Xicon from "../../asssets/images/Xicon.png";
+import Insta from "../../asssets/images/Insta.png";
+import Isolation_Mode from "../../asssets/images/Isolation_Mode.png";
+
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -57,13 +61,14 @@ const Footer = () => {
           <div className="text-2xl font-semibold xl:mb-6 md:mb-4 mb-2">Community</div>
           <div className="flex flex-col gap-6">
             <div className="flex gap-9">
-              <img src={Facebook} alt="facebook" className="w-7 rounded-full" />
-              <img src={Twitter} alt="twitter" className="w-7 rounded-full" />
+              <img src={Insta} alt="facebook" className="w-7 rounded-full" />
+              <img src={Xicon} alt="twitter" className="w-7 rounded-full" />
               <img src={Telegram} alt="telegram" className="w-7 rounded-full" />
             </div>
             <div className="flex gap-9">
               <img src={Discord} alt="discord" className="w-7 rounded-full" />
               <img src={Linkedin} alt="linkedin" className="w-7 rounded-full" />
+              <img src={Isolation_Mode} alt="linkedin" className="w-7 rounded-full" />
             </div>
           </div>
         </div>
