@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { pixpelRequest } from "../../utils/axios";
 import Button from "./Button";
 
@@ -7,14 +7,12 @@ function LimitOrders() {
   const limitsuccessmodal = useSelector(s => s.swap.limitsuccessmodal);
   const [tempTable, setTempTable] = useState([]);
   const account = useSelector(s => s.connect.account);
-  const [openorder, setOpenOrders] = useState([]);
   const [filter, setFilter] = useState(false);
-  const dispatch = useDispatch();
 
   async function fetchDataDex() {
     setFilter(false);
     const response = await pixpelRequest.post("/tokens/getlimitordersbywallet", {
-      walletAddress: "341THe74fqpi9uohgGBbKpedqAjz2bNCgnbRWacrKVs9pPDq6U",
+      walletAddress: account || "",
     });
 
     console.log(response.data, "getlimitordersbywallet Data");
@@ -28,6 +26,7 @@ function LimitOrders() {
     console.log("WALLET NUMBER : ", account);
 
     fetchDataDex();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openorders = () => {

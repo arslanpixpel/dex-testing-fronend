@@ -23,17 +23,16 @@ const PERIOD_METHODS = {
 
 export const getChartData = async ({ tokenFrom, tokenTo, period }) => {
   const currentDate = new Date();
-  const startOfHourDate = startOfHour(currentDate);
 
   const periodMethod = PERIOD_METHODS[period];
-  const dateFrom = periodMethod(startOfHourDate, -1);
+  const dateFrom = periodMethod(currentDate, -1);
 
   try {
     const response = await pixpelRequest.post("/chart-data", {
       pairFrom: getTokenParam(tokenFrom),
       pairTo: getTokenParam(tokenTo),
       dateFrom: dateFrom,
-      dateTo: startOfHourDate,
+      dateTo: currentDate,
     });
 
     return response.data.chartData || [];

@@ -1,5 +1,6 @@
 //export const JS_NODE_URL = "https://concordium-servernode.dev-site.space";
 export const JS_NODE_URL = "https://api.pixpel.io";
+// export const JS_NODE_URL = "http://localhost:8000";
 export const JSON_RPC_URL = "https://json-rpc-proxy-0.dev-site.space";
 export const NETWORK = "testnet";
 

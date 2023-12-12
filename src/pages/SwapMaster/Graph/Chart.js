@@ -8,7 +8,15 @@ import {
   Decimation,
   LineController,
 } from "chart.js";
-
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 // for decimation mechanism
 import "chartjs-adapter-date-fns";
 
@@ -105,7 +113,47 @@ const Chart = ({ data, setHoveredPointIndex }) => {
     return () => chart.current?.destroy();
   }, [preparedData, onChartHover]);
 
-  return <canvas id="swap-chart" ref={canvasRef} />;
+  return (
+    <>
+      {/* <canvas id="swap-chart" ref={canvasRef} /> */}
+      <div style={{ width: "100%", height: 300, color: "black" }}>
+        <ResponsiveContainer>
+          <AreaChart
+            data={data}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#2EBD73" stopOpacity={0.6} />
+                <stop offset="100%" stopColor="rgba(46, 189, 133, 0)" stopOpacity={0.6} />
+              </linearGradient>
+            </defs>
+            <Tooltip
+              content={({ active, payload, label }) => {
+                setHoveredPointIndex(label);
+
+                if (active && payload && payload.length) {
+                  return (
+                    <div className="custom-tooltip ">
+                      {/* <p className="label">{payload[0].value}</p> */}
+                    </div>
+                  );
+                }
+
+                return null;
+              }}
+            />
+            <Area type="monotone" dataKey="exchangeRate" stroke="#2EBD85" fill="url(#colorUv)" />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </>
+  );
 };
 
 export default Chart;
