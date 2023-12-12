@@ -241,7 +241,7 @@ const LimitCard = () => {
   // };
 
   useEffect(() => {
-    if (tokenList && tokenList.length && !tokenFrom && !tokenTo) {
+    if (tokenList && tokenList.length && !tokenFrom?.symbol && !tokenTo?.symbol) {
       setLimitTokenFrom2(tokenList[0]);
       setLimitTokenTo2(tokenList[1]);
     }
