@@ -22,7 +22,7 @@ const LiquidityPools = ({ openLiquidityForm }) => {
 
   const isTokenListLoaded = useSelector(s => s.swapMaster.isTokenListLoaded);
 
-  if (!isTokenListLoaded) return null;
+  dispatch(getExchanges());
 
   const handleOpenForm =
     (tokenToData, isUnstakeMode = false, isCreateMode = false) =>
@@ -100,6 +100,7 @@ const LiquidityPools = ({ openLiquidityForm }) => {
         exchanges.every(exchange => {
           const { index, subindex } = address; // Corrected
           console.log(index, subindex);
+
           return !isSameToken(
             { index: address.index, subindex: address.subindex, tokenId }, // Corrected
             { index, subindex, tokenId: exchange.tokenId }, // Corrected
@@ -108,6 +109,8 @@ const LiquidityPools = ({ openLiquidityForm }) => {
     );
     handleOpenForm(newExchangeTokenToData, false, true)();
   };
+
+  if (!isTokenListLoaded) return null;
 
   const exchangesTable = (
     <div className="flex flex-col mb-5">

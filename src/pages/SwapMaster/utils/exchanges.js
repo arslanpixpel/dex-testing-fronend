@@ -39,7 +39,9 @@ export const getExchanges = () => async (dispatch, getState) => {
 
     exchanges = new PixpelSwapDeserializer(returnedValue).readExchanges();
     console.log(exchanges, "exchanges");
-  } catch {}
+  } catch (e) {
+    console.log(e);
+  }
 
   if (exchanges) {
     dispatch(setExchanges(exchanges));
