@@ -36,8 +36,8 @@ const GraphCard = () => {
     <div className="flex flex-col text-lg 2xl1:w-[815px] bg-app-black rounded-xl sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] ">
       <div className="flex items-center justify-center rounded-md w-36 bg-app-black-button h-14">
         <div>
-          <span title={tokenFrom.symbol}>{getShortTokenName(tokenFrom.symbol)}</span>/
-          <span title={tokenTo.symbol}>{getShortTokenName(tokenTo.symbol)}</span>
+          <span title={tokenFrom?.symbol}>{getShortTokenName(tokenFrom?.symbol)}</span>/
+          <span title={tokenTo?.symbol}>{getShortTokenName(tokenTo?.symbol)}</span>
         </div>
       </div>
       <div className="flex flex-col justify-between mt-4 sm:items-center sm:flex-row">

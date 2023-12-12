@@ -112,13 +112,20 @@ import { getShortTokenName } from "../../utils/format";
 
 const ImageDropDownButton = props => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [selectedTokenFrom, setSelectedTokenFrom] = useState(null);
-  const [selectedTokenTo, setSelectedTokenTo] = useState(null);
+  const [selectedTokenFrom, setSelectedTokenFrom] = useState();
+  const [selectedTokenTo, setSelectedTokenTo] = useState();
   const [bgColor, setBgColor] = useState("bg-app-black");
 
   useEffect(() => {
     setBgColor(props.backgroundColor);
   }, [props.backgroundColor]);
+
+  useEffect(() => {
+    if (props.contentList.length && !selectedTokenFrom && !selectedTokenTo) {
+      setSelectedTokenFrom(props.contentList[0]);
+      setSelectedTokenTo(props.contentList[1]);
+    }
+  }, [props]);
 
   // useEffect(() => {
   //   // Check if props.SwapDirection is true, then swap the values
@@ -175,15 +182,15 @@ const ImageDropDownButton = props => {
             className="w-7 h-7 rounded-full"
           />
           <div className="text-base font-medium">
-            {
+            {getShortTokenName(
               props.dropdownType === "from"
                 ? selectedTokenFrom?.symbol
                 : // ? selectedTokenFrom?.symbol
                   // : props.initialContent?.symbol
-                  selectedTokenTo?.symbol
+                  selectedTokenTo?.symbol,
               // ? selectedTokenTo?.symbol
               // : props.initialContent2?.symbol
-            }
+            )}
           </div>
         </div>
         <div className="flex items-center">

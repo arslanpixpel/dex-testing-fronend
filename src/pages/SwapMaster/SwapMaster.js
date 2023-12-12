@@ -98,7 +98,7 @@ const SwapMaster = () => {
           <div className="text-3xl  2xs:text-4xl 1xs:text-[40px] font-semibold">Swap Master</div>
           <div className="w-12 h-12"></div>
         </div>
-        <div className="flex flex-row justify-center w-full gap-5 mb-12 xs:font-semibold xs:text-lg px-28">
+        <div className="flex flex-wrap flex-row justify-center w-full gap-5 mb-12 xs:font-semibold xs:text-lg px-28">
           {buttonList.map((button, idx) => {
             return (
               <Link

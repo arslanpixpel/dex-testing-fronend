@@ -240,6 +240,14 @@ const LimitCard = () => {
   //   setSelectedTokenTo(temp);
   // };
 
+  useEffect(() => {
+    if (tokenList && tokenList.length && !tokenFrom && !tokenTo) {
+      setLimitTokenFrom2(tokenList[0]);
+      setLimitTokenTo2(tokenList[1]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokenList]);
+
   return (
     <>
       <div className="flex flex-col sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] bg-app-black rounded-xl max-w-[815px]">
