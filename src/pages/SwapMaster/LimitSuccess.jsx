@@ -9,17 +9,20 @@ import { setlimitSuccessModal } from "../../store/reducers/SwapMaster/swapSlice"
 
 const LimitSuccessCard = () => {
   const dispatch = useDispatch();
-  const tokenFrom = useSelector(s => s.swap.tokenFrom);
-  const tokenTo = useSelector(s => s.swap.tokenTo);
+  const tokenTo = useSelector(s => s.swap.limitdata.tokenTo);
+  const tokenFrom = useSelector(s => s.swap.limitdata.tokenFrom);
+
+  console.log(tokenFrom, tokenTo, "LimitSuccessCard");
+
   const {
     values = {},
-    fromPerToAmount,
-    toPerFromAmount,
-    txnHash,
-  } = useSelector(s => s.swap.modals.success.modalData);
+    price: fromPerToAmount,
+    inverseprice: toPerFromAmount,
+    txnhash,
+  } = useSelector(s => s.swap.limitdata);
   const closemodal = () => {
     console.log("close modal");
-    dispatch(setlimitSuccessModal({ modal: "limitsuccessmodal", isOpen: false }));
+    dispatch(setlimitSuccessModal(false));
   };
 
   //   const onCloseModal = () => {
@@ -88,15 +91,13 @@ const LimitSuccessCard = () => {
       <div className="flex flex-row justify-between w-full gap-4">
         <div
           className="flex items-center justify-center h-16 py-5 rounded-lg cursor-pointer w-44 bg-app-black-button hover:bg-app-blue"
-          onClick={""}
+          onClick={closemodal}
         >
-          <div className="text-lg font-medium" onClick={closemodal}>
-            Back
-          </div>
+          <div className="text-lg font-medium">Back</div>
         </div>
         <a
-          // href={`https://dashboard.${NETWORK}.concordium.com/lookup/${txnHash}`}
-          href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnHash}`}
+          // href={`https://dashboard.${NETWORK}.concordium.com/lookup/${txnhash}`}
+          href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnhash}`}
           target="_blank"
           rel="noopener noreferrer nofollow"
           className="flex items-center justify-center w-56 h-16 py-5 rounded-lg cursor-pointer bg-app-blue hover:bg-app-blue"

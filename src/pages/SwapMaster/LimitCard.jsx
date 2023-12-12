@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageDropDownButton from "../../components/DropDown/ImageDropDownButton";
 import DropdownButton from "../../components/DropDown/DropDownButton";
 import { SwapDirectionIcon } from "./icons/SwapDirectionIcon";
@@ -12,7 +12,12 @@ import { detectConcordiumProvider } from "@concordium/browser-wallet-api-helpers
 import { JS_NODE_URL } from "../../config";
 import { useChartData } from "./Graph/hooks";
 import Loader from "../../components/Loader/Loader";
-import { setlimitSuccessModal } from "../../store/reducers/SwapMaster/swapSlice";
+import {
+  setLimitPrice,
+  setLimitTokenFrom,
+  setLimitTokenTo,
+  setlimitSuccessModal,
+} from "../../store/reducers/SwapMaster/swapSlice";
 // import { WebClient } from "concordium_web_sdk__WEBPACK_IMPORTED_MODULE_6__";
 
 const currencyList = [
@@ -85,8 +90,8 @@ const currencyList = [
 
 const LimitCard = () => {
   const [convert, setConvert] = useState();
-  const [selectedTokenFrom, setSelectedTokenFrom] = useState(null);
-  const [SelectedTokenTo, setSelectedTokenTo] = useState(null);
+  // const [selectedTokenFrom, setSelectedTokenFrom] = useState(null);
+  // const [SelectedTokenTo, setSelectedTokenTo] = useState(null);
   const [tokenFromValue, setTokenFromValue] = useState("");
   const [tokenToValue, setTokenToValue] = useState("");
   const [addExpiry, setAddExpiry] = useState(3600000);
@@ -96,24 +101,23 @@ const LimitCard = () => {
   const dispatch = useDispatch();
 
   const openmodal = () => {
-    dispatch(setlimitSuccessModal({ modal: "confirm", isOpen: true }));
+    dispatch(setlimitSuccessModal(true));
   };
 
-  const PERIODS = [
-    { name: "day", label: "24H", description: "Past 24 Hours" },
-    { name: "week", label: "1W", description: "Past Week" },
-    { name: "month", label: "1M", description: "Past Month" },
-  ];
-  const [period, setPeriod] = useState(PERIODS[0]);
-  const { chartData, percentDifference } = useChartData({
-    selectedTokenFrom,
-    SelectedTokenTo,
-    period,
-  });
-  console.log(chartData, "chartData");
-  console.log(percentDifference, "percentDifference");
-  console.log(selectedTokenFrom, "selectedTokenFrom");
-  console.log(SelectedTokenTo, "SelectedTokenTo");
+  const setLimitTokenFrom2 = x => {
+    dispatch(setLimitTokenFrom(x));
+  };
+
+  const setLimitTokenTo2 = x => {
+    dispatch(setLimitTokenTo(x));
+  };
+
+  const tokenTo = useSelector(s => s.swap.limitdata.tokenTo);
+  const tokenFrom = useSelector(s => s.swap.limitdata.tokenFrom);
+  console.log(tokenFrom, tokenTo, "tokenFrom tokenTo tokenFrom token");
+
+  console.log(tokenFrom, "selectedTokenFrom");
+  console.log(tokenTo, "SelectedTokenTo");
   // const dispatch = useDispatch();
 
   const handleChangeFromValue = event => {
@@ -130,8 +134,8 @@ const LimitCard = () => {
 
   const handleSwapDirection = () => {
     //dispatch(changeSwapDirection());
-    setSelectedTokenFrom(SelectedTokenTo);
-    setSelectedTokenTo(selectedTokenFrom);
+    setLimitTokenFrom2(tokenTo);
+    setLimitTokenTo2(tokenFrom);
     setSwapDirection(!SwapDirection);
   };
 
@@ -157,14 +161,14 @@ const LimitCard = () => {
       let now = new Date(new Date().getTime() + addExpiry);
 
       const requestBody = {
-        tokenfromName: selectedTokenFrom?.symbol,
-        tokentoName: SelectedTokenTo?.symbol,
+        tokenfromName: tokenFrom?.symbol,
+        tokentoName: tokenTo?.symbol,
         tokenfromvalue: tokenFromValue,
         tokentovalue: tokenToValue,
-        tokenToindex: SelectedTokenTo?.address?.index || 0,
-        tokenFromindex: selectedTokenFrom?.address?.index || 0,
-        tokenFromid: selectedTokenFrom.id,
-        tokenToid: SelectedTokenTo.id,
+        tokenToindex: tokenTo?.address?.index || 0,
+        tokenFromindex: tokenFrom?.address?.index || 0,
+        tokenFromid: tokenFrom.id,
+        tokenToid: tokenTo.id,
         address: account,
         expiry: now.getTime(),
       };
@@ -177,8 +181,17 @@ const LimitCard = () => {
 
       console.log(txHash);
       setisProcessing(false);
+      dispatch(
+        setLimitPrice({
+          price: tokenToValue / tokenFromValue,
+          inverseprice: tokenFromValue / tokenToValue,
+          txnhash: txHash,
+        }),
+      );
+      openmodal();
     } catch (error) {
       console.error("Error making API request:", error);
+      setisProcessing(false);
     }
   };
 
@@ -277,8 +290,8 @@ const LimitCard = () => {
               initialContent={tokenList[0]}
               contentList={tokenList}
               backgroundColor="bg-app-black-button"
-              setSelectedTokenFrom={setSelectedTokenFrom}
-              setSelectedTokenTo={setSelectedTokenTo}
+              setSelectedTokenFrom={setLimitTokenFrom2}
+              setSelectedTokenTo={setLimitTokenTo2}
               SwapDirection={SwapDirection}
               dropdownType="from"
             />
@@ -317,8 +330,8 @@ const LimitCard = () => {
               initialContent2={tokenList[1]}
               contentList={tokenList}
               backgroundColor="bg-app-black-button"
-              setSelectedTokenFrom={setSelectedTokenFrom}
-              setSelectedTokenTo={setSelectedTokenTo}
+              setSelectedTokenFrom={setLimitTokenFrom2}
+              setSelectedTokenTo={setLimitTokenTo2}
               dropdownType="to" // Specify the dropdown type
             />
           </div>
@@ -413,15 +426,13 @@ const LimitCard = () => {
         <div className="flex flex-row justify-between mt-5 text-xs 1xs:text-base">
           <div>Price</div>
           <div>
-            1 {selectedTokenFrom?.symbol} = {tokenToValue / tokenFromValue}{" "}
-            {SelectedTokenTo?.symbol}
+            1 {tokenFrom?.symbol} = {tokenToValue / tokenFromValue} {tokenTo?.symbol}
           </div>
         </div>
         <div className="flex flex-row justify-between mt-3 text-xs 1xs:text-base">
           <div>Inverse Price</div>
           <div>
-            1 {SelectedTokenTo?.symbol} = {tokenFromValue / tokenToValue}{" "}
-            {selectedTokenFrom?.symbol}
+            1 {tokenTo?.symbol} = {tokenFromValue / tokenToValue} {tokenFrom?.symbol}
           </div>
         </div>
         <div
@@ -431,9 +442,7 @@ const LimitCard = () => {
           }}
         >
           {isProcessing && <Loader size="md" />}
-          <div className="text-lg" onClick={openmodal}>
-            Place Older
-          </div>
+          <div className="text-lg">Place Older</div>
         </div>
       </div>
     </>

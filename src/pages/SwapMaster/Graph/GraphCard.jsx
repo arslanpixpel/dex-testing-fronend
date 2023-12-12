@@ -18,8 +18,10 @@ const PERIODS = [
 ];
 
 const GraphCard = () => {
-  const tokenFrom = useSelector(s => s.swap.tokenFrom);
-  const tokenTo = useSelector(s => s.swap.tokenTo);
+  // const tokenFrom = useSelector(s => s.swap.tokenFrom);
+  // const tokenTo = useSelector(s => s.swap.tokenTo);
+  const tokenTo = useSelector(s => s.swap.limitdata.tokenTo);
+  const tokenFrom = useSelector(s => s.swap.limitdata.tokenFrom);
   const [period, setPeriod] = useState(PERIODS[0]);
   const [hoveredPointIndex, setHoveredPointIndex] = useState(null);
 

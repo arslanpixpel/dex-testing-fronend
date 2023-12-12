@@ -12,7 +12,7 @@ function LimitOrders() {
   async function fetchDataDex() {
     setFilter(false);
     const response = await pixpelRequest.post("/tokens/getlimitordersbywallet", {
-      walletAddress: account || "",
+      walletAddress: account,
     });
 
     console.log(response.data, "getlimitordersbywallet Data");
@@ -27,7 +27,7 @@ function LimitOrders() {
 
     fetchDataDex();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [account]);
 
   const openorders = () => {
     console.log(tempTable);

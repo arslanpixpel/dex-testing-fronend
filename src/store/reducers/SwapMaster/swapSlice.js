@@ -18,6 +18,13 @@ const initialState = {
     },
   },
   limitsuccessmodal: false,
+  limitdata: {
+    tokenFrom: {},
+    tokenTo: {},
+    price: 0,
+    inverseprice: 0,
+    txnhash: null,
+  },
 };
 
 const swapSlice = createSlice({
@@ -67,6 +74,18 @@ const swapSlice = createSlice({
     setlimitSuccessModal: (state, action) => {
       state.limitsuccessmodal = action.payload;
     },
+    setLimitTokenFrom: (state, action) => {
+      state.limitdata.tokenFrom = action.payload;
+    },
+    setLimitTokenTo: (state, action) => {
+      state.limitdata.tokenTo = action.payload;
+    },
+    setLimitPrice: (state, action) => {
+      state.limitdata.price = action.payload.price;
+      state.limitdata.inverseprice = action.payload.inverseprice;
+      state.limitdata.txnhash = action.payload.txnhash;
+    },
+
     clearSwapState: () => initialState,
   },
 });
@@ -79,6 +98,9 @@ export const {
   setIsSwapModalOpen,
   clearSwapState,
   setlimitSuccessModal,
+  setLimitTokenFrom,
+  setLimitTokenTo,
+  setLimitPrice,
 } = swapSlice.actions;
 
 export default swapSlice.reducer;

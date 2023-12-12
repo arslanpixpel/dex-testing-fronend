@@ -9,16 +9,19 @@ import LimitSuccessCard from "./LimitSuccess";
 
 const Limit = () => {
   const limitsuccessmodal = useSelector(s => s.swap.limitsuccessmodal);
+
   return (
     <>
-      <div className="grid grid-cols-1 w-full gap-8 2xl:grid-cols-2 md:w-auto">
-        <GraphCard />
-        <LimitCard />
-        <SwapModal />
-        {/* {isSuccessModalOpen && <SwapSuccessCard />} */}
-        <LimitOrders />
-        {limitsuccessmodal && <LimitSuccessCard />}
-      </div>
+      {!limitsuccessmodal && (
+        <div className="grid grid-cols-1 w-full gap-8 2xl:grid-cols-2 md:w-auto">
+          <GraphCard />
+          <LimitCard />
+          <SwapModal />
+          {/* {isSuccessModalOpen && <SwapSuccessCard />} */}
+          <LimitOrders />
+        </div>
+      )}
+      {limitsuccessmodal && <LimitSuccessCard />}
     </>
   );
 };
