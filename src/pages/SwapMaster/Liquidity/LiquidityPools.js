@@ -32,8 +32,8 @@ const LiquidityPools = ({ openLiquidityForm }) => {
       openLiquidityForm({ isUnstakeMode, isCreateMode });
     };
 
-  console.log(exchanges, "exchanges");
-  console.log(isTokenListLoaded, "isTokenListLoaded");
+  // console.log(exchanges, "exchanges");
+  // console.log(isTokenListLoaded, "isTokenListLoaded");
 
   // const handleCreateLiquidity = () => {
   //   const newExchangeTokenToData = tokenList.find(
@@ -121,7 +121,7 @@ const LiquidityPools = ({ openLiquidityForm }) => {
       {exchanges.reduce((acc, { token, lpTokensHolderBalance }, i) => {
         const tokenFrom = tokenList[0];
         const tokenTo = tokenList.find(({ address, tokenId }) => {
-          console.log(token);
+          // console.log(token);
           const { index, subindex } = parseTokenAddress(token.address);
 
           return (
@@ -132,8 +132,8 @@ const LiquidityPools = ({ openLiquidityForm }) => {
             )
           );
         });
-        console.log(tokenFrom, "tokenfrom");
-        console.log(tokenList, "tokenList");
+        // console.log(tokenFrom, "tokenfrom");
+        // console.log(tokenList, "tokenList");
 
         if (!tokenTo) return acc;
 
