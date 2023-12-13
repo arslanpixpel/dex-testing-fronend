@@ -17,6 +17,7 @@ import {
 } from "@concordium/web-sdk";
 import { JSON_RPC_URL } from "../config";
 import axios from "axios";
+import { detectConcordiumProvider } from "@concordium/browser-wallet-api-helpers";
 
 export const customRpcClient = new JsonRpcClient(new HttpProvider(JSON_RPC_URL));
 
@@ -50,8 +51,15 @@ export async function invokeContract(
         })
       : undefined);
   // const client = provider?.getJsonRpcClient() || customRpcClient;
-  console.log(customRpcClient, "customRpcClient");
-  const client = provider?.getGrpcClient() || customRpcClient;
+  // console.log(customRpcClient, "customRpcClient");
+  // console.log(provider, "provider");
+
+  if (!provider) {
+    console.log("provider not found");
+    provider = await detectConcordiumProvider();
+  }
+
+  const client = provider?.getGrpcClient();
 
   const contractContext = {
     parameter,
@@ -61,6 +69,8 @@ export async function invokeContract(
   };
 
   const res = await client.invokeContract(contractContext);
+
+  console.log(res, "contract");
 
   if (!res || res.tag === "failure") {
     try {
