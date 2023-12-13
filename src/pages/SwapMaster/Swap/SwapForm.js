@@ -142,7 +142,10 @@ const SwapForm = () => {
       <div className="mt-2">
         <div className="text-sm text-slate-400">Please confirm conversion within the time.</div>
       </div>
-      <div className="my-5 bg-white/10 rounded-md p-5">1 AVA = 0.3371245 PIXP</div>
+      <div className="my-5 bg-white/10 rounded-md p-5">
+        {" "}
+        1 {tokenFrom.symbol} = {toPerFromAmount} {tokenTo.symbol}
+      </div>
       <div className="flex flex-row justify-between">
         <div>Pool Fee</div>
         <div>0.01%</div>
