@@ -27,6 +27,7 @@ const GraphCard = () => {
 
   const handlePeriodChange = period => () => {
     setPeriod(period);
+    setHoveredPointIndex(null);
   };
 
   const { chartData, percentDifference } = useChartData({ tokenFrom, tokenTo, period });
@@ -45,8 +46,7 @@ const GraphCard = () => {
           <div className="flex items-center justify-center h-16 px-2 mr-4 rounded-md w-60 bg-app-black-button">
             <div className="text-base 1xl:text-2xl">
               {!!chartData.length &&
-                chartData[hoveredPointIndex ?? chartData.length - 1].exchangeRate}
-              {/* {40656.65839907} */}
+                chartData[hoveredPointIndex ?? chartData.length - 1]?.exchangeRate}
             </div>
           </div>
           <div
