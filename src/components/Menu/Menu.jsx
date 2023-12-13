@@ -50,5 +50,4 @@ const Menu = props => {
 Menu.defaultProps = {
   elemClass: "",
 };
-// console.log(Header);
 export default Menu;

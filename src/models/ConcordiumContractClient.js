@@ -51,11 +51,8 @@ export async function invokeContract(
         })
       : undefined);
   // const client = provider?.getJsonRpcClient() || customRpcClient;
-  // console.log(customRpcClient, "customRpcClient");
-  // console.log(provider, "provider");
 
   if (!provider) {
-    console.log("provider not found");
     provider = await detectConcordiumProvider();
   }
 
@@ -70,8 +67,6 @@ export async function invokeContract(
 
   const res = await client.invokeContract(contractContext);
 
-  console.log(res, "contract");
-
   if (!res || res.tag === "failure") {
     try {
       const errorData =
@@ -83,18 +78,18 @@ export async function invokeContract(
           methodName,
         );
 
-      console.log(
+      console.error(
         `%c::${"Deserialized error"}`,
         "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
         errorData,
       );
     } catch (error) {
-      console.log(
+      console.error(
         `%c::${"Deserialization error"}`,
         "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
         error,
       );
-      console.log(
+      console.error(
         `%c::${"Failure result"}`,
         "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
         res,
@@ -145,7 +140,6 @@ export async function updateContract(
   maxContractExecutionEnergy = BigInt(9999),
   ccdUiAmount = 0,
 ) {
-  console.log(provider, "provider");
   const { schemaBuffer, contractName, serializationContractName, schemaWithContext } = contractInfo;
   const parameter = serializeParams(
     serializationContractName || contractName,
@@ -153,7 +147,6 @@ export async function updateContract(
     methodName,
     paramJson,
   );
-  console.log(parameter, "parameter");
   let txnHash = await provider.sendTransaction(
     account,
     AccountTransactionType.Update,
@@ -168,59 +161,50 @@ export async function updateContract(
     schemaWithContext || schemaBuffer.toString("base64"),
     SchemaVersion.V2,
   );
-  console.log(
-    maxContractExecutionEnergy,
-    contractAddress,
-    parameter,
-    ccdUiAmount,
-    `${contractName}.${methodName}`,
-    "txnhashprovider",
-  );
   //const outcomes = await waitForTransaction(provider, txnHash);
   const outcomes = await provider.getGrpcClient().waitForTransactionFinalization(txnHash);
-  console.log(outcomes, "outcomes");
   // return ensureValidOutcome(outcomes);
 
   return outcomes;
 }
 
-/**
- * Waits for the input transaction to Finalize.
- * @param provider Wallet Provider.
- * @param txnHash Hash of Transaction.
- * @returns Transaction outcomes.
- */
-function waitForTransaction(provider, txnHash) {
-  return new Promise((res, rej) => {
-    _wait(provider, txnHash, res, rej);
-  });
-}
+// /**
+//  * Waits for the input transaction to Finalize.
+//  * @param provider Wallet Provider.
+//  * @param txnHash Hash of Transaction.
+//  * @returns Transaction outcomes.
+//  */
+// function waitForTransaction(provider, txnHash) {
+//   return new Promise((res, rej) => {
+//     _wait(provider, txnHash, res, rej);
+//   });
+// }
 
-function ensureValidOutcome(outcomes) {
-  if (!outcomes) {
-    throw Error("Null Outcome");
-  }
+// function ensureValidOutcome(outcomes) {
+//   if (!outcomes) {
+//     throw Error("Null Outcome");
+//   }
 
-  let successTxnSummary = Object.keys(outcomes)
-    .map(k => outcomes[k])
-    .find(s => s.result.outcome === "success");
+//   let successTxnSummary = Object.keys(outcomes)
+//     .map(k => outcomes[k])
+//     .find(s => s.result.outcome === "success");
 
-  if (!successTxnSummary) {
-    console.log(
-      `%c::${"outcomes"}`,
-      "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
-      outcomes,
-    );
-    let failures = Object.keys(outcomes)
-      .map(k => outcomes[k])
-      .filter(s => s.result.outcome === "reject")
-      .map(s => s.result.rejectReason.tag)
-      .join(",");
-    throw Error(`Transaction failed, reasons: ${failures}`);
-  }
+//   if (!successTxnSummary) {
+//     console.log(
+//       `%c::${"outcomes"}`,
+//       "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
+//       outcomes,
+//     );
+//     let failures = Object.keys(outcomes)
+//       .map(k => outcomes[k])
+//       .filter(s => s.result.outcome === "reject")
+//       .map(s => s.result.rejectReason.tag)
+//       .join(",");
+//     throw Error(`Transaction failed, reasons: ${failures}`);
+//   }
 
-  return outcomes;
-}
+//   return outcomes;
+// }
 
 /**
  * Uses Contract Schema to serialize the contract parameters with reattempts on error.

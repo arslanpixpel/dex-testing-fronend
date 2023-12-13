@@ -28,7 +28,6 @@
 //     setShowDropDown(false);
 //   };
 
-//   console.log(selectedContent);
 
 //   return (
 //     <div

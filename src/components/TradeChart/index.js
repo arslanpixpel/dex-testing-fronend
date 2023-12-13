@@ -210,7 +210,6 @@ var TradeViewChart = function (_a) {
         "".concat(WS_URL, "/").concat(pair.toLocaleLowerCase(), "@kline_").concat(interval),
       );
 
-      // ws.onopen = () => console.log("open");
       ws.onmessage = function (e) {
         var message = JSON.parse(e.data);
         var parsedMessage = candleSocketAdaptor(message);
