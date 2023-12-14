@@ -4,13 +4,11 @@ import DropdownButton from "../../components/DropDown/DropDownButton";
 import { SwapDirectionIcon } from "./icons/SwapDirectionIcon";
 // import concodium from "../../asssets/images/concordium-icon.svg";
 // import ethereum from "../../asssets/images/ethereum-icon.svg";
-import { changeSwapDirection } from "./Swap/utils";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { AccountAddress, AccountTransactionType, CcdAmount } from "@concordium/web-sdk";
 import { detectConcordiumProvider } from "@concordium/browser-wallet-api-helpers";
 import { JS_NODE_URL } from "../../config";
-import { useChartData } from "./Graph/hooks";
 import Loader from "../../components/Loader/Loader";
 import {
   setLimitPrice,
@@ -434,13 +432,13 @@ const LimitCard = () => {
         <div className="flex flex-row justify-between mt-5 text-xs 1xs:text-base">
           <div>Price</div>
           <div>
-            1 {tokenFrom?.symbol} = {tokenToValue / tokenFromValue} {tokenTo?.symbol}
+            1 {tokenFrom?.symbol} = {tokenToValue / tokenFromValue || 0} {tokenTo?.symbol}
           </div>
         </div>
         <div className="flex flex-row justify-between mt-3 text-xs 1xs:text-base">
           <div>Inverse Price</div>
           <div>
-            1 {tokenTo?.symbol} = {tokenFromValue / tokenToValue} {tokenFrom?.symbol}
+            1 {tokenTo?.symbol} = {tokenFromValue / tokenToValue || 0} {tokenFrom?.symbol}
           </div>
         </div>
         <div
