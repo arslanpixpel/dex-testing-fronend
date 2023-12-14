@@ -250,7 +250,7 @@ const LimitCard = () => {
     <>
       <div className="flex flex-col sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] bg-app-black rounded-xl max-w-[815px]">
         <div className="flex flex-col justify-between 2xs:flex-row">
-          <div className="text-lg font-normal ">{!SwapDirection ? "From" : "To"}</div>
+          <div className="text-lg font-normal ">From</div>
           {/* <div className="flex flex-row items-center text-gray-600">
             <div className="text-xs text-gray-500">Spot wallet available</div>
             <svg
@@ -292,15 +292,26 @@ const LimitCard = () => {
               backgroundColor=" bg-app-black-button"
               setselectedTokenFrom={setselectedTokenFrom}
             /> */}
-            <ImageDropDownButton
-              initialContent={tokenList[0]}
-              contentList={tokenList}
-              backgroundColor="bg-app-black-button"
-              setSelectedTokenFrom={setLimitTokenFrom2}
-              setSelectedTokenTo={setLimitTokenTo2}
-              SwapDirection={SwapDirection}
-              dropdownType="from"
-            />
+            {SwapDirection ? (
+              <ImageDropDownButton
+                initialContent2={tokenList[1]}
+                contentList={tokenList}
+                backgroundColor="bg-app-black-button"
+                setSelectedTokenFrom={setLimitTokenFrom2}
+                setSelectedTokenTo={setLimitTokenTo2}
+                dropdownType="to"
+              />
+            ) : (
+              <ImageDropDownButton
+                initialContent={tokenList[0]}
+                contentList={tokenList}
+                backgroundColor="bg-app-black-button"
+                setSelectedTokenFrom={setLimitTokenFrom2}
+                setSelectedTokenTo={setLimitTokenTo2}
+                SwapDirection={SwapDirection}
+                dropdownType="from"
+              />
+            )}
           </div>
         </div>
         <div className="flex justify-center w-full mt-10">
@@ -315,7 +326,7 @@ const LimitCard = () => {
           </div>
         </div>
         <div className="flex flex-row justify-between">
-          <div className="text-lg font-normal ">{SwapDirection ? "From" : "To"}</div>
+          <div className="text-lg font-normal ">To</div>
         </div>
         <div className="flex flex-row items-center justify-between h-16 py-3 pl-8 mt-3 rounded-lg bg-app-black-button">
           <div className="flex flex-row items-center justify-between w-3/4">
@@ -332,14 +343,27 @@ const LimitCard = () => {
               contentList={!convert ? tokenList : tokenList}
               backgroundColor=" bg-app-black-button"
             /> */}
-            <ImageDropDownButton
-              initialContent2={tokenList[1]}
-              contentList={tokenList}
-              backgroundColor="bg-app-black-button"
-              setSelectedTokenFrom={setLimitTokenFrom2}
-              setSelectedTokenTo={setLimitTokenTo2}
-              dropdownType="to" // Specify the dropdown type
-            />
+
+            {!SwapDirection ? (
+              <ImageDropDownButton
+                initialContent2={tokenList[1]}
+                contentList={tokenList}
+                backgroundColor="bg-app-black-button"
+                setSelectedTokenFrom={setLimitTokenFrom2}
+                setSelectedTokenTo={setLimitTokenTo2}
+                dropdownType="to"
+              />
+            ) : (
+              <ImageDropDownButton
+                initialContent={tokenList[0]}
+                contentList={tokenList}
+                backgroundColor="bg-app-black-button"
+                setSelectedTokenFrom={setLimitTokenFrom2}
+                setSelectedTokenTo={setLimitTokenTo2}
+                SwapDirection={SwapDirection}
+                dropdownType="from"
+              />
+            )}
           </div>
         </div>
         <div className="flex flex-col pb-10 border-b-2 border-app-block border-b-gray-700">
