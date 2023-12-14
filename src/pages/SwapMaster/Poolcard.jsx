@@ -6,7 +6,7 @@ function Poolcard() {
   return (
     <div className="flex justify-center">
       <div
-        className={`flex flex-col mb-[120px] rounded-md w-155 2xl:w-155 xl:w-155 bg-app-black sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px]`}
+        className={`flex flex-col mb-[120px] rounded-md  2xl:w-155 xl:w-155 bg-app-black sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px]`}
       >
         <p className="text-[24px] font-medium leading-normal  ">You are creating a pool</p>
         <div className="flex gap-4 my-2 mt-8 items-center">
