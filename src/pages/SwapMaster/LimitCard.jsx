@@ -292,26 +292,15 @@ const LimitCard = () => {
               backgroundColor=" bg-app-black-button"
               setselectedTokenFrom={setselectedTokenFrom}
             /> */}
-            {SwapDirection ? (
-              <ImageDropDownButton
-                initialContent2={tokenList[1]}
-                contentList={tokenList}
-                backgroundColor="bg-app-black-button"
-                setSelectedTokenFrom={setLimitTokenFrom2}
-                setSelectedTokenTo={setLimitTokenTo2}
-                dropdownType="to"
-              />
-            ) : (
-              <ImageDropDownButton
-                initialContent={tokenList[0]}
-                contentList={tokenList}
-                backgroundColor="bg-app-black-button"
-                setSelectedTokenFrom={setLimitTokenFrom2}
-                setSelectedTokenTo={setLimitTokenTo2}
-                SwapDirection={SwapDirection}
-                dropdownType="from"
-              />
-            )}
+            <ImageDropDownButton
+              initialContent={tokenList[0]}
+              contentList={tokenList}
+              backgroundColor="bg-app-black-button"
+              setSelectedTokenFrom={setLimitTokenFrom2}
+              setSelectedTokenTo={setLimitTokenTo2}
+              SwapDirection={SwapDirection}
+              dropdownType="from"
+            />
           </div>
         </div>
         <div className="flex justify-center w-full mt-10">
@@ -344,26 +333,14 @@ const LimitCard = () => {
               backgroundColor=" bg-app-black-button"
             /> */}
 
-            {!SwapDirection ? (
-              <ImageDropDownButton
-                initialContent2={tokenList[1]}
-                contentList={tokenList}
-                backgroundColor="bg-app-black-button"
-                setSelectedTokenFrom={setLimitTokenFrom2}
-                setSelectedTokenTo={setLimitTokenTo2}
-                dropdownType="to"
-              />
-            ) : (
-              <ImageDropDownButton
-                initialContent={tokenList[0]}
-                contentList={tokenList}
-                backgroundColor="bg-app-black-button"
-                setSelectedTokenFrom={setLimitTokenFrom2}
-                setSelectedTokenTo={setLimitTokenTo2}
-                SwapDirection={SwapDirection}
-                dropdownType="from"
-              />
-            )}
+            <ImageDropDownButton
+              initialContent2={tokenList[1]}
+              contentList={tokenList}
+              backgroundColor="bg-app-black-button"
+              setSelectedTokenFrom={setLimitTokenFrom2}
+              setSelectedTokenTo={setLimitTokenTo2}
+              dropdownType="to"
+            />
           </div>
         </div>
         <div className="flex flex-col pb-10 border-b-2 border-app-block border-b-gray-700">

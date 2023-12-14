@@ -24,10 +24,9 @@
 
 //   const selectHandleClick = content => {
 //     setSelectedContent(content);
-//     props.setselectedTokenFrom(content);
+//     props.settokenFrom(content);
 //     setShowDropDown(false);
 //   };
-
 
 //   return (
 //     <div
@@ -108,39 +107,17 @@
 
 import React, { useState, useEffect } from "react";
 import { getShortTokenName } from "../../utils/format";
+import { useSelector } from "react-redux";
 
 const ImageDropDownButton = props => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [selectedTokenFrom, setSelectedTokenFrom] = useState();
-  const [selectedTokenTo, setSelectedTokenTo] = useState();
   const [bgColor, setBgColor] = useState("bg-app-black");
+  const tokenTo = useSelector(s => s.swap.limitdata.tokenTo);
+  const tokenFrom = useSelector(s => s.swap.limitdata.tokenFrom);
 
   useEffect(() => {
     setBgColor(props.backgroundColor);
   }, [props.backgroundColor]);
-
-  useEffect(() => {
-    if (props.contentList.length && !selectedTokenFrom && !selectedTokenTo) {
-      setSelectedTokenFrom(props.contentList[0]);
-      setSelectedTokenTo(props.contentList[1]);
-    }
-  }, [props]);
-
-  // useEffect(() => {
-  //   // Check if props.SwapDirection is true, then swap the values
-  //   if (props.SwapDirection) {
-  //     setSelectedTokenFrom(prevTokenTo => {
-  //       // eslint-disable-next-line no-unused-vars
-  //       setSelectedTokenTo(prevTokenFrom => prevTokenTo);
-  //       return prevTokenTo;
-  //     });
-  //   }
-  // }, [props.SwapDirection]);
-
-  // if (props.SwapDirection) {
-  //   setSelectedTokenFrom(selectedTokenTo);
-  //   setSelectedTokenTo(selectedTokenFrom);
-  // }
 
   const handleDropDown = () => {
     setShowDropDown(!showDropDown);
@@ -148,10 +125,8 @@ const ImageDropDownButton = props => {
 
   const selectHandleClick = content => {
     if (props.dropdownType === "from") {
-      setSelectedTokenFrom(content);
       props.setSelectedTokenFrom(content);
     } else if (props.dropdownType === "to") {
-      setSelectedTokenTo(content);
       props.setSelectedTokenTo(content);
     }
 
@@ -170,11 +145,11 @@ const ImageDropDownButton = props => {
           <img
             src={
               props.dropdownType === "from"
-                ? selectedTokenFrom?.images?.thumbnail?.url
-                : // ? selectedTokenFrom.images?.thumbnail.url
+                ? tokenFrom?.images?.thumbnail?.url
+                : // ? tokenFrom.images?.thumbnail.url
                   // : props.initialContent.images.thumbnail.url
-                  selectedTokenTo?.images?.thumbnail?.url
-              // ? selectedTokenTo?.images?.thumbnail?.url
+                  tokenTo?.images?.thumbnail?.url
+              // ? tokenTo?.images?.thumbnail?.url
               // : props.initialContent2?.images?.thumbnail?.url
             }
             alt=""
@@ -183,11 +158,11 @@ const ImageDropDownButton = props => {
           <div className="text-base font-medium">
             {getShortTokenName(
               props.dropdownType === "from"
-                ? selectedTokenFrom?.symbol
-                : // ? selectedTokenFrom?.symbol
+                ? tokenFrom?.symbol
+                : // ? tokenFrom?.symbol
                   // : props.initialContent?.symbol
-                  selectedTokenTo?.symbol,
-              // ? selectedTokenTo?.symbol
+                  tokenTo?.symbol,
+              // ? tokenTo?.symbol
               // : props.initialContent2?.symbol
             )}
           </div>
