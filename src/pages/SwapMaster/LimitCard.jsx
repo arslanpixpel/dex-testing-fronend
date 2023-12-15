@@ -184,6 +184,7 @@ const LimitCard = () => {
           price: tokenToValue / tokenFromValue,
           inverseprice: tokenFromValue / tokenToValue,
           txnhash: txHash,
+          tokenfromvalue: tokenFromValue,
         }),
       );
       openmodal();

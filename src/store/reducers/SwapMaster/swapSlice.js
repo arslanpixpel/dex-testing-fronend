@@ -24,6 +24,7 @@ const initialState = {
     price: 0,
     inverseprice: 0,
     txnhash: null,
+    tokenfromvalue: null,
   },
 };
 
@@ -84,8 +85,8 @@ const swapSlice = createSlice({
       state.limitdata.price = action.payload.price;
       state.limitdata.inverseprice = action.payload.inverseprice;
       state.limitdata.txnhash = action.payload.txnhash;
+      state.limitdata.tokenfromvalue = action.payload.tokenfromvalue;
     },
-
     clearSwapState: () => initialState,
   },
 });

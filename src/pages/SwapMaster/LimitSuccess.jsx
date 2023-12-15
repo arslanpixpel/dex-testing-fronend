@@ -20,6 +20,7 @@ const LimitSuccessCard = () => {
     price: fromPerToAmount,
     inverseprice: toPerFromAmount,
     txnhash,
+    tokenfromvalue,
   } = useSelector(s => s.swap.limitdata);
 
   const closemodal = () => {
@@ -27,6 +28,8 @@ const LimitSuccessCard = () => {
     dispatch(setlimitSuccessModal(false));
     dispatch(clearSwapState());
   };
+
+  console.log(tokenfromvalue, "token from value");
 
   //   const onCloseModal = () => {
   //     dispatch(setIsSwapModalOpen({ modal: "success", isOpen: false }));
@@ -70,7 +73,8 @@ const LimitSuccessCard = () => {
       </div>
       <div className="flex justify-center mb-5">
         <div className="text-2xl font-medium">
-          1{values.from} {tokenFrom.symbol}
+          {tokenfromvalue}
+          {values.from} {tokenFrom.symbol}
         </div>
       </div>
       <div className="flex flex-row justify-between w-full mb-3 text-xs 2xs:text-sm">
