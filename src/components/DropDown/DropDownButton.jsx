@@ -32,6 +32,7 @@ const DropDownButton = ({
   const selectHandleClick = contentTitle => {
     setSelectedContent(contentTitle);
     setShowDropDown(false);
+
     if (callback) {
       callback(contentTitle);
     }
@@ -85,16 +86,16 @@ const DropDownButton = ({
                   return (
                     <div
                       key={idx}
-                      className="relative flex justify-start px-5 py-5"
+                      className="relative flex justify-start px-5 py-5 "
                       onClick={() => {
                         selectHandleClick(content.title);
                       }}
                     >
-                      <div className={"text-base font-medium hover:text-app-blue " + textColor}>
+                      <div className={"text-base font-medium hover:text-app-blue" + textColor}>
                         {content.title}
                       </div>
                       {idx !== contentList.length - 1 && (
-                        <div className="absolute left-0 right-0 bottom-0 h-1 bg-[#717A8B] rounded-b-lg"></div>
+                        <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#717A8B] rounded-b-lg"></div>
                       )}
                     </div>
                   );

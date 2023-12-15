@@ -72,10 +72,7 @@ const DeveloperHeaderPixpel = () => {
           </div>
           {/* <Trade /> */}
           <div
-            className={
-              (context.developerHeader === 2 ? "text-app-blue px-5 py-1" : "") +
-              "hover:text-app-blue cursor-pointer px-5 py-1"
-            }
+            className={"text-app-blue cursor-pointer w-max  px-5 py-1"}
             onClick={() => {
               navigate("/swap-master/swap");
               context.setDeveloperHeader(2);
