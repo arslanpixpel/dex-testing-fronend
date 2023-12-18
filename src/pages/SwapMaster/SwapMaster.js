@@ -59,6 +59,7 @@ const SwapMaster = () => {
 
   const handleClickArrow = () => {
     dispatch(setLiquidityActiveWindow(LIQUIDITY_WINDOWS.pools));
+    window.history.back();
   };
 
   // const isLiquidityTab = params["*"] === "liquidity";
