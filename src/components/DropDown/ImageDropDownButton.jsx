@@ -194,7 +194,7 @@ const ImageDropDownButton = props => {
         {showDropDown === true ? (
           <div className="absolute inset-0 z-10 min-w-max ml-[-140px]">
             <div className="fixed inset-0 w-full h-full" onClick={handleDropDown}></div>
-            <div className={bgColor + " flex flex-col rounded-b-md "}>
+            <div className={bgColor + " flex flex-col rounded-b-md max-h-96 overflow-y-scroll "}>
               {filteredContentList.map((content, idx) => {
                 return (
                   <div
