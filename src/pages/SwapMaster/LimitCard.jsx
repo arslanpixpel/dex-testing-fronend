@@ -272,12 +272,13 @@ const LimitCard = () => {
           </div> */}
         </div>
         <div className="flex flex-row items-center justify-between h-16 py-3 pl-4 mt-3 rounded-lg xs:pl-8 bg-app-black-button">
-          <div className="flex flex-row items-center justify-between w-125">
+          <div className="flex flex-row items-center justify-between w-3/4">
             <input
-              className="w-full text-xs bg-app-black-button placeholder:text-gray-400 xs:placeholder:text-base"
+              className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder={"Please enter 20-25000000"}
               value={tokenFromValue}
               onChange={handleChangeFromValue}
+              type="number"
             />
             {/* <div className="text-base text-gray-500 w-text-base">Max</div> */}
           </div>
@@ -325,6 +326,7 @@ const LimitCard = () => {
               placeholder="Please enter 0.0004-50"
               value={tokenToValue}
               onChange={handleChangeToValue}
+              type="number"
             />
           </div>
           <div className="flex-none">
@@ -352,10 +354,13 @@ const LimitCard = () => {
           <div className="flex flex-col justify-start gap-2 mt-3 md:flex-row">
             <div className="flex flex-row items-center justify-between w-full h-16 py-5 pl-8 rounded-lg sm:w-2/3 bg-app-black-button">
               <div className="w-3/4">
-                <input
+                {/* <input
                   className="w-full bg-app-black-button"
                   value={tokenToValue / tokenFromValue ? tokenToValue / tokenFromValue : ""}
-                />
+                /> */}
+                <div className="w-full bg-app-black-button cursor-default">
+                  {tokenToValue / tokenFromValue ? tokenToValue / tokenFromValue : ""}
+                </div>
               </div>
               <div className="flex-none">
                 {/* <ImageDropDownButton
@@ -443,14 +448,29 @@ const LimitCard = () => {
             1 {tokenTo?.symbol} = {tokenFromValue / tokenToValue || 0} {tokenFrom?.symbol}
           </div>
         </div>
-        <div
+        {/* <div
           className="flex items-center justify-center h-16 mt-5 rounded-md cursor-pointer bg-app-blue hover:bg-[#50D0FB]"
           onClick={() => {
-            handlePlaceOrder();
+            if (tokenFromValue !== "" && tokenToValue !== "") {
+              handlePlaceOrder();
+            }
           }}
         >
           {isProcessing && <Loader size="md" />}
           <div className="text-lg">Place Older</div>
+        </div> */}
+        <div
+          className={`flex items-center justify-center h-16 mt-5 rounded-md cursor-pointer bg-app-blue hover:bg-[#50D0FB] ${
+            tokenFromValue === "" || tokenToValue === "" ? " cursor-not-allowed" : ""
+          }`}
+          onClick={() => {
+            if (tokenFromValue !== "" && tokenToValue !== "") {
+              handlePlaceOrder();
+            }
+          }}
+        >
+          {isProcessing && <Loader size="md" />}
+          <div className="text-lg">Place Order</div>
         </div>
       </div>
     </>
