@@ -244,8 +244,8 @@ const SwapModal = () => {
         console.log(outcomes, "outcomes");
 
         if (outcomes) {
-          const targetOutcome = Object.values(outcomes)[0];
-          console.log(targetOutcome, "targetOutcome");
+          // const targetOutcome = Object.values(outcomes)[0];
+          // console.log(targetOutcome, "targetOutcome");
           txnHash = outcomes?.summary?.hash;
         }
 
