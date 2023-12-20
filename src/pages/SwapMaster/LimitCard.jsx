@@ -302,6 +302,7 @@ const LimitCard = () => {
               setSelectedTokenTo={setLimitTokenTo2}
               SwapDirection={SwapDirection}
               dropdownType="from"
+              disabled={tokenTo}
             />
           </div>
         </div>
@@ -343,6 +344,7 @@ const LimitCard = () => {
               setSelectedTokenFrom={setLimitTokenFrom2}
               setSelectedTokenTo={setLimitTokenTo2}
               dropdownType="to"
+              disabled={tokenFrom}
             />
           </div>
         </div>

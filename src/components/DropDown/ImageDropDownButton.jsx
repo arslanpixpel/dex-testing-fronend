@@ -133,6 +133,10 @@ const ImageDropDownButton = props => {
     setShowDropDown(false);
   };
 
+  const disabledToken = props.disabled.symbol;
+
+  const filteredContentList = props.contentList.filter(content => content.symbol !== disabledToken);
+
   return (
     <div
       className={
@@ -191,7 +195,7 @@ const ImageDropDownButton = props => {
           <div className="absolute inset-0 z-10 min-w-max ml-[-140px]">
             <div className="fixed inset-0 w-full h-full" onClick={handleDropDown}></div>
             <div className={bgColor + " flex flex-col rounded-b-md "}>
-              {props.contentList.map((content, idx) => {
+              {filteredContentList.map((content, idx) => {
                 return (
                   <div
                     key={idx}
