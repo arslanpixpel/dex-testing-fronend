@@ -245,8 +245,8 @@ const SwapModal = () => {
 
         if (outcomes) {
           const targetOutcome = Object.values(outcomes)[0];
-
-          txnHash = targetOutcome?.hash;
+          console.log(targetOutcome, "targetOutcome");
+          txnHash = outcomes?.summary?.hash;
         }
 
         console.log(outcomes, "Automatic AUthentication");
@@ -265,6 +265,7 @@ const SwapModal = () => {
       return;
     }
 
+    console.log(txnHash, "txnHash=");
     setIsProcessing(false);
     dispatch(
       setIsSwapModalOpen({
