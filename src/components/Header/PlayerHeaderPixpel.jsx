@@ -43,7 +43,7 @@ const PlayerHeaderPixpel = () => {
           >
             NFT
           </div> */}
-          <div
+          {/* <div
             className={
               (context.playerHeader === 0 ? "text-app-blue px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer px-5 py-1"
@@ -54,8 +54,8 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             Game
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className={
               (context.playerHeader === 1 ? "text-app-blue px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer px-5 py-1"
@@ -66,9 +66,9 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             Launchpad
-          </div>
+          </div> */}
           {/* <Trade /> */}
-          <div
+          {/* <div
             className={"text-app-blue cursor-pointer w-max  px-5 py-1"}
             onClick={() => {
               navigate("/swap-master/swap");
@@ -89,19 +89,19 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             Wallet
-          </div>
+          </div> */}
         </div>
       </div>
       {/* <ConnectWalletButton /> */}
-      <div
+      {/* <div
         className="hidden lg:flex bg-app-black-button px-14 py-3 rounded-md text-app-blue w-max hover:cursor-pointer items-center"
         onClick={() => {
           context.setPlayer(false);
         }}
       >
         Player
-      </div>
-      <div className="hidden xl:flex gap-5 items-center">
+      </div> */}
+      {/* <div className="hidden xl:flex gap-5 items-center">
         <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 1 && (
             <div
@@ -236,7 +236,7 @@ const PlayerHeaderPixpel = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="xl:hidden flex" onClick={() => setOpenMenu(!openMenu)}>
         <img src={Iconmenu} alt="menu" />
       </div>
@@ -253,7 +253,7 @@ const PlayerHeaderPixpel = () => {
           <p className="text-5xl cursor-pointer text-white">×</p>
         </div>
         <div className="w-full flex justify-center flex-col items-center gap-8 pt-10">
-          <div
+          {/* <div
             onClick={() => {
               setOpenMenu(false);
               window.location.href = "https://nft.pixpel.io/player/game-market";
@@ -261,7 +261,7 @@ const PlayerHeaderPixpel = () => {
             className="hover:text-app-blue cursor-pointer"
           >
             Game
-          </div>
+          </div> */}
           <div
             onClick={() => {
               setOpenMenu(false);
@@ -271,7 +271,7 @@ const PlayerHeaderPixpel = () => {
           >
             Launchpad
           </div>
-          <div
+          {/* <div
             onClick={() => {
               setOpenMenu(false);
               window.location.href = "/swap-master";
@@ -289,7 +289,7 @@ const PlayerHeaderPixpel = () => {
             className="hover:text-app-blue cursor-pointer"
           >
             Wallet
-          </div>
+          </div> */}
 
           <div className="flex gap-5">
             <img
@@ -300,7 +300,7 @@ const PlayerHeaderPixpel = () => {
                 window.location.href = "https://launchpad.pixpel.io";
               }}
             />
-            <img
+            {/* <img
               src={marketplace}
               alt="cart"
               onClick={() => {
@@ -348,7 +348,7 @@ const PlayerHeaderPixpel = () => {
                 setOpenMenu(false);
                 navigate("https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/profile");
               }}
-            />
+            /> */}
           </div>
         </div>
       </div>
