@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col">
           <div className="text-2xl font-semibold xl:mb-6 md:mb-4 mb-2">Community</div>
-          <div className="flex flex-col gap-6">
+          {/* <div className="flex flex-col gap-6">
             <div className="flex gap-9">
               <img src={Insta} alt="facebook" className="w-7 rounded-full" />
               <img src={Xicon} alt="twitter" className="w-7 rounded-full" />
@@ -70,10 +70,38 @@ const Footer = () => {
               <img src={Linkedin} alt="linkedin" className="w-7 rounded-full" />
               <img src={Isolation_Mode} alt="linkedin" className="w-7 rounded-full" />
             </div>
+          </div> */}
+          <div className="flex flex-col gap-6">
+            <div className="flex gap-9">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                <img src={Insta} alt="instagram" className="w-7 rounded-full" />
+              </a>
+              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                <img src={Xicon} alt="twitter" className="w-7 rounded-full" />
+              </a>
+              <a href="https://t.me/pixpel" target="_blank" rel="noopener noreferrer">
+                <img src={Telegram} alt="telegram" className="w-7 rounded-full" />
+              </a>
+            </div>
+            <div className="flex gap-9">
+              <a href="https://discord.gg/wgHYhj6DKX" target="_blank" rel="noopener noreferrer">
+                <img src={Discord} alt="discord" className="w-7 rounded-full" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/81952738/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Linkedin} alt="linkedin" className="w-7 rounded-full" />
+              </a>
+              <a href="https://www.pixpel.io/" target="_blank" rel="noopener noreferrer">
+                <img src={Isolation_Mode} alt="pixpel" className="w-7 rounded-full" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col border-t-2 border-app-black justify-center items-center gap-2">
+      <div className="flex flex-col border-t-2 border-app-black justify-center items-center gap-2 xl:hidden">
         <div className="flex mt-5 gap-2">
           <div className="text-xl">PIXPEL</div>
           <svg
