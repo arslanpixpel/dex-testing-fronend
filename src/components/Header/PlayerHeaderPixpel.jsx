@@ -32,18 +32,6 @@ const PlayerHeaderPixpel = () => {
   useEffect(() => {
     const queryString = window.location.search.substring(1);
 
-    const queryParamsArray = queryString.split("&");
-
-    const queryParams = {};
-
-    queryParamsArray.forEach(param => {
-      const pair = param.split("=");
-      const key = decodeURIComponent(pair[0]);
-      const value = decodeURIComponent(pair[1] || "");
-      queryParams[key] = value;
-    });
-    console.log(queryParams);
-
     if (!localStorage.getItem("username")) {
       localStorage.setItem("username", JSON.stringify(queryString.split("&")[0]));
     }
