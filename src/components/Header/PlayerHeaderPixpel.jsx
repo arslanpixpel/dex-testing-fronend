@@ -290,7 +290,7 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              window.location.href = "https://launchpad.pixpel.io";
+              location.href = "https://launchpad.pixpel.io";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
@@ -299,7 +299,7 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              window.location.href = "https://launchpad.pixpel.io";
+              location.href = "https://launchpad.pixpel.io";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
