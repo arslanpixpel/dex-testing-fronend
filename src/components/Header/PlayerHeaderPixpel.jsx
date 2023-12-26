@@ -116,9 +116,9 @@ const PlayerHeaderPixpel = () => {
       {/* <ConnectWalletButton /> */}
       <div
         className="hidden lg:flex bg-app-black-button px-14 py-3 rounded-md text-app-blue w-max hover:cursor-pointer items-center"
-        onClick={() => {
-          context.setPlayer(false);
-        }}
+        // onClick={() => {
+        //   context.setPlayer(false);
+        // }}
       >
         {username ? username.split('"') : ""}
       </div>
