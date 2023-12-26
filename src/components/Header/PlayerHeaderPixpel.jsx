@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Notification from "./Notification";
 // import Market from "./Market";
 // import Trade from "./Trade";
@@ -27,6 +27,27 @@ const PlayerHeaderPixpel = () => {
   const context = useAppContext();
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const queryString = window.location.search.substring(1);
+
+    const queryParamsArray = queryString.split("&");
+
+    const queryParams = {};
+
+    queryParamsArray.forEach(param => {
+      const pair = param.split("=");
+      const key = decodeURIComponent(pair[0]);
+      const value = decodeURIComponent(pair[1] || "");
+      queryParams[key] = value;
+    });
+    console.log(queryParams);
+    localStorage.setItem("username", JSON.stringify(queryString));
+    setUsername(localStorage.getItem("username"));
+    console.log(username, "username present");
+    // setUsername(queryParams);
+  }, []);
 
   return (
     <div className="bg-app-black flex justify-between px-8 py-5 items-center mb-11">
@@ -93,14 +114,14 @@ const PlayerHeaderPixpel = () => {
         </div>
       </div>
       {/* <ConnectWalletButton /> */}
-      {/* <div
+      <div
         className="hidden lg:flex bg-app-black-button px-14 py-3 rounded-md text-app-blue w-max hover:cursor-pointer items-center"
         onClick={() => {
           context.setPlayer(false);
         }}
       >
-        Player
-      </div> */}
+        {username ? username.split('"') : ""}
+      </div>
       {/* <div className="hidden xl:flex gap-5 items-center">
         <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 1 && (
