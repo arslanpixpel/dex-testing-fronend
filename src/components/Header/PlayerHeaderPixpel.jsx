@@ -44,7 +44,14 @@ const PlayerHeaderPixpel = () => {
   return (
     <div className="bg-app-black flex justify-between px-8 py-5 items-center mb-11">
       <div className="flex flex-row justify-center gap-7 items-center">
-        <img src={logo} alt="logo" onClick={() => navigate("/")} className="cursor-pointer" />
+        {/* <img src={logo} alt="logo" onClick={() => navigate("/")} className="cursor-pointer" /> */}
+        <img
+          src={logo}
+          alt="logo"
+          onClick={() => (window.location.href = "https://www.pixpel.io/")}
+          className="cursor-pointer"
+        />
+
         <div className="hidden xl:flex gap-4 ">
           {/* <Market />
           <div

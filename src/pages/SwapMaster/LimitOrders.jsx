@@ -80,46 +80,46 @@ function LimitOrders() {
               </tr>
             </thead>
             <tbody className="px-4">
-              {tempTable
-                ? tempTable?.map((menu, idx) => (
-                    <tr
-                      key={idx}
-                      className={idx !== tempTable.length - 1 ? "border-b-2 border-app-black" : ""}
-                    >
-                      <td className="pr-6">
-                        <div className="w-max text-[16px] font-medium leading-normal">
-                          {menu._id}
-                        </div>
-                      </td>
-                      <td className="py-5 pr-6">
-                        <div className="w-max text-[16px] font-medium leading-normal">
-                          {menu.tokenfromName}
-                        </div>
-                      </td>
-                      <td className="pr-6">
-                        <div className="w-max text-[16px] font-medium leading-normal">
-                          {menu.tokentoName}
-                        </div>
-                      </td>
-                      <td className="pr-6">
-                        <div className="w-max text-[16px] font-medium leading-normal">
-                          {menu.paid.toString()}
-                        </div>
-                      </td>
-                      <td className="pr-6">
-                        <div className="w-max text-[16px] font-medium leading-norma ">
-                          {menu.price}
-                        </div>
-                      </td>
-                      {/* <td className="pr-6">
+              {tempTable && tempTable.length > 0 ? (
+                tempTable?.map((menu, idx) => (
+                  <tr
+                    key={idx}
+                    className={idx !== tempTable.length - 1 ? "border-b-2 border-app-black" : ""}
+                  >
+                    <td className="pr-6">
+                      <div className="w-max text-[16px] font-medium leading-normal">{menu._id}</div>
+                    </td>
+                    <td className="py-5 pr-6">
+                      <div className="w-max text-[16px] font-medium leading-normal">
+                        {menu.tokenfromName}
+                      </div>
+                    </td>
+                    <td className="pr-6">
+                      <div className="w-max text-[16px] font-medium leading-normal">
+                        {menu.tokentoName}
+                      </div>
+                    </td>
+                    <td className="pr-6">
+                      <div className="w-max text-[16px] font-medium leading-normal">
+                        {menu.paid.toString()}
+                      </div>
+                    </td>
+                    <td className="pr-6">
+                      <div className="w-max text-[16px] font-medium leading-norma ">
+                        {menu.price}
+                      </div>
+                    </td>
+                    {/* <td className="pr-6">
                       <div className="w-max text-[16px] font-medium leading-normal">{menu.PIXP}</div>
                     </td>
                     <td className="pl-6">
                       <div className="flex gap-4"></div>
                     </td> */}
-                    </tr>
-                  ))
-                : "No data available"}
+                  </tr>
+                ))
+              ) : (
+                <h1>No Orders available to show</h1>
+              )}
             </tbody>
           </table>
         </div>

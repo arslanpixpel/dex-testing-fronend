@@ -39,18 +39,18 @@ const buttonList = [
     buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
     path: "liquidity",
   },
-  {
-    id: 4,
-    title: "POOL",
-    buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
-    path: "pool",
-  },
-  {
-    id: 5,
-    title: "BRIDGE",
-    buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
-    path: "bridge",
-  },
+  // {
+  //   id: 4,
+  //   title: "POOL",
+  //   buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
+  //   path: "pool",
+  // },
+  // {
+  //   id: 5,
+  //   title: "BRIDGE",
+  //   buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
+  //   path: "bridge",
+  // },
 ];
 
 const SwapMaster = () => {
