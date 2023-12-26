@@ -292,6 +292,15 @@ const PlayerHeaderPixpel = () => {
           >
             Launchpad
           </div>
+          <div
+            onClick={() => {
+              setOpenMenu(false);
+              window.location.href = "https://launchpad.pixpel.io";
+            }}
+            className="hover:text-app-blue cursor-pointer"
+          >
+            {username ? username.split('"') : ""}
+          </div>
           {/* <div
             onClick={() => {
               setOpenMenu(false);
