@@ -338,7 +338,7 @@ const LimitCard = () => {
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="Please enter 0.0004-50"
-              value={tokenFromValue * chartData[chartData.length - 1]?.exchangeRate}
+              value={tokenToValue}
               onChange={handleChangeToValue}
               type="number"
             />
