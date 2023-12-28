@@ -156,6 +156,7 @@ const TokenSelectInput = ({
           readOnly={readOnly}
           onInput={onInput}
           type="number"
+          step="any"
         />
       </div>
       {isWithMaxButton && !!onMaxHandler && (
