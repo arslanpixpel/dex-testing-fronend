@@ -53,7 +53,7 @@ function LimitOrders() {
   return (
     <div>
       <div className="flex gap-4 py-4">
-        <Button onClick={openorders} title={"OPEN ORDER"} selected={filter} />
+        <Button onClick={openorders} title={"OPEN ORDERS"} selected={filter} />
         <Button onClick={getallorders} title={"ORDER HISTORY"} selected={!filter} />
       </div>
       {isProcessing && (

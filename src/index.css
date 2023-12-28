@@ -19,3 +19,14 @@ textarea {
     @apply autofill:shadow-[inset_0_0_0px_1000px_var(--color-dark-200)] autofill:text-fill-white autofill:caret-white;
   }
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

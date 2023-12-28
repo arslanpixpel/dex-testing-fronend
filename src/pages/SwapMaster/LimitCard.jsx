@@ -16,6 +16,7 @@ import {
   setLimitTokenTo,
   setlimitSuccessModal,
 } from "../../store/reducers/SwapMaster/swapSlice";
+import { useChartData } from "./Graph/hooks";
 // import { WebClient } from "concordium_web_sdk__WEBPACK_IMPORTED_MODULE_6__";
 
 const currencyList = [
@@ -112,10 +113,22 @@ const LimitCard = () => {
 
   const tokenTo = useSelector(s => s.swap.limitdata.tokenTo);
   const tokenFrom = useSelector(s => s.swap.limitdata.tokenFrom);
+  const period = {
+    name: "day",
+    label: "24H",
+    description: "Past 24 Hours",
+  };
+  const { chartData, percentDifference } = useChartData({
+    tokenFrom: tokenTo,
+    tokenTo: tokenFrom,
+    period,
+  });
+  console.log(chartData, percentDifference, "chartData", "percentDifference");
+  console.log(chartData[chartData.length - 1]?.exchangeRate);
   console.log(tokenFrom, tokenTo, "tokenFrom tokenTo tokenFrom token");
 
   console.log(tokenFrom, "selectedTokenFrom");
-  console.log(tokenTo, "SelectedTokenTo");
+  console.log(tokenToValue, "SelectedTokenToValue");
   // const dispatch = useDispatch();
 
   const handleChangeFromValue = event => {

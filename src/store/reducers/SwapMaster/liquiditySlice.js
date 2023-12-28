@@ -30,8 +30,15 @@ const liquiditySlice = createSlice({
   name: "liquidity",
   initialState,
   reducers: {
+    // setLiquidityTokenTo: (state, action) => {
+    //   state.tokenTo = action.payload || {};
+    // },
     setLiquidityTokenTo: (state, action) => {
-      state.tokenTo = action.payload || {};
+      const updatedTokenTo = {
+        ...action.payload,
+        decimals: action.payload.decimals || 6,
+      };
+      state.tokenTo = updatedTokenTo;
     },
     setLiquidityBalances: (state, action) => {
       const { balanceFrom, balanceTo } = action.payload;
