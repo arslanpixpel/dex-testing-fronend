@@ -33,7 +33,7 @@ const LiquidityForm = ({ isUnstakeMode, isCreateMode }) => {
   const tokenList = useSelector(s => s.swapMaster.tokenList);
   const tokenTo = useSelector(s => s.liquidity.tokenTo);
   const tokenFrom = tokenList[0];
-  console.log(tokenList);
+  // console.log(tokenList);
   const exchanges = useSelector(s => s.swapMaster.exchanges);
   const exchangeData = getCurrentExchange(exchanges, tokenTo);
 
@@ -68,12 +68,12 @@ const LiquidityForm = ({ isUnstakeMode, isCreateMode }) => {
 
   const values = watch();
   const isFilledPool = exchangeData?.ccdBalance > 0 && exchangeData?.tokenBalance > 0;
-  console.log({
-    values,
-    exchangeData: isFilledPool && exchangeData,
-    tokenFrom,
-    tokenTo,
-  });
+  // console.log({
+  //   values,
+  //   exchangeData: isFilledPool && exchangeData,
+  //   tokenFrom,
+  //   tokenTo,
+  // });
   const fromPerToAmount = getFromPerToAmount({
     values,
     exchangeData: isFilledPool && exchangeData,

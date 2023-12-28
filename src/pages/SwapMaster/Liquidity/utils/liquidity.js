@@ -92,7 +92,7 @@ export const removeLiquidity =
     const provider = getState().connect.provider;
     const tokenTo = getState().liquidity.tokenTo;
 
-    await updateContract(
+    const res = await updateContract(
       provider,
       PIXPEL_SWAP_CONTRACT_INFO,
       {
@@ -104,6 +104,8 @@ export const removeLiquidity =
       PIXPEL_CONTRACT_METHODS.removeLiquidity,
       MAX_ENERGY,
     );
+
+    dispatch(setTxnhash(res?.summary?.hash));
 
     await dispatch(getExchanges());
     await dispatch(getLiquidityBalances());
