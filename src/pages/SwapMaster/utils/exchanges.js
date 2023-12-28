@@ -36,10 +36,10 @@ export const getExchanges = () => async (dispatch, getState) => {
         holder,
       },
     );
-    console.log(returnedValue, "returnedValue");
+    // console.log(returnedValue, "returnedValue");
 
     exchanges = new PixpelSwapDeserializer(returnedValue).readExchanges();
-    console.log(exchanges, "exchanges");
+    // console.log(exchanges, "exchanges");
   } catch (e) {
     console.log(e);
   }

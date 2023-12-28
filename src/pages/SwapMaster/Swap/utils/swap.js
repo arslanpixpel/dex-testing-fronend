@@ -17,14 +17,14 @@ import {
 
 export const changeSwapDirection = () => async (dispatch, getState) => {
   const { tokenFrom, tokenTo } = getState().swap;
-  console.log("TokenFrom", tokenFrom);
-  console.log("TokenTo", tokenTo);
+  //console.log("TokenFrom", tokenFrom);
+  //console.log("TokenTo", tokenTo);
   dispatch(setSwapTokens({ tokenFrom: tokenTo, tokenTo: tokenFrom }));
 };
 
 const swapTokenToCcd = async ({ tokenData, amountFrom, amountTo, provider, account }) => {
   const { address, decimals, tokenId, contractName } = tokenData;
-  console.log(address);
+  // console.log(address);
   await updateOperator({ provider, account, tokenAddress: address, contractName });
 
   return updateContract(
@@ -105,8 +105,8 @@ export const handleSwap =
       account = "124334234321342134";
     }
 
-    console.log(Owner, "Owner Orignal");
-    console.log(account, "Orignal Account");
+    //  console.log(Owner, "Owner Orignal");
+    // console.log(account, "Orignal Account");
 
     if (!account || !provider) return;
 

@@ -24,6 +24,7 @@ const initialState = {
     },
   },
   activeWindow: LIQUIDITY_WINDOWS.pools,
+  txnhash: null,
 };
 
 const liquiditySlice = createSlice({
@@ -61,6 +62,9 @@ const liquiditySlice = createSlice({
     setLiquidityActiveWindow: (state, action) => {
       state.activeWindow = action.payload;
     },
+    setTxnhash: (state, action) => {
+      state.txnhash = action.payload;
+    },
     clearLiquidityState: () => initialState,
   },
 });
@@ -70,6 +74,7 @@ export const {
   setLiquidityBalances,
   setIsLiquidityModalOpen,
   setLiquidityActiveWindow,
+  setTxnhash,
   clearLiquidityState,
 } = liquiditySlice.actions;
 

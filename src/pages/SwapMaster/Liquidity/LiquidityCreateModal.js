@@ -17,6 +17,7 @@ export const LiquidityCreateModal = () => {
   const isShowModal = useSelector(s => s.liquidity.modals.create.isOpen);
   const tokenFrom = useSelector(s => s.swapMaster.tokenList[0]);
   const tokenTo = useSelector(s => s.liquidity.tokenTo);
+  const txnhash = useSelector(s => s.liquidity.txnhash);
 
   const {
     values = {},
@@ -81,6 +82,15 @@ export const LiquidityCreateModal = () => {
           >
             <div className="text-lg">Close</div>
           </div>
+          <a
+            href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnhash}`}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            <div className="flex items-center justify-center rounded-md cursor-pointer h-14 bg-blue-500 hover:bg-blue-400 mt-4">
+              <div className="text-lg">View Status</div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
