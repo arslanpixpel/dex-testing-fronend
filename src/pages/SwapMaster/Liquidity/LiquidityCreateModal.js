@@ -18,11 +18,6 @@ export const LiquidityCreateModal = () => {
   const tokenFrom = useSelector(s => s.swapMaster.tokenList[0]);
   const tokenTo = useSelector(s => s.liquidity.tokenTo);
 
-  if (!tokenTo.decimals) {
-    tokenTo.decimals = 6;
-  }
-  console.log(tokenTo, "tokenToDecimals");
-
   const {
     values = {},
     poolShare,
