@@ -38,7 +38,7 @@ const PlayerHeaderPixpel = () => {
 
     setUsername(localStorage.getItem("username"));
 
-    if (!username || username === undefined || username === "" || username === null) {
+    if (!username) {
       window.location.href = "https://www.pixpel.io";
       console.log("Please");
     }
