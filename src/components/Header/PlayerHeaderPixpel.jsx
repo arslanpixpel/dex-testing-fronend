@@ -38,10 +38,10 @@ const PlayerHeaderPixpel = () => {
 
     setUsername(localStorage.getItem("username"));
 
-    if (!username) {
-      window.location.href = "https://www.pixpel.io";
-      console.log("Please");
-    }
+    // if (!username) {
+    //   window.location.href = "https://www.pixpel.io";
+    //   console.log("Please");
+    // }
 
     // setUsername(queryParams);
   }, []);
