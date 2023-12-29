@@ -63,9 +63,9 @@ function App() {
   useEffect(() => {
     setUser(storedUsername);
 
-    if (!user || user === undefined || user === "" || user === null) {
-      window.location.href = "https://www.pixpel.io";
-    }
+    // if (!user || user === undefined || user === "" || user === null) {
+    //   window.location.href = "https://www.pixpel.io";
+    // }
   }, [storedUsername]);
 
   useWalletConnect();
