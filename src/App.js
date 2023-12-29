@@ -40,6 +40,7 @@ import PlayerHeaderPixpel from "./components/Header/PlayerHeaderPixpel";
 import DeveloperHeaderPixpel from "./components/Header/DeveloperHeaderPixpel";
 import PixpelHeader from "./components/Header/PixpelHeader";
 import Sockets from "./pages/SwapMaster/sockets";
+import { useEffect, useState } from "react";
 
 function Test() {
   return (
@@ -56,6 +57,17 @@ function Test() {
 }
 
 function App() {
+  const [user, setUser] = useState();
+  const storedUsername = localStorage.getItem("username");
+
+  useEffect(() => {
+    setUser(storedUsername);
+
+    if (!user || user === undefined || user === "" || user === null) {
+      window.location.href = "https://www.pixpel.io";
+    }
+  }, [storedUsername]);
+
   useWalletConnect();
 
   return (

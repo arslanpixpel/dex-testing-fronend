@@ -133,9 +133,11 @@ const LimitCard = () => {
 
   const handleChangeFromValue = event => {
     setTokenFromValue(event.target.value);
+    // setTokenToValue(event.target.value * chartData[chartData.length - 1]?.exchangeRate);
   };
 
   const handleChangeToValue = event => {
+    // console.log(event.target.value);
     setTokenToValue(event.target.value);
   };
 
@@ -338,6 +340,7 @@ const LimitCard = () => {
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="Please enter 0.0004-50"
+              // value={tokenFromValue * chartData[chartData.length - 1]?.exchangeRate}
               value={tokenToValue}
               onChange={handleChangeToValue}
               type="number"
