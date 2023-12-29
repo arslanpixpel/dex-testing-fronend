@@ -150,9 +150,9 @@ const LimitCard = () => {
 
   const handleConvert = () => {
     setConvert(!convert);
-    setPrice("");
-    setTokenFromValue("");
-    setTokenToValue("");
+    setPrice(0);
+    setTokenFromValue(0);
+    setTokenToValue(0);
   };
 
   // Function to calculate and update values based on tokenFromValue
