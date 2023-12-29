@@ -41,13 +41,13 @@ const PlayerHeaderPixpel = () => {
     // setUsername(queryParams);
   }, []);
 
-  useEffect(() => {
-    if (!username) {
-      console.log("Redirecting to pixpel.io");
+  // useEffect(() => {
+  //   if (!username) {
+  //     console.log("Redirecting to pixpel.io");
 
-      window.location.href = "https://www.pixpel.io";
-    }
-  }, [username]);
+  //     window.location.href = "https://www.pixpel.io";
+  //   }
+  // }, [username]);
 
   const handlelogout = () => {
     localStorage.clear();
