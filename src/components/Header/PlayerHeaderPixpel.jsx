@@ -38,13 +38,16 @@ const PlayerHeaderPixpel = () => {
 
     setUsername(localStorage.getItem("username"));
 
-    // if (!username) {
-    //   window.location.href = "https://www.pixpel.io";
-    //   console.log("Please");
-    // }
-
     // setUsername(queryParams);
   }, []);
+
+  useEffect(() => {
+    if (!username) {
+      console.log("Redirecting to pixpel.io");
+
+      window.location.href = "https://www.pixpel.io";
+    }
+  }, [username]);
 
   const handlelogout = () => {
     localStorage.clear();
