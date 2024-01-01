@@ -466,7 +466,7 @@ const LimitCard = () => {
             /> */}
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
-              placeholder="Please enter 0.0004-50"
+              placeholder="0"
               value={tokenToValue}
               onKeyDown={handleKeyDown}
               onChange={handleChangeToValue}
