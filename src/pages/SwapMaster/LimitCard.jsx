@@ -248,9 +248,9 @@ const LimitCard = () => {
   }, [price, tokenFromValue]);
 
   const isToFieldDisabled = !tokenFromValue || !tokenToValue;
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     // Check if the pressed key is 'e' or 'E' and prevent the input
-    if (e.key === 'e' || e.key === 'E') {
+    if (e.key === "e" || e.key === "E") {
       e.preventDefault();
     }
   };
@@ -275,7 +275,8 @@ const LimitCard = () => {
       const provider = await detectConcordiumProvider();
       const account = await provider.connect();
       const txHash = await provider.sendTransaction(account, AccountTransactionType.Transfer, {
-        amount: new CcdAmount(BigInt(tokenFromValue + "000000")),
+        //amount: new CcdAmount(BigInt(tokenFromValue + "000000")),
+        amount: new CcdAmount(BigInt(parseInt(tokenFromValue * 1e6))),
         toAddress: new AccountAddress(
           process.env.REACT_APP_ADMIN_ADDRESS ||
             "4D3RtGf7zbg7JtBrrsjXVuTMCNgDcnr5M1TKpXqTTBtHENTWtR",
