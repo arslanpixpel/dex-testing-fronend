@@ -41,7 +41,6 @@ const SwapForm = () => {
   } = useFormContext();
 
   const currentValues = getValues();
-  // console.log(currentValues);
 
   const { tokenList, fromPerToAmount, toPerFromAmount } = useSwapDataUpdate();
 
