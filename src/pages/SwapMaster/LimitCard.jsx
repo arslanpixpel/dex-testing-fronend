@@ -407,7 +407,7 @@ const LimitCard = () => {
             /> */}
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
-              placeholder="Please enter 20-25000000"
+              placeholder="0"
               onKeyDown={handleKeyDown}
               value={tokenFromValue}
               onChange={handleChangeFromValue}
