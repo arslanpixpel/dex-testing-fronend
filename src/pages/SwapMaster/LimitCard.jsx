@@ -155,7 +155,48 @@ const LimitCard = () => {
     setTokenToValue(0);
   };
 
-  // Function to calculate and update values based on tokenFromValue
+  // // Function to calculate and update values based on tokenFromValue
+  // const updateValuesFromTokenFrom = value => {
+  //   setTokenFromValue(value);
+  //   const exchangeRate = chartData[chartData.length - 1]?.exchangeRate || 1;
+  //   setTokenToValue(value * exchangeRate);
+  //   setPrice(tokenToValue / value);
+  // };
+
+  // // Function to calculate and update values based on tokenToValue
+  // const updateValuesFromTokenTo = value => {
+  //   setTokenToValue(value);
+  //   const exchangeRate = chartData[chartData.length - 1]?.exchangeRate || 1;
+  //   setTokenFromValue(value / exchangeRate);
+  //   setPrice(value / tokenFromValue);
+  // };
+
+  // // Function to calculate and update values based on price
+  // const updateValuesFromPrice = value => {
+  //   setPrice(value);
+  //   setTokenToValue(value * tokenFromValue);
+  // };
+
+  // // Handle changes in tokenFromValue
+  // const handleChangeFromValue = event => {
+  //   updateValuesFromTokenFrom(event.target.value);
+  // };
+
+  // // Handle changes in tokenToValue
+  // const handleChangeToValue = event => {
+  //   updateValuesFromTokenTo(event.target.value);
+  // };
+
+  // // Handle changes in price
+  // const handleChangePrice = event => {
+  //   updateValuesFromPrice(event.target.value);
+  // };
+
+  // // useEffect to update tokenToValue when tokenFromValue changes
+  // useEffect(() => {
+  //   updateValuesFromTokenFrom(tokenFromValue);
+  // }, [tokenFromValue]);
+
   const updateValuesFromTokenFrom = value => {
     setTokenFromValue(value);
     const exchangeRate = chartData[chartData.length - 1]?.exchangeRate || 1;
@@ -196,6 +237,15 @@ const LimitCard = () => {
   useEffect(() => {
     updateValuesFromTokenFrom(tokenFromValue);
   }, [tokenFromValue]);
+
+  // useEffect to calculate and update tokenToValue based on price
+  useEffect(() => {
+    const newPrice = parseFloat(price);
+
+    if (!isNaN(newPrice) && newPrice >= 0) {
+      setTokenToValue(newPrice * tokenFromValue);
+    }
+  }, [price, tokenFromValue]);
 
   const handleSwapDirection = () => {
     //dispatch(changeSwapDirection());
@@ -411,7 +461,7 @@ const LimitCard = () => {
               value={tokenToValue}
               onChange={handleChangeToValue}
               type="number"
-              readOnly
+              // readOnly
             />
             {/* <div
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
