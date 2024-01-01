@@ -16,6 +16,7 @@ import {
   setLimitTokenTo,
   setlimitSuccessModal,
 } from "../../store/reducers/SwapMaster/swapSlice";
+import { useChartData } from "./Graph/hooks";
 // import { WebClient } from "concordium_web_sdk__WEBPACK_IMPORTED_MODULE_6__";
 
 const currencyList = [
@@ -95,6 +96,7 @@ const LimitCard = () => {
   const [addExpiry, setAddExpiry] = useState(3600000);
   const [SwapDirection, setSwapDirection] = useState(false);
   const [isProcessing, setisProcessing] = useState(false);
+  const [price, setPrice] = useState("");
 
   const dispatch = useDispatch();
 
@@ -112,23 +114,88 @@ const LimitCard = () => {
 
   const tokenTo = useSelector(s => s.swap.limitdata.tokenTo);
   const tokenFrom = useSelector(s => s.swap.limitdata.tokenFrom);
-  console.log(tokenFrom, tokenTo, "tokenFrom tokenTo tokenFrom token");
+  const period = {
+    name: "day",
+    label: "24H",
+    description: "Past 24 Hours",
+  };
+  const { chartData, percentDifference } = useChartData({
+    tokenFrom: tokenTo,
+    tokenTo: tokenFrom,
+    period,
+  });
+  // console.log(chartData, percentDifference, "chartData", "percentDifference");
+  // console.log(chartData[chartData.length - 1]?.exchangeRate);
+  // console.log(tokenFrom, tokenTo, "tokenFrom tokenTo tokenFrom token");
 
-  console.log(tokenFrom, "selectedTokenFrom");
-  console.log(tokenTo, "SelectedTokenTo");
+  // console.log(tokenFromValue, "selectedTokenFromValue");
+  // console.log(tokenToValue, "SelectedTokenToValue");
+  // console.log(price, "price");
   // const dispatch = useDispatch();
 
-  const handleChangeFromValue = event => {
-    setTokenFromValue(event.target.value);
-  };
+  // const handleChangeFromValue = event => {
+  //   setTokenFromValue(event.target.value);
+  //   setTokenToValue(event.target.value * chartData[chartData.length - 1]?.exchangeRate);
+  //   setprice(tokenToValue / event.target.value);
+  // };
 
-  const handleChangeToValue = event => {
-    setTokenToValue(event.target.value);
-  };
+  // const handleChangeToValue = event => {
+  //   // console.log(event.target.value);
+  //   setTokenToValue(event.target.value);
+  // };
+
+  // const handleChangePrice = event => {
+  //   setprice(event.target.value);
+  // };
 
   const handleConvert = () => {
     setConvert(!convert);
+    setPrice(0);
+    setTokenFromValue(0);
+    setTokenToValue(0);
   };
+
+  // Function to calculate and update values based on tokenFromValue
+  const updateValuesFromTokenFrom = value => {
+    setTokenFromValue(value);
+    const exchangeRate = chartData[chartData.length - 1]?.exchangeRate || 1;
+    setTokenToValue(value * exchangeRate);
+    setPrice(tokenToValue / value);
+  };
+
+  // Function to calculate and update values based on tokenToValue
+  const updateValuesFromTokenTo = value => {
+    setTokenToValue(value);
+    const exchangeRate = chartData[chartData.length - 1]?.exchangeRate || 1;
+    setTokenFromValue(value / exchangeRate);
+    setPrice(value / tokenFromValue);
+  };
+
+  // Function to calculate and update values based on price
+  const updateValuesFromPrice = value => {
+    setPrice(value);
+    setTokenToValue(value * tokenFromValue);
+  };
+
+  // Handle changes in tokenFromValue
+  const handleChangeFromValue = event => {
+    updateValuesFromTokenFrom(event.target.value);
+  };
+
+  // Handle changes in tokenToValue
+  const handleChangeToValue = event => {
+    updateValuesFromTokenTo(event.target.value);
+  };
+
+  // Handle changes in price
+  const handleChangePrice = event => {
+    updateValuesFromPrice(event.target.value);
+  };
+
+  // useEffect to update tokenToValue when tokenFromValue changes
+  useEffect(() => {
+    updateValuesFromTokenFrom(tokenFromValue);
+  }, [tokenFromValue]);
 
   const handleSwapDirection = () => {
     //dispatch(changeSwapDirection());
@@ -273,9 +340,16 @@ const LimitCard = () => {
         </div>
         <div className="flex flex-row items-center justify-between h-16 py-3 pl-4 mt-3 rounded-lg xs:pl-8 bg-app-black-button">
           <div className="flex flex-row items-center justify-between w-3/4">
-            <input
+            {/* <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder={"Please enter 20-25000000"}
+              value={tokenFromValue}
+              onChange={handleChangeFromValue}
+              type="number"
+            /> */}
+            <input
+              className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
+              placeholder="Please enter 20-25000000"
               value={tokenFromValue}
               onChange={handleChangeFromValue}
               type="number"
@@ -322,13 +396,32 @@ const LimitCard = () => {
         </div>
         <div className="flex flex-row items-center justify-between h-16 py-3 pl-8 mt-3 rounded-lg bg-app-black-button">
           <div className="flex flex-row items-center justify-between w-3/4">
+            {/* <input
+              className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
+              placeholder="Please enter 0.0004-50"
+              //value={tokenFromValue * chartData[chartData.length - 1]?.exchangeRate}
+              value={tokenToValue}
+              onChange={handleChangeToValue}
+              type="number"
+              readOnly
+            /> */}
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="Please enter 0.0004-50"
               value={tokenToValue}
               onChange={handleChangeToValue}
               type="number"
+              readOnly
             />
+            {/* <div
+              className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
+              placeholder="Please enter 0.0004-50"
+              value={tokenFromValue * chartData[chartData.length - 1]?.exchangeRate}
+              onChange={handleChangeToValue}
+              type="number"
+            >
+              {tokenFromValue * chartData[chartData.length - 1]?.exchangeRate}
+            </div> */}
           </div>
           <div className="flex-none">
             {/* <ImageDropDownButton
@@ -358,11 +451,19 @@ const LimitCard = () => {
               <div className="w-3/4">
                 {/* <input
                   className="w-full bg-app-black-button"
-                  value={tokenToValue / tokenFromValue ? tokenToValue / tokenFromValue : ""}
+                  value={price}
+                  //  value={tokenToValue}
+                  onChange={handleChangePrice}
                 /> */}
-                <div className="w-full bg-app-black-button cursor-default">
+                <input
+                  className="w-full bg-app-black-button"
+                  value={price}
+                  onChange={handleChangePrice}
+                  type="number"
+                />
+                {/* <div className="w-full bg-app-black-button cursor-default">
                   {tokenToValue / tokenFromValue ? tokenToValue / tokenFromValue : ""}
-                </div>
+                </div> */}
               </div>
               <div className="flex-none">
                 {/* <ImageDropDownButton

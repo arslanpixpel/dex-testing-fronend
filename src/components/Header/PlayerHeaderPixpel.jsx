@@ -49,14 +49,34 @@ const PlayerHeaderPixpel = () => {
     }
 
     setUsername(localStorage.getItem("username"));
-    console.log(username.split("&")[0], "username present");
+
     // setUsername(queryParams);
   }, []);
+
+  // useEffect(() => {
+  //   if (!username) {
+  //     console.log("Redirecting to pixpel.io");
+
+  //     window.location.href = "https://www.pixpel.io";
+  //   }
+  // }, [username]);
+
+  const handlelogout = () => {
+    localStorage.clear();
+    window.location.href = "https://www.pixpel.io/?logout=true";
+  };
 
   return (
     <div className="bg-app-black flex justify-between px-8 py-5 items-center mb-11">
       <div className="flex flex-row justify-center gap-7 items-center">
-        <img src={logo} alt="logo" onClick={() => navigate("/")} className="cursor-pointer" />
+        {/* <img src={logo} alt="logo" onClick={() => navigate("/")} className="cursor-pointer" /> */}
+        <img
+          src={logo}
+          alt="logo"
+          onClick={() => (window.location.href = "https://www.pixpel.io/")}
+          className="cursor-pointer"
+        />
+
         <div className="hidden xl:flex gap-4 ">
           {/* <Market />
           <div
@@ -125,6 +145,28 @@ const PlayerHeaderPixpel = () => {
         // }}
       >
         {username ? username.split('"') : ""}
+      </div>
+      <div
+        className="flex items-center justify-center w-36 h-12 rounded-lg bg-app-black-button hover:bg-app-blue gap-2 cursor-pointer"
+        onClick={handlelogout}
+      >
+        <svg
+          className="h-6 w-6 text-white"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <line x1="5" y1="12" x2="11" y2="18" />
+          <line x1="5" y1="12" x2="11" y2="6" />
+        </svg>
+        <h1>LOGOUT</h1>
       </div>
       {/* <div className="hidden xl:flex gap-5 items-center">
         <div className="relative inline-flex flex-col items-start ">

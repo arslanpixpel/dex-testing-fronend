@@ -155,6 +155,8 @@ const TokenSelectInput = ({
           className={"w-full input-autofill " + backgroundColor}
           readOnly={readOnly}
           onInput={onInput}
+          type="number"
+          step="any"
         />
       </div>
       {isWithMaxButton && !!onMaxHandler && (

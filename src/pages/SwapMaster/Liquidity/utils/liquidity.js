@@ -16,7 +16,10 @@ import {
 } from "../../utils";
 
 // Actions
-import { setLiquidityBalances } from "../../../../store/reducers/SwapMaster/liquiditySlice";
+import {
+  setLiquidityBalances,
+  setTxnhash,
+} from "../../../../store/reducers/SwapMaster/liquiditySlice";
 
 // Constants
 import {
@@ -55,7 +58,8 @@ export const addLiquidity =
       MAX_ENERGY,
       values.from,
     );
-    await updateContract(
+
+    const res = await updateContract(
       provider,
       PIXPEL_SWAP_CONTRACT_INFO,
       {
@@ -68,6 +72,8 @@ export const addLiquidity =
       MAX_ENERGY,
       values.from,
     );
+
+    dispatch(setTxnhash(res?.summary?.hash));
 
     await dispatch(getExchanges());
     await dispatch(getLiquidityBalances());
@@ -86,7 +92,7 @@ export const removeLiquidity =
     const provider = getState().connect.provider;
     const tokenTo = getState().liquidity.tokenTo;
 
-    await updateContract(
+    const res = await updateContract(
       provider,
       PIXPEL_SWAP_CONTRACT_INFO,
       {
@@ -98,6 +104,8 @@ export const removeLiquidity =
       PIXPEL_CONTRACT_METHODS.removeLiquidity,
       MAX_ENERGY,
     );
+
+    dispatch(setTxnhash(res?.summary?.hash));
 
     await dispatch(getExchanges());
     await dispatch(getLiquidityBalances());

@@ -19,7 +19,7 @@ const SwapFormContainer = () => {
 
   const methods = useForm({
     defaultValues: {
-      [SWAP_FORM_FIELDS.from]: 0,
+      [SWAP_FORM_FIELDS.from]: null,
       [SWAP_FORM_FIELDS.to]: 0,
     },
     resolver: yupResolver(validationSchema),
