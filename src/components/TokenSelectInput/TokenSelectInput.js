@@ -60,7 +60,6 @@ const TokenSelectInput = ({
   };
 
   useOutsideClick(dropDownRef, closeDropDown);
-
   return (
     <div
       className={"flex flex-row items-center w-full h-16 rounded cursor-pointer " + backgroundColor}

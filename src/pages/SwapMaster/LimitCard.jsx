@@ -248,6 +248,12 @@ const LimitCard = () => {
   }, [price, tokenFromValue]);
 
   const isToFieldDisabled = !tokenFromValue || !tokenToValue;
+  const handleKeyDown = (e) => {
+    // Check if the pressed key is 'e' or 'E' and prevent the input
+    if (e.key === 'e' || e.key === 'E') {
+      e.preventDefault();
+    }
+  };
 
   const handleSwapDirection = () => {
     //dispatch(changeSwapDirection());
@@ -402,6 +408,7 @@ const LimitCard = () => {
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="Please enter 20-25000000"
+              onKeyDown={handleKeyDown}
               value={tokenFromValue}
               onChange={handleChangeFromValue}
               type="number"
@@ -461,6 +468,7 @@ const LimitCard = () => {
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="Please enter 0.0004-50"
               value={tokenToValue}
+              onKeyDown={handleKeyDown}
               onChange={handleChangeToValue}
               type="number"
               // readOnly
@@ -513,6 +521,8 @@ const LimitCard = () => {
                   }`}
                   value={price}
                   onChange={handleChangePrice}
+                  onKeyDown={handleKeyDown}
+                  placeholder="0"
                   type="number"
                   disabled={isToFieldDisabled}
                 />

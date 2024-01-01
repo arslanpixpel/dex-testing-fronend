@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useState } from "react";
 // Components
 import TokenSelectInput from "../../../components/TokenSelectInput/TokenSelectInput";
 import { MainButton } from "../../../components/Button/MainButton";
@@ -32,6 +32,7 @@ const SwapForm = () => {
   const tokenTo = useSelector(s => s.swap.tokenTo);
   const balanceTo = useSelector(s => s.swap.balance.to);
   const isNoFilledPools = useSelector(s => s.swapMaster.isNoFilledPools);
+  const {shuffle , setShuffle} = useState(false);
 
   const {
     formState: { errors, isSubmitting },
@@ -58,6 +59,7 @@ const SwapForm = () => {
 
   const handleSwapDirection = () => {
     dispatch(changeSwapDirection());
+    setShuffle((prev) => !prev);
   };
 
   const onMaxHandler = () => {
