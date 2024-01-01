@@ -516,7 +516,9 @@ const LimitCard = () => {
                   onChange={handleChangePrice}
                 /> */}
                 <input
-                  className="w-full bg-app-black-button"
+                  className={`w-full bg-app-black-button ${
+                    isToFieldDisabled ? "cursor-not-allowed" : ""
+                  }`}
                   value={price}
                   onChange={handleChangePrice}
                   onKeyDown={handleKeyDown}
