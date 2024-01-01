@@ -32,8 +32,8 @@ const PlayerHeaderPixpel = () => {
   useEffect(() => {
     const queryString = window.location.search.substring(1);
 
-    const queryParamsArray = queryString.split("/?");
-    const result = [queryParamsArray[1] ? queryParamsArray[1].split('&')[0] : ''];
+    const queryParamsArray = queryString.split("&");
+
     const queryParams = {};
 
     queryParamsArray.forEach(param => {
@@ -42,8 +42,7 @@ const PlayerHeaderPixpel = () => {
       const value = decodeURIComponent(pair[1] || "");
       queryParams[key] = value;
     });
-    // console.log(queryParams);
-    console.log("res" , result);
+    console.log(queryParams);
 
     if (!localStorage.getItem("username")) {
       localStorage.setItem("username", JSON.stringify(result));
