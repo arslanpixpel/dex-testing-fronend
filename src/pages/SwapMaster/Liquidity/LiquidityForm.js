@@ -46,7 +46,7 @@ const LiquidityForm = ({ isUnstakeMode, isCreateMode }) => {
     defaultValues: {
       ...(isUnstakeMode && { [LIQUIDITY_FORM_FIELDS.lp]: 0 }),
       [LIQUIDITY_FORM_FIELDS.from]: isUnstakeMode ? 0 : null,
-      [LIQUIDITY_FORM_FIELDS.to]: 0,
+      [LIQUIDITY_FORM_FIELDS.to]: isUnstakeMode ? 0 : null,
     },
     resolver: yupResolver(validationSchema),
     context: {
