@@ -247,6 +247,8 @@ const LimitCard = () => {
     }
   }, [price, tokenFromValue]);
 
+  const isToFieldDisabled = !tokenFromValue || !tokenToValue;
+
   const handleSwapDirection = () => {
     //dispatch(changeSwapDirection());
     setLimitTokenFrom2(tokenTo);
@@ -510,6 +512,7 @@ const LimitCard = () => {
                   value={price}
                   onChange={handleChangePrice}
                   type="number"
+                  disabled={isToFieldDisabled}
                 />
                 {/* <div className="w-full bg-app-black-button cursor-default">
                   {tokenToValue / tokenFromValue ? tokenToValue / tokenFromValue : ""}
