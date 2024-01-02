@@ -42,10 +42,9 @@ const PlayerHeaderPixpel = () => {
       const value = decodeURIComponent(pair[1] || "");
       queryParams[key] = value;
     });
-    console.log(queryParams);
 
     if (!localStorage.getItem("username")) {
-      localStorage.setItem("username", JSON.stringify(result));
+      localStorage.setItem("username", JSON.stringify(queryParamsArray?.[0]));
     }
 
     setUsername(localStorage.getItem("username"));
