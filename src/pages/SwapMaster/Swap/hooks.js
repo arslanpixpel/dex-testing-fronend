@@ -106,6 +106,10 @@ export const useSwapDataUpdate = () => {
         handleAmount(values);
       }
 
+      if (!values.from) {
+        setValue("to", "");
+      }
+
       if (!isAmountLoading.current) {
         setFromPerToAmount(getFromPerToAmount(values, swapTokenFrom.decimals || 6));
         setToPerFromAmount(getToPerFromAmount(values, swapTokenTo.decimals || 6));
