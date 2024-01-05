@@ -510,8 +510,12 @@ const LimitCard = () => {
             <div className="w-1/3 text-lg font-normal md:flex hidden">Expires in</div>
           </div>
           <div className="flex flex-col justify-start gap-2 mt-3 md:flex-row">
-            <div className="flex flex-row items-center justify-between w-full h-16 py-5 pl-8 rounded-lg sm:w-2/3 bg-app-black-button">
-              <div className="w-3/4">
+            <div
+              className={`flex flex-row items-center justify-between w-full h-16 py-5 pl-8 rounded-lg sm:w-2/3 ${
+                isToFieldDisabled ? "cursor-not-allowed bg-app-black-modal" : " bg-app-black-button"
+              } `}
+            >
+              <div className={`w-3/4 ${isToFieldDisabled ? "cursor-not-allowed" : ""}`}>
                 {/* <input
                   className="w-full bg-app-black-button"
                   value={price}
@@ -520,7 +524,7 @@ const LimitCard = () => {
                 /> */}
                 <input
                   className={`w-full bg-app-black-button ${
-                    isToFieldDisabled ? "cursor-not-allowed" : ""
+                    isToFieldDisabled ? "cursor-not-allowed bg-app-black-modal" : ""
                   }`}
                   value={price}
                   onChange={handleChangePrice}
