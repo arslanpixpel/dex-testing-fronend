@@ -143,7 +143,7 @@ const PlayerHeaderPixpel = () => {
         //   context.setPlayer(false);
         // }}
       >
-        {username ? username.split('"') : ""}
+        {username ? username.split('"') : "UserName"}
       </div>
       <div
         className="flex items-center justify-center w-36 h-12 rounded-lg bg-app-black-button hover:bg-app-blue gap-2 cursor-pointer"
