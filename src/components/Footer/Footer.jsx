@@ -31,9 +31,27 @@ const Footer = () => {
         <div className="flex flex-col">
           <div className="text-2xl font-semibold xl:mb-6 md:mb-4 mb-2">Products</div>
           <div className="flex flex-col xl:gap-3 md:gap-2 gap-1">
-            <div>NFT</div>
-            <div>Token</div>
-            <div>Buy Crypto</div>
+            <div
+              onClick={() => {
+                navigate("https://nft.pixpel.io/");
+              }}
+            >
+              NFT
+            </div>
+            <div
+              onClick={() => {
+                navigate("https://home.pixpel.io/");
+              }}
+            >
+              Profile
+            </div>
+            <div
+              onClick={() => {
+                navigate("https://launchpad.pixpel.io/");
+              }}
+            >
+              Launchpad
+            </div>
           </div>
         </div>
         <div className="flex flex-col">
