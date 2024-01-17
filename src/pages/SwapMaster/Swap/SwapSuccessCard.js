@@ -81,14 +81,17 @@ const SwapSuccessCard = () => {
         </div>
       </div>
       <div className="flex flex-row justify-between w-full mb-5 text-xs 2xs:text-sm">
-        <div className="font-normal ">Token From Index</div>
+        <div className="font-normal">Token From Index</div>
         <div className="font-normal text-[#0095C8]">
-          {tokenFrom.address ? tokenFrom.address.index : "CCD"}
+          {tokenFrom?.address?.index ? tokenFrom.address.index : "CCD"}
         </div>
       </div>
+
       <div className="flex flex-row justify-between w-full mb-5 text-xs 2xs:text-sm">
-        <div className="font-normal ">Token To Index</div>
-        <div className="font-normal text-[#0095C8]">{tokenTo.address.index}</div>
+        <div className="font-normal">Token To Index</div>
+        <div className="font-normal text-[#0095C8]">
+          {tokenTo?.address?.index ? tokenTo.address.index : "CCD"}
+        </div>
       </div>
       <div className="flex flex-row justify-between w-full gap-4">
         <div
