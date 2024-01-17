@@ -80,6 +80,16 @@ const SwapSuccessCard = () => {
           1 {tokenTo.symbol} = {toPerFromAmount} {tokenFrom.symbol}
         </div>
       </div>
+      <div className="flex flex-row justify-between w-full mb-5 text-xs 2xs:text-sm">
+        <div className="font-normal ">Token From Index</div>
+        <div className="font-normal text-[#0095C8]">
+          {tokenFrom.address ? tokenFrom.address.index : "CCD"}
+        </div>
+      </div>
+      <div className="flex flex-row justify-between w-full mb-5 text-xs 2xs:text-sm">
+        <div className="font-normal ">Token To Index</div>
+        <div className="font-normal text-[#0095C8]">{tokenTo.address.index}</div>
+      </div>
       <div className="flex flex-row justify-between w-full gap-4">
         <div
           className="flex items-center justify-center h-16 py-5 rounded-lg cursor-pointer w-44 bg-app-black-button hover:bg-app-blue"
