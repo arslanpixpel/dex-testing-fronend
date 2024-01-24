@@ -39,7 +39,6 @@ const SwapForm = () => {
     getValues,
     setValue,
   } = useFormContext();
-
   const currentValues = getValues();
 
   const { tokenList, fromPerToAmount, toPerFromAmount } = useSwapDataUpdate();
@@ -63,13 +62,18 @@ const SwapForm = () => {
     const isCCD = !tokenFrom.address;
     const balance = isCCD ? getMaxCcdAmount(balanceFrom) : balanceFrom;
 
+    setValue(SWAP_FORM_FIELDS.to, balance, { shouldValidate: true, shouldTouch: true });
+  };
+  const onMaxToHandler = () => {
+    const isCCD = !tokenFrom.address;
+    const balance = isCCD ? getMaxCcdAmount(balanceTo) : balanceTo;
     setValue(SWAP_FORM_FIELDS.from, balance, { shouldValidate: true, shouldTouch: true });
   };
 
   const errorMessage = Object.values(errors)
     .map(({ message }) => message)
     .join(", ");
-
+  // console.log(tokenList);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -108,17 +112,35 @@ const SwapForm = () => {
         <div className="font-semibold">To</div>
         <div className="font-normal text-gray-400">Balance: {balanceTo}</div>
       </div>
+      {/* <TokenSelectInput
+        name={SWAP_FORM_FIELDS.to}
+        tokenList={tokenList}
+        selectedToken={tokenTo}
+        disabledToken={tokenFrom}
+        backgroundColor="bg-app-black-button"
+        onInput={onInputTokenPair}
+        isWithMaxButton={!isUnstakeMode}
+        onMaxHandler={onMaxToHandler}
+        onTokenSelect={tokenData => {
+          dispatch(setLiquidityTokenTo(tokenData));
+        }}
+        readOnly={isUnstakeMode}
+        isSelectDisabled={isUnstakeMode}
+        isAddToken={isCreateMode}
+      /> */}
       <TokenSelectInput
         name={SWAP_FORM_FIELDS.to}
         tokenList={tokenList}
         selectedToken={tokenTo}
         disabledToken={tokenFrom}
         backgroundColor="bg-app-black-button"
-        readOnly
+        // readOnly
         onTokenSelect={tokenData => {
           dispatch(setSwapTokenTo(tokenData));
         }}
         isAddToken
+        onMaxHandler={onMaxToHandler}
+        isWithMaxButton
       />
       <div className="flex flex-col gap-2 mt-5 text-sm border-b-2 border-app-black">
         <div className="flex flex-row justify-between">
