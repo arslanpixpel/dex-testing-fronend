@@ -72,21 +72,23 @@ const PlayerHeaderPixpel = () => {
         <img
           src={logo}
           alt="logo"
-          onClick={() => (window.location.href = "https://www.pixpel.io/")}
+          onClick={() => (window.location.href = "https://home.pixpel.io/")}
           className="cursor-pointer"
         />
 
         <div className="hidden xl:flex gap-4 ">
-          {/* <Market />
+          {/* <Market /> */}
           <div
-            className="relative flex justify-start px-5 border-b-2 border-app-black py-1 hover:text-app-blue"
+            className="relative flex justify-start px-5  border-app-black py-1 hover:text-app-blue"
             onClick={async () => {
-              navigate("/nft-market");
+              // navigate("/nft-market");
+              window.location.href = "https://nft.pixpel.io";
+
               context.setDeveloperHeader(0);
             }}
           >
             NFT
-          </div> */}
+          </div>
           {/* <div
             className={
               (context.playerHeader === 0 ? "text-app-blue px-5 py-1" : "") +
@@ -99,7 +101,7 @@ const PlayerHeaderPixpel = () => {
           >
             Game
           </div> */}
-          {/* <div
+          <div
             className={
               (context.playerHeader === 1 ? "text-app-blue px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer px-5 py-1"
@@ -110,9 +112,9 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             Launchpad
-          </div> */}
+          </div>
           {/* <Trade /> */}
-          {/* <div
+          <div
             className={"text-app-blue cursor-pointer w-max  px-5 py-1"}
             onClick={() => {
               navigate("/swap-master/swap");
@@ -121,7 +123,7 @@ const PlayerHeaderPixpel = () => {
           >
             DEX
           </div>
-          <div
+          {/* <div
             className={
               (context.playerHeader === 3 ? "text-app-blue  px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer w-max  px-5 py-1"
@@ -137,15 +139,15 @@ const PlayerHeaderPixpel = () => {
         </div>
       </div>
       {/* <ConnectWalletButton /> */}
-      <div
+      {/* <div
         className="hidden lg:flex bg-app-black-button px-14 py-3 rounded-md text-app-blue w-max hover:cursor-pointer items-center"
         // onClick={() => {
         //   context.setPlayer(false);
         // }}
       >
         {username ? username.split('"') : "UserName"}
-      </div>
-      <div
+      </div> */}
+      {/* <div
         className="flex items-center justify-center w-36 h-12 rounded-lg bg-app-black-button hover:bg-app-blue gap-2 cursor-pointer"
         onClick={handlelogout}
       >
@@ -166,9 +168,9 @@ const PlayerHeaderPixpel = () => {
           <line x1="5" y1="12" x2="11" y2="6" />
         </svg>
         <h1>LOGOUT</h1>
-      </div>
-      {/* <div className="hidden xl:flex gap-5 items-center">
-        <div className="relative inline-flex flex-col items-start ">
+      </div> */}
+      <div className="hidden xl:flex gap-5 items-center">
+        {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 1 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -188,9 +190,9 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div>
+        </div> */}
 
-        <div className="relative inline-flex flex-col items-start ">
+        {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 2 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -210,8 +212,8 @@ const PlayerHeaderPixpel = () => {
               className="w-full h-full"
             />
           </div>
-        </div>
-        <div className="relative inline-flex flex-col items-start ">
+        </div> */}
+        {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 3 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -235,8 +237,8 @@ const PlayerHeaderPixpel = () => {
               }}
             />
           </div>
-        </div>
-        <div className="relative inline-flex flex-col items-start ">
+        </div> */}
+        {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 4 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -256,8 +258,8 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div>
-        <div className="relative inline-flex flex-col items-start ">
+        </div> */}
+        {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 5 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -277,11 +279,11 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div>
+        </div> */}
 
-        <Notification />
+        {/* <Notification /> */}
 
-        <div className="relative inline-flex flex-col items-start ">
+        {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 6 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -301,8 +303,8 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
       <div className="xl:hidden flex" onClick={() => setOpenMenu(!openMenu)}>
         <img src={Iconmenu} alt="menu" />
       </div>
