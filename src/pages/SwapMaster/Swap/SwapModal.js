@@ -137,55 +137,32 @@ const SwapModal = () => {
         .filter(i => !i.paid && i.tokenToid === tokenTo.id && new Date().getTime() < i.expiry)
         .forEach(async a => {
           const ResponcePrice = a?.price;
+          const ExpiryData = a?.expiry;
+          const account = a?.address;
+          const tokenFrom = a?.tokenfromvalue;
+          const refund = a?.refund;
+          const id = a?._id;
+          const paid = a?.paid;
 
           if (ResponcePrice < 0) {
             ResponcePrice === 0;
           }
+          console.log(ExpiryData, "DATA CHECK");
+          const ExpDate = new Date(ExpiryData);
+          const currentDate = new Date();
+          // if (ExpDate > currentDate) {
+          //   console.log(`${ExpDate} is in the future.`);
+          // } else if (ExpDate < currentDate) {
+          //   console.log(`${ExpDate} is in the past.`);
+          // } else {
+          //   console.log(`${ExpDate} is the same as the current date and time.`);
+          // }
 
-          if (ToPerFromAmount >= ResponcePrice) {
-            const apiUrl2 = (JS_NODE_URL || "http://localhost:8000") + "/api/v1/tokens/tokenswap";
-            const { data } = await axios
-              .post(
-                apiUrl2,
-                {
-                  a: {
-                    token: {
-                      address: tokenTo?.address,
-                      id: tokenTo.tokenId,
-                    },
-                    min_token_amount: getTokenRawAmount(
-                      ToPerFromAmount * a.tokenfromvalue,
-                      tokenTo?.decimals || 6,
-                    ).toString(),
-                  },
-                  b: [
-                    {
-                      token_id: tokenTo.tokenId,
-                      amount: getTokenRawAmount(
-                        ToPerFromAmount * a.tokenfromvalue,
-                        tokenTo?.decimals || 6,
-                      ).toString(),
-                      from: {
-                        Account: [
-                          process.env.REACT_APP_ADMIN_WALLET ||
-                            "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
-                        ],
-                      },
-                      to: {
-                        Account: [a.address],
-                      },
-                      data: [0],
-                    },
-                  ],
-                  c: values.from,
-                  d: tokenTo,
-                  amountFrom: values.from,
-                  _id: a._id,
-                },
-                { timeout: 15000 },
-              )
-              .catch(async e => {
-                const { data } = await axios.post(
+          if (ExpDate > currentDate) {
+            if (ToPerFromAmount >= ResponcePrice) {
+              const apiUrl2 = (JS_NODE_URL || "http://localhost:8000") + "/api/v1/tokens/tokenswap";
+              const { data } = await axios
+                .post(
                   apiUrl2,
                   {
                     a: {
@@ -214,7 +191,7 @@ const SwapModal = () => {
                         to: {
                           Account: [a.address],
                         },
-                        data: "",
+                        data: [0],
                       },
                     ],
                     c: values.from,
@@ -223,10 +200,157 @@ const SwapModal = () => {
                     _id: a._id,
                   },
                   { timeout: 15000 },
-                );
-                console.log(data, "Automatic Transection Data");
+                )
+                .catch(async e => {
+                  const { data } = await axios.post(
+                    apiUrl2,
+                    {
+                      a: {
+                        token: {
+                          address: tokenTo?.address,
+                          id: tokenTo.tokenId,
+                        },
+                        min_token_amount: getTokenRawAmount(
+                          ToPerFromAmount * a.tokenfromvalue,
+                          tokenTo?.decimals || 6,
+                        ).toString(),
+                      },
+                      b: [
+                        {
+                          token_id: tokenTo.tokenId,
+                          amount: getTokenRawAmount(
+                            ToPerFromAmount * a.tokenfromvalue,
+                            tokenTo?.decimals || 6,
+                          ).toString(),
+                          from: {
+                            Account: [
+                              process.env.REACT_APP_ADMIN_WALLET ||
+                                "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
+                            ],
+                          },
+                          to: {
+                            Account: [a.address],
+                          },
+                          data: "",
+                        },
+                      ],
+                      c: values.from,
+                      d: tokenTo,
+                      amountFrom: values.from,
+                      _id: a._id,
+                    },
+                    { timeout: 15000 },
+                  );
+                  console.log(data, "Automatic Transection Data");
+                });
+              console.log(data, "Automatic Transection Data");
+            }
+          } else if (!refund && !paid) {
+            await axios
+              .post("https://api.pixpel.io/api/v1/exchanges/walletAmmount", {
+                walletTo: account,
+                amount: tokenFrom * 1e6,
+              })
+              .then(async res => {
+                console.log(res);
+                await axios
+                  .put(`https://api.pixpel.io/api/v1/tokens/refundLimitOrder/${id}`)
+                  .then(() => console.log(res))
+                  .catch(e => {
+                    e.message;
+                  });
+                // if (ToPerFromAmount >= ResponcePrice) {
+                //   const apiUrl2 =
+                //     (JS_NODE_URL || "http://localhost:8000") + "/api/v1/tokens/tokenswap";
+                //   const { data } = await axios
+                //     .post(
+                //       apiUrl2,
+                //       {
+                //         a: {
+                //           token: {
+                //             address: tokenTo?.address,
+                //             id: tokenTo.tokenId,
+                //           },
+                //           min_token_amount: getTokenRawAmount(
+                //             ToPerFromAmount * a.tokenfromvalue,
+                //             tokenTo?.decimals || 6,
+                //           ).toString(),
+                //         },
+                //         b: [
+                //           {
+                //             token_id: tokenTo.tokenId,
+                //             amount: getTokenRawAmount(
+                //               ToPerFromAmount * a.tokenfromvalue,
+                //               tokenTo?.decimals || 6,
+                //             ).toString(),
+                //             from: {
+                //               Account: [
+                //                 process.env.REACT_APP_ADMIN_WALLET ||
+                //                   "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
+                //               ],
+                //             },
+                //             to: {
+                //               Account: [a.address],
+                //             },
+                //             data: [0],
+                //           },
+                //         ],
+                //         c: values.from,
+                //         d: tokenTo,
+                //         amountFrom: values.from,
+                //         _id: a._id,
+                //       },
+                //       { timeout: 15000 },
+                //     )
+                //     .catch(async e => {
+                //       const { data } = await axios.post(
+                //         apiUrl2,
+                //         {
+                //           a: {
+                //             token: {
+                //               address: tokenTo?.address,
+                //               id: tokenTo.tokenId,
+                //             },
+                //             min_token_amount: getTokenRawAmount(
+                //               ToPerFromAmount * a.tokenfromvalue,
+                //               tokenTo?.decimals || 6,
+                //             ).toString(),
+                //           },
+                //           b: [
+                //             {
+                //               token_id: tokenTo.tokenId,
+                //               amount: getTokenRawAmount(
+                //                 ToPerFromAmount * a.tokenfromvalue,
+                //                 tokenTo?.decimals || 6,
+                //               ).toString(),
+                //               from: {
+                //                 Account: [
+                //                   process.env.REACT_APP_ADMIN_WALLET ||
+                //                     "3NQJpBY6L8FofGLxo37w2taX3R8apCRmK7eQnbZK3EBnvoew1U",
+                //                 ],
+                //               },
+                //               to: {
+                //                 Account: [a.address],
+                //               },
+                //               data: "",
+                //             },
+                //           ],
+                //           c: values.from,
+                //           d: tokenTo,
+                //           amountFrom: values.from,
+                //           _id: a._id,
+                //         },
+                //         { timeout: 15000 },
+                //       );
+                //       console.log(data, "Automatic Transection Data");
+                //     });
+                //   console.log(data, "Automatic Transection Data");
+                // }
+              })
+              .catch(e => {
+                console.log("ERROR: ", e.message);
+                alert("Transaction did not Transfer Back");
               });
-            console.log(data, "Automatic Transection Data");
           }
         });
 
