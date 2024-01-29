@@ -240,6 +240,11 @@ const LimitCard = () => {
     updateValuesFromTokenFrom(tokenFromValue);
   }, [tokenFromValue]);
 
+  const handleNull = () => {
+    setTokenFromValue(null);
+    setTokenToValue(null);
+  };
+
   // useEffect to calculate and update tokenToValue based on price
   useEffect(() => {
     const newPrice = parseFloat(price);
@@ -412,7 +417,10 @@ const LimitCard = () => {
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="0"
               onKeyDown={handleKeyDown}
-              value={tokenFromValue ? tokenFromValue : ""}
+              // value={tokenFromValue ? tokenFromValue : ""}
+              value={Number(tokenFromValue)
+                .toFixed(9)
+                .replace(/\.?0+$/, "")}
               onChange={handleChangeFromValue}
               type="number"
             />
@@ -439,6 +447,7 @@ const LimitCard = () => {
               SwapDirection={SwapDirection}
               dropdownType="from"
               disabled={tokenTo}
+              callback={handleNull}
             />
           </div>
         </div>
@@ -470,7 +479,14 @@ const LimitCard = () => {
             <input
               className="w-full bg-app-black-button xs:placeholder:text-base placeholder:text-xs placeholder:text-gray-400"
               placeholder="0"
-              value={tokenToValue ? tokenToValue : ""}
+              // value={
+              //   typeof tokenToValue === "number"
+              //     ? tokenToValue.toFixed(9).replace(/\.?0+$/, "")
+              //     : ""
+              // }
+              value={Number(tokenToValue)
+                .toFixed(9)
+                .replace(/\.?0+$/, "")}
               onKeyDown={handleKeyDown}
               onChange={handleChangeToValue}
               type="number"
@@ -501,6 +517,7 @@ const LimitCard = () => {
               setSelectedTokenTo={setLimitTokenTo2}
               dropdownType="to"
               disabled={tokenFrom}
+              callback={handleNull}
             />
           </div>
         </div>
@@ -526,7 +543,10 @@ const LimitCard = () => {
                   className={`w-full bg-app-black-button ${
                     isToFieldDisabled ? "cursor-not-allowed bg-app-black-modal" : ""
                   }`}
-                  value={price}
+                  // value={price}
+                  value={Number(price)
+                    .toFixed(9)
+                    .replace(/\.?0+$/, "")}
                   onChange={handleChangePrice}
                   onKeyDown={handleKeyDown}
                   placeholder="0"

@@ -24,23 +24,23 @@ function LimitOrders() {
     setIsProcessing(false);
   }
 
-  console.log(limitsuccessmodal, "limitsuccessmodal");
+  // console.log(limitsuccessmodal, "limitsuccessmodal");
 
   useEffect(() => {
-    console.log("WALLET NUMBER : ", account);
+    // console.log("WALLET NUMBER : ", account);
 
     fetchDataDex();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
   const openorders = () => {
-    console.log(tempTable);
+    // console.log(tempTable);
     setIsProcessing(true);
     const filteredOrder = tempTable.filter(
       order => order.paid === false && order.expiry > Date.now(),
     );
 
-    console.log(filteredOrder);
+    // console.log(filteredOrder);
     setTempTable(filteredOrder);
     setFilter(true);
     setIsProcessing(false);

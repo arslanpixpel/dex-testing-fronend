@@ -31,7 +31,7 @@ const GraphCard = () => {
   };
 
   const { chartData, percentDifference } = useChartData({ tokenFrom, tokenTo, period });
-  console.log({ tokenFrom, tokenTo, period, chartData });
+  // console.log({ tokenFrom, tokenTo, period, chartData });
 
   return (
     <div className="flex flex-col text-lg 2xl1:w-[815px] bg-app-black rounded-xl sm:p-[50px] xs:p-[40px] 1xs:p-[30px] 2xs:p-[20px] p-[10px] ">

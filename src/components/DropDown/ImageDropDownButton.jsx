@@ -130,6 +130,10 @@ const ImageDropDownButton = props => {
       props.setSelectedTokenTo(content);
     }
 
+    if (props.callback) {
+      props.callback();
+    }
+
     setShowDropDown(false);
   };
 
