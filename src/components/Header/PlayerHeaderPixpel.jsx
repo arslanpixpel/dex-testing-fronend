@@ -78,7 +78,7 @@ const PlayerHeaderPixpel = () => {
 
         <div className="hidden xl:flex gap-4 ">
           {/* <Market /> */}
-          <div
+          {/* <div
             className="relative flex justify-start px-5  border-app-black py-1 hover:text-app-blue"
             onClick={async () => {
               // navigate("/nft-market");
@@ -88,7 +88,7 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             NFT
-          </div>
+          </div> */}
           {/* <div
             className={
               (context.playerHeader === 0 ? "text-app-blue px-5 py-1" : "") +
@@ -101,7 +101,7 @@ const PlayerHeaderPixpel = () => {
           >
             Game
           </div> */}
-          <div
+          {/* <div
             className={
               (context.playerHeader === 1 ? "text-app-blue px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer px-5 py-1"
@@ -112,7 +112,7 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             Launchpad
-          </div>
+          </div> */}
           {/* <Trade /> */}
           <div
             className={"text-app-blue cursor-pointer w-max  px-5 py-1"}
@@ -330,7 +330,7 @@ const PlayerHeaderPixpel = () => {
           >
             Game
           </div> */}
-          <div
+          {/* <div
             onClick={() => {
               setOpenMenu(false);
               window.location.href = "https://launchpad.pixpel.io";
@@ -347,7 +347,7 @@ const PlayerHeaderPixpel = () => {
             className="hover:text-app-blue cursor-pointer"
           >
             {username ? username.split('"') : ""}
-          </div>
+          </div> */}
           {/* <div
             onClick={() => {
               setOpenMenu(false);
@@ -369,14 +369,14 @@ const PlayerHeaderPixpel = () => {
           </div> */}
 
           <div className="flex gap-5">
-            <img
+            {/* <img
               src={launchpad}
               alt="cart"
               onClick={() => {
                 setOpenMenu(false);
                 window.location.href = "https://launchpad.pixpel.io";
               }}
-            />
+            /> */}
             {/* <img
               src={marketplace}
               alt="cart"
