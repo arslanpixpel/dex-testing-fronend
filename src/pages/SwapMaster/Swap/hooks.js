@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 // Utils
 import { getAmount, getFromPerToAmount, getSwapBalances, getToPerFromAmount } from "./utils";
-import { parseTokenAddress } from "../../../utils/format";
+// import { parseTokenAddress } from "../../../utils/format";
 import { isSameToken } from "../utils";
 
 // Actions
@@ -39,11 +39,13 @@ export const useSwapDataUpdate = () => {
     tokenData => {
       const { address, tokenId } = tokenData;
       const isCCD = !address;
+      // console.log(exchanges, "exchange");
 
       return (
         isCCD ||
         exchanges.some(exchange => {
-          const { index, subindex } = parseTokenAddress(exchange.token.address);
+          // const { index, subindex } = parseTokenAddress(exchange.token.address);
+          const { index, subindex } = exchange.token.address;
           const isFilledPool = exchange.ccdBalance > 0 && exchange.tokenBalance > 0;
 
           return (
@@ -86,7 +88,7 @@ export const useSwapDataUpdate = () => {
     async values => {
       try {
         const targetAmount = await dispatch(getAmount(values.from));
-        console.log(targetAmount);
+        // console.log(targetAmount, " Trageted Amount to");
         isAmountLoading.current = false;
         setValue(SWAP_FORM_FIELDS.to, targetAmount, { shouldValidate: true });
       } catch {

@@ -64,6 +64,7 @@ const SwapForm = () => {
 
     setValue(SWAP_FORM_FIELDS.to, balance, { shouldValidate: true, shouldTouch: true });
   };
+
   const onMaxToHandler = () => {
     const isCCD = !tokenFrom.address;
     const balance = isCCD ? getMaxCcdAmount(balanceTo) : balanceTo;
@@ -74,6 +75,7 @@ const SwapForm = () => {
     .map(({ message }) => message)
     .join(", ");
   // console.log(tokenList);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

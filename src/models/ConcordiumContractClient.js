@@ -14,6 +14,7 @@ import {
   AccountAddress,
   TransactionExpiry,
   ConcordiumClient,
+  ConcordiumGRPCClient,
 } from "@concordium/web-sdk";
 import { JSON_RPC_URL } from "../config";
 import axios from "axios";
@@ -51,12 +52,15 @@ export async function invokeContract(
         })
       : undefined);
   // const client = provider?.getJsonRpcClient() || customRpcClient;
+  const client = provider?.getGrpcClient() || customRpcClient;
+
+  // const client = new ConcordiumGRPCClient(provider.grpcTransport);
 
   if (!provider) {
     provider = await detectConcordiumProvider();
   }
 
-  const client = provider?.getGrpcClient();
+  // const client = provider?.getGrpcClient() || customRpcClient;
 
   const contractContext = {
     parameter,
@@ -64,6 +68,97 @@ export async function invokeContract(
     invoker,
     method: `${contractName}.${methodName}`,
   };
+
+  // console.log(contractContext, " contract Context");
+
+  const res = await client.invokeContract(contractContext);
+
+  if (!res || res.tag === "failure") {
+    try {
+      const errorData =
+        res.returnValue &&
+        deserializeReceiveError(
+          Buffer.from(res.returnValue, "hex"),
+          schemaBuffer,
+          contractName,
+          methodName,
+        );
+
+      console.error(
+        `%c::${"Deserialized error"}`,
+        "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
+        errorData,
+      );
+    } catch (error) {
+      console.error(
+        `%c::${"Deserialization error"}`,
+        "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
+        error,
+      );
+      console.error(
+        `%c::${"Failure result"}`,
+        "background: #5ebaf2; color: #fff; border-radius: 5px; padding: 2px 5px;",
+        res,
+      );
+    }
+
+    const msg =
+      `failed invoking contract ` +
+      `method:${methodName}, ` +
+      `contract:(index: ${contract.index.toString()}, subindex: ${contract.subindex.toString()})`;
+
+    return Promise.reject(new Error(msg, { cause: res }));
+  }
+
+  if (!res.returnValue) {
+    const msg =
+      `failed invoking contract, null return value` +
+      `method:${methodName}, ` +
+      `contract:(index: ${contract.index.toString()}, subindex: ${contract.subindex.toString()})`;
+
+    return Promise.reject(new Error(msg, { cause: res }));
+  }
+
+  return Buffer.from(res.returnValue, "hex");
+}
+
+export async function invokeContract2(
+  provider,
+  contractInfo,
+  contract,
+  methodName,
+  params,
+  invoker,
+  customParameter,
+) {
+  const { contractName, schemaBuffer, serializationContractName } = contractInfo;
+
+  const parameter =
+    customParameter ||
+    (params
+      ? await serializeParamsWithReattempt({
+          params: [serializationContractName || contractName, schemaBuffer, methodName, params],
+        })
+      : undefined);
+  // const client = provider?.getJsonRpcClient() || customRpcClient;
+  // const client = provider?.getGrpcClient() || customRpcClient;
+
+  const client = new ConcordiumGRPCClient(provider.grpcTransport);
+
+  if (!provider) {
+    provider = await detectConcordiumProvider();
+  }
+
+  // const client = provider?.getGrpcClient() || customRpcClient;
+
+  const contractContext = {
+    parameter,
+    contract,
+    invoker,
+    method: `${contractName}.${methodName}`,
+  };
+
+  // console.log(contractContext, " contract Context");
 
   const res = await client.invokeContract(contractContext);
 
@@ -162,10 +257,14 @@ export async function updateContract(
     SchemaVersion.V2,
   );
   //const outcomes = await waitForTransaction(provider, txnHash);
-  const outcomes = await provider.getGrpcClient().waitForTransactionFinalization(txnHash);
+  const client = new ConcordiumGRPCClient(provider.grpcTransport);
+  const outcomes = await client.waitForTransactionFinalization(txnHash);
+  // console.log(outcomes, "waitForTransaction final Liquidity");
+  // const outcomes = await provider.getGrpcClient().waitForTransactionFinalization(txnHash);
   // return ensureValidOutcome(outcomes);
 
   return outcomes;
+  // return txnHash;
 }
 
 // /**

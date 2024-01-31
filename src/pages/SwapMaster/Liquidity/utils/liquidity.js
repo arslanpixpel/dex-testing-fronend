@@ -36,7 +36,7 @@ export const addLiquidity =
     const account = getState().connect.account;
     const provider = getState().connect.provider;
     const tokenTo = getState().liquidity.tokenTo;
-    console.log(provider, account, tokenTo);
+    // console.log(provider, account, tokenTo);
 
     await updateOperator({
       provider,
@@ -73,7 +73,8 @@ export const addLiquidity =
       values.from,
     );
 
-    dispatch(setTxnhash(res?.summary?.hash));
+    // dispatch(setTxnhash(res?.summary?.hash));
+    dispatch(setTxnhash(res));
 
     await dispatch(getExchanges());
     await dispatch(getLiquidityBalances());
@@ -105,7 +106,8 @@ export const removeLiquidity =
       MAX_ENERGY,
     );
 
-    dispatch(setTxnhash(res?.summary?.hash));
+    // dispatch(setTxnhash(res?.summary?.hash));
+    dispatch(setTxnhash(res));
 
     await dispatch(getExchanges());
     await dispatch(getLiquidityBalances());

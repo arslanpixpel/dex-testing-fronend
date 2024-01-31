@@ -5,7 +5,7 @@
   "homepage": "http://195.181.246.75/",
   "dependencies": {
     "@concordium/browser-wallet-api-helpers": "2.2.0",
-    "@concordium/web-sdk": "3.2.0",
+    "@concordium/web-sdk": "^3.5.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@hookform/resolvers": "^2.9.10",

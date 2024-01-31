@@ -83,7 +83,8 @@ export const LiquidityCreateModal = () => {
             <div className="text-lg">Close</div>
           </div>
           <a
-            href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnhash}`}
+            // href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnhash}`}
+            href={`https://testnet.ccdscan.io/?dcount=1&dentity=block&dhash=${txnhash}`}
             target="_blank"
             rel="noopener noreferrer nofollow"
           >

@@ -147,7 +147,7 @@ const SwapModal = () => {
           if (ResponcePrice < 0) {
             ResponcePrice === 0;
           }
-          console.log(ExpiryData, "DATA CHECK");
+          // console.log(ExpiryData, "DATA CHECK");
           const ExpDate = new Date(ExpiryData);
           const currentDate = new Date();
           // if (ExpDate > currentDate) {
@@ -370,7 +370,8 @@ const SwapModal = () => {
         if (outcomes) {
           // const targetOutcome = Object.values(outcomes)[0];
           // console.log(targetOutcome, "targetOutcome");
-          txnHash = outcomes?.summary?.hash;
+          // txnHash = outcomes?.summary?.hash;
+          txnHash = outcomes;
         }
 
         console.log(outcomes, "Automatic AUthentication");

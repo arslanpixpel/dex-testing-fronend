@@ -39,6 +39,7 @@ const LiquidityForm = ({ isUnstakeMode, isCreateMode }) => {
 
   const balanceFrom = useSelector(s => s.liquidity.balance.from);
   const balanceTo = useSelector(s => s.liquidity.balance.to);
+
   const balanceLp = isUnstakeMode
     ? getTokenUiAmount(BigNumber(exchangeData?.lpTokensHolderBalance), CCD_DECIMALS)
     : 0;

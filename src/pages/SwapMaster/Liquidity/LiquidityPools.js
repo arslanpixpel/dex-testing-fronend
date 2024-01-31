@@ -122,7 +122,8 @@ const LiquidityPools = ({ openLiquidityForm }) => {
         const tokenFrom = tokenList[0];
         const tokenTo = tokenList.find(({ address, tokenId }) => {
           // console.log(token);
-          const { index, subindex } = parseTokenAddress(token.address);
+          // const { index, subindex } = parseTokenAddress(token.address);
+          const { index, subindex } = token.address;
 
           return (
             address &&

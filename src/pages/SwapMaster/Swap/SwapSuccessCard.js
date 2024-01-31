@@ -101,8 +101,8 @@ const SwapSuccessCard = () => {
           <div className="text-lg font-medium">Back</div>
         </div>
         <a
-          // href={`https://dashboard.${NETWORK}.concordium.com/lookup/${txnHash}`}
-          href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnHash}`}
+          // href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${txnHash}`}
+          href={`https://testnet.ccdscan.io/?dcount=1&dentity=block&dhash=${txnHash}`}
           target="_blank"
           rel="noopener noreferrer nofollow"
           className="flex items-center justify-center w-56 h-16 py-5 rounded-lg cursor-pointer bg-app-blue hover:bg-app-blue"

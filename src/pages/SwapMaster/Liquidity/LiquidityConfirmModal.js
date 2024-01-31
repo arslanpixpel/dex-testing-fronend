@@ -41,7 +41,7 @@ const LiquidityConfirmModal = () => {
     const actionHandler = isUnstakeMode ? removeLiquidity : addLiquidity;
 
     try {
-      console.log(values);
+      // console.log(values);
       lpBalance = await dispatch(actionHandler({ values }));
     } catch (e) {
       closeModal();

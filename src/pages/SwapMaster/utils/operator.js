@@ -1,5 +1,9 @@
 // Utils
-import { invokeContract, updateContract } from "../../../models/ConcordiumContractClient";
+import {
+  invokeContract,
+  invokeContract2,
+  updateContract,
+} from "../../../models/ConcordiumContractClient";
 import { toBigIntContractAddress, toParamContractAddress } from "../../../utils/format";
 import { PixpelSwapDeserializer } from "../../../models/PixpelSwapDeserializer";
 
@@ -42,7 +46,24 @@ export const updateOperator = async ({
     },
   };
 
-  const returnedValue = await invokeContract(
+  // const returnedValue = await invokeContract(
+  //   provider,
+  //   contractInfo,
+  //   toBigIntContractAddress(tokenAddress),
+  //   PIXPEL_CONTRACT_METHODS.operatorOf,
+  //   [
+  //     {
+  //       owner: {
+  //         Account: [account],
+  //       },
+  //       address: {
+  //         Contract: [toParamContractAddress(contractAddress)],
+  //       },
+  //     },
+  //   ],
+  // );
+
+  const returnedValue = await invokeContract2(
     provider,
     contractInfo,
     toBigIntContractAddress(tokenAddress),

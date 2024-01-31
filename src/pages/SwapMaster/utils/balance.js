@@ -2,12 +2,21 @@ import { Buffer } from "buffer/";
 import Base58 from "base-58";
 
 // Utils
-import { invokeContract } from "../../../models/ConcordiumContractClient";
+import {
+  customRpcClient,
+  invokeContract,
+  invokeContract2,
+} from "../../../models/ConcordiumContractClient";
 
 // Constants
 import { CIS2_CONTRACT_METHODS, PIXPEL_SWAP_CONTRACT_INFO } from "../../../config";
 import { PixpelSwapDeserializer } from "../../../models/PixpelSwapDeserializer";
-import { AccountAddress } from "@concordium/web-sdk";
+import { AccountAddress, ConcordiumGRPCClient } from "@concordium/web-sdk";
+// import { ConcordiumGRPCClient } from "@concordium/web-sdk/grpc";
+
+export const nodeAddress = "https://grpc.testnet.concordium.com";
+export const nodePort = 20000;
+
 const getBalanceParameter = ({ tokenId, account }) => {
   const numberOfQueriesBuffer = Buffer.from("0100", "hex");
   const contractIdBuffer = Buffer.from(tokenId, "hex");
@@ -47,7 +56,9 @@ export const getBalance =
 
     if (!account || !provider) return;
 
-    const returnedValue = await invokeContract(
+    // console.log({ tokenAddress, tokenId, contractName }, "Token Information");
+
+    const returnedValue = await invokeContract2(
       provider,
       { ...PIXPEL_SWAP_CONTRACT_INFO, ...(contractName && { contractName }) },
       tokenAddress,
@@ -56,6 +67,7 @@ export const getBalance =
       null,
       getBalanceParameter({ tokenId, account }),
     );
+    // console.log(returnedValue, " returned Value");
 
     return new PixpelSwapDeserializer(returnedValue).readBalanceOf();
   };
@@ -81,12 +93,19 @@ export const getCCDBalance = () => async (_, getState) => {
 
   if (!account || !provider) return;
 
-  const client = provider.getGrpcClient();
-
+  // const client = provider.getGrpcClient();
+  // const client = customRpcClient;
+  // console.log("getting Balance Fucntion");
+  const client = new ConcordiumGRPCClient(provider.grpcTransport);
+  // console.log(client, "Provider");
   const accountAddress = new AccountAddress(account);
-  const blockHash = (await client.getConsensusStatus()).bestBlock;
+  // console.log(accountAddress, "Account Address");
+  // const blockHash = (await client.getConsensusStatus()).bestBlock;
+  // console.log(blockHash, "Block hash");
 
-  const accountInfo = await client.getAccountInfo(accountAddress, blockHash);
+  const accountInfo = await client.getAccountInfo(accountAddress);
+  // console.log(accountInfo, "Account info");
+  // console.log(accountInfo.accountAmount, "accountInfo.accountAmount");
 
   return accountInfo.accountAmount;
 };

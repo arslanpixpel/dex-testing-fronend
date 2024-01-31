@@ -2,6 +2,7 @@ import BigNumber from "bignumber.js";
 
 // parse from string like '<3677,0>'
 export const parseTokenAddress = addressString => {
+  console.log(addressString, "address string");
   const [, index, subindex] = addressString.match(/<(\d+),(\d+)>/);
 
   return {
