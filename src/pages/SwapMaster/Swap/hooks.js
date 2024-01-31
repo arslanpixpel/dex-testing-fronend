@@ -108,8 +108,12 @@ export const useSwapDataUpdate = () => {
         handleAmount(values);
       }
 
-      if (!values.from) {
-        setValue("to", "");
+      // if (!values.from) {
+      //   setValue("to", 0);
+      // }
+
+      if (!values.from && values.to !== 0) {
+        setValue("to", 0);
       }
 
       if (!isAmountLoading.current) {
