@@ -9,16 +9,16 @@ import Xicon from "../../asssets/images/Xicon.png";
 import Insta from "../../asssets/images/Insta.png";
 import Isolation_Mode from "../../asssets/images/Isolation_Mode.png";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div className="flex flex-col bg-app-black 2xl:px-20 xl:px-16 lg:px-12 md:px-9 sm:px-6 px-3 xl:pt-16 lg:pt-12 md:pt-9 sm:pt-6 pt-3 xl:pb-8 lg:pb-6 md:pb-4 pb-3 mt-10">
       <div className="header__logo cursor-pointer xl:mb-12 lg:mb-9 md:mb-6 sm:mb-4 mb-3">
         {/* <img src="assets/images/logo.svg" className="logo" alt="" /> */}
-        <img src={logo} alt="logo" onClick={() => navigate("/")} className="cursor-pointer" />
+        <img src={logo} alt="logo" className="cursor-pointer" />
       </div>
       <div className="grid xl1:grid-cols-6 md1:grid-cols-3 2xs:grid-cols-2 grid-cols-1 2xl:mb-20 xl:mb-16 lg:mb-12 md:mb-9 sm:mb-6 mb-3 gap-10">
         <div className="flex flex-col">
@@ -33,21 +33,21 @@ const Footer = () => {
           <div className="flex flex-col xl:gap-3 md:gap-2 gap-1">
             <div
               onClick={() => {
-                navigate("https://nft.pixpel.io/");
+                // navigate("https://nft.pixpel.io/");
               }}
             >
               NFT
             </div>
             <div
               onClick={() => {
-                navigate("https://home.pixpel.io/");
+                // navigate("https://home.pixpel.io/");
               }}
             >
               Profile
             </div>
             <div
               onClick={() => {
-                navigate("https://launchpad.pixpel.io/");
+                // navigate("https://launchpad.pixpel.io/");
               }}
             >
               Launchpad
@@ -91,10 +91,18 @@ const Footer = () => {
           </div> */}
           <div className="flex flex-col gap-6">
             <div className="flex gap-9">
-              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.instagram.com/pixpelplatform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={Insta} alt="instagram" className="w-7 rounded-full" />
               </a>
-              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://twitter.com/PixpelPlatform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={Xicon} alt="twitter" className="w-7 rounded-full" />
               </a>
               <a href="https://t.me/pixpel" target="_blank" rel="noopener noreferrer">
@@ -112,7 +120,7 @@ const Footer = () => {
               >
                 <img src={Linkedin} alt="linkedin" className="w-7 rounded-full" />
               </a>
-              <a href="https://www.pixpel.io/" target="_blank" rel="noopener noreferrer">
+              <a target="_blank" rel="noopener noreferrer">
                 <img src={Isolation_Mode} alt="pixpel" className="w-7 rounded-full" />
               </a>
             </div>
