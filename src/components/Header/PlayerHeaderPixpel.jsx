@@ -72,23 +72,12 @@ const PlayerHeaderPixpel = () => {
         <img
           src={logo}
           alt="logo"
-          onClick={() => window.history.back()}
+          onClick={() => (window.location.href = "https://home.pixpel.io/player/account")}
           className="cursor-pointer"
         />
 
         <div className="hidden xl:flex gap-4 ">
           {/* <Market /> */}
-          {/* <div
-            className="relative flex justify-start px-5  border-app-black py-1 hover:text-app-blue"
-            onClick={async () => {
-              // navigate("/nft-market");
-              window.location.href = "https://nft.pixpel.io";
-
-              context.setDeveloperHeader(0);
-            }}
-          >
-            NFT
-          </div> */}
           {/* <div
             className={
               (context.playerHeader === 0 ? "text-app-blue px-5 py-1" : "") +
@@ -98,10 +87,10 @@ const PlayerHeaderPixpel = () => {
               window.location.href = "https://nft.pixpel.io/player/game-market";
               context.setPlayerHeader(0);
             }}
-          >
+            >
             Game
           </div> */}
-          {/* <div
+          <div
             className={
               (context.playerHeader === 1 ? "text-app-blue px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer px-5 py-1"
@@ -112,65 +101,53 @@ const PlayerHeaderPixpel = () => {
             }}
           >
             Launchpad
-          </div> */}
-          {/* <Trade /> */}
+          </div>{" "}
           <div
             className={"text-app-blue cursor-pointer w-max  px-5 py-1"}
             onClick={() => {
-              navigate("/swap-master/swap");
+              // navigate("/swap-master/swap");
               context.setPlayerHeader(2);
             }}
           >
             DEX
           </div>
-          {/* <div
+          <div
+            className="relative flex justify-start px-5  border-app-black py-1 hover:text-app-blue cursor-pointer"
+            onClick={async () => {
+              // navigate("/nft-market");
+              window.location.href = "https://nft.pixpel.io";
+
+              context.setDeveloperHeader(0);
+            }}
+          >
+            NFT
+          </div>
+          {/* <Trade /> */}
+          <div
             className={
               (context.playerHeader === 3 ? "text-app-blue  px-5 py-1" : "") +
               "hover:text-app-blue cursor-pointer w-max  px-5 py-1"
             }
             onClick={() => {
-              window.location.href =
-                "https://pixpel-git-v23frontend-pixpel2.vercel.app/player/wallet";
+              window.location.href = "https://home.pixpel.io/player/wallet";
               context.setPlayerHeader(7);
             }}
           >
             Wallet
-          </div> */}
+          </div>
         </div>
       </div>
       {/* <ConnectWalletButton /> */}
-      {/* <div
-        className="hidden lg:flex bg-app-black-button px-14 py-3 rounded-md text-app-blue w-max hover:cursor-pointer items-center"
+      <div
+        className="hidden lg:flex bg-app-black-button px-14 py-3 rounded-md text-app-blue w-max  items-center"
         // onClick={() => {
         //   context.setPlayer(false);
         // }}
       >
-        {username ? username.split('"') : "UserName"}
-      </div> */}
+        Player
+      </div>
       <div className="hidden xl:flex gap-5 items-center">
-        <div
-          className="flex items-center justify-center w-36 h-12 rounded-lg bg-app-black-button hover:bg-app-blue gap-2 cursor-pointer"
-          onClick={handlelogout}
-        >
-          <svg
-            className="h-6 w-6 text-white"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <line x1="5" y1="12" x2="11" y2="18" />
-            <line x1="5" y1="12" x2="11" y2="6" />
-          </svg>
-          <h1>LOGOUT</h1>
-        </div>
-        {/* <div className="relative inline-flex flex-col items-start ">
+        <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 1 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -190,7 +167,7 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div> */}
+        </div>
 
         {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 2 && (
@@ -259,7 +236,7 @@ const PlayerHeaderPixpel = () => {
             />
           </div>
         </div> */}
-        {/* <div className="relative inline-flex flex-col items-start ">
+        <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 5 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -269,7 +246,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              window.location.href = "https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/wallet";
+              window.location.href = "https://home.pixpel.io/player/wallet";
               context.setPlayerHeader(5);
             }}
           >
@@ -279,11 +256,11 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div> */}
+        </div>
 
         {/* <Notification /> */}
 
-        {/* <div className="relative inline-flex flex-col items-start ">
+        <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 6 && (
             <div
               className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
@@ -293,7 +270,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              window.location.href = "https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/profile";
+              window.location.href = "https://home.pixpel.io/player/profile";
               context.setPlayerHeader(6);
             }}
           >
@@ -303,7 +280,29 @@ const PlayerHeaderPixpel = () => {
               className="cursor-pointer"
             />
           </div>
-        </div> */}
+        </div>
+        <div
+          className="flex items-center justify-center w-36 h-12 rounded-lg bg-app-black-button hover:bg-app-blue gap-2 cursor-pointer"
+          onClick={handlelogout}
+        >
+          <svg
+            className="h-6 w-6 text-white"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <line x1="5" y1="12" x2="11" y2="18" />
+            <line x1="5" y1="12" x2="11" y2="6" />
+          </svg>
+          <h1>LOGOUT</h1>
+        </div>
       </div>
       <div className="xl:hidden flex" onClick={() => setOpenMenu(!openMenu)}>
         <img src={Iconmenu} alt="menu" />
@@ -321,16 +320,16 @@ const PlayerHeaderPixpel = () => {
           <p className="text-5xl cursor-pointer text-white">×</p>
         </div>
         <div className="w-full flex justify-center flex-col items-center gap-8 pt-10">
-          {/* <div
+          <div
             onClick={() => {
               setOpenMenu(false);
-              window.location.href = "https://nft.pixpel.io/player/game-market";
+              window.location.href = "https://nft.pixpel.io";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
-            Game
-          </div> */}
-          {/* <div
+            NFT
+          </div>
+          <div
             onClick={() => {
               setOpenMenu(false);
               window.location.href = "https://launchpad.pixpel.io";
@@ -342,15 +341,6 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              window.location.href = "https://launchpad.pixpel.io";
-            }}
-            className="hover:text-app-blue cursor-pointer"
-          >
-            {username ? username.split('"') : ""}
-          </div> */}
-          {/* <div
-            onClick={() => {
-              setOpenMenu(false);
               window.location.href = "/swap-master";
             }}
             className="hover:text-app-blue cursor-pointer"
@@ -360,23 +350,22 @@ const PlayerHeaderPixpel = () => {
           <div
             onClick={() => {
               setOpenMenu(false);
-              window.location.href =
-                "https://pixpel-git-v23frontend-pixpel2.vercel.app/player/wallet";
+              window.location.href = "https://home.pixpel.io/player/wallet";
             }}
             className="hover:text-app-blue cursor-pointer"
           >
             Wallet
-          </div> */}
+          </div>
 
           <div className="flex gap-5">
-            {/* <img
+            <img
               src={launchpad}
               alt="cart"
               onClick={() => {
                 setOpenMenu(false);
                 window.location.href = "https://launchpad.pixpel.io";
               }}
-            /> */}
+            />
             {/* <img
               src={marketplace}
               alt="cart"
@@ -384,8 +373,8 @@ const PlayerHeaderPixpel = () => {
                 setOpenMenu(false);
                 window.location.href = "https://nft.pixpel.io";
               }}
-            />
-            <img
+            /> */}
+            {/* <img
               src={cart}
               alt="notification"
               onClick={() => {
@@ -400,32 +389,31 @@ const PlayerHeaderPixpel = () => {
                 setOpenMenu(false);
                 window.location.href = "https://nft.pixpel.io/player/inventory";
               }}
-            />
+            /> */}
             <img
               src={wallet}
               alt="wallet"
               onClick={() => {
                 setOpenMenu(false);
-                window.location.href =
-                  "https://pixpel-git-v23frontend-pixpel2.vercel.app/player/wallet";
+                window.location.href = "https://home.pixpel.io/player/wallet";
               }}
             />
-            <img
+            {/* <img
               src={notification}
               alt="notification"
               onClick={() => {
                 setOpenMenu(false);
                 navigate("/notification");
               }}
-            />
+            /> */}
             <img
               src={profile}
               alt="profile"
               onClick={() => {
                 setOpenMenu(false);
-                navigate("https://pixpel-2wu5gnmb4-pixpel2.vercel.app/player/profile");
+                window.location.href = "https://home.pixpel.io/player/profile";
               }}
-            /> */}
+            />
           </div>
         </div>
       </div>

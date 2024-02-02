@@ -25,19 +25,22 @@ const buttonList = [
     id: 1,
     title: "MARKET",
     buttonStyle: "w-33 xs:h-14 h-10 1xs:px-0 px-2",
-    path: "swap",
+    // path: "swap",
+    path: ["swap/player", "swap/developer"],
   },
   {
     id: 2,
     title: "LIMIT",
     buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
-    path: "limit",
+    path: ["limit/player", "limit/developer"],
+    // path: "limit",
   },
   {
     id: 3,
     title: "LIQUIDITY",
     buttonStyle: "w-36 xs:h-14 h-10 1xs:px-0 px-2",
-    path: "liquidity",
+    path: ["liquidity/player", "liquidity/developer"],
+    // path: "liquidity",
   },
   // {
   //   id: 4,
@@ -52,6 +55,19 @@ const buttonList = [
   //   path: "bridge",
   // },
 ];
+
+const getCorrectPath = paths => {
+  const currentPath = window.location.pathname;
+  const isPlayerSide = currentPath.includes("/player");
+
+  if (isPlayerSide) {
+    // If on player side, use the first path in the array
+    return paths[0];
+  } else {
+    // If on developer side, use the second path in the array
+    return paths[1];
+  }
+};
 
 const SwapMaster = () => {
   const params = useParams();
@@ -106,8 +122,10 @@ const SwapMaster = () => {
                 key={idx}
                 title={button.title}
                 linkStyle={button.buttonStyle}
-                selected={params["*"] === button.path}
-                to={button.path}
+                // selected={params["*"] === button.path}
+                selected={button.path.includes(params["*"])}
+                // to={button.path[0]}
+                to={getCorrectPath(button.path)}
               />
             );
           })}
@@ -116,11 +134,11 @@ const SwapMaster = () => {
           <div className="flex justify-center w-full">
             <Routes>
               <Route index element={<Navigate to="swap" replace />} />
-              <Route path="swap" element={<Swap />} />
-              <Route path="liquidity" element={<Liquidity />} />
-              <Route path="limit" element={<Limit />} />
-              <Route path="pool" element={<Pool />} />
-              <Route path="bridge" element={<Bridge />} />
+              <Route path="swap/*" element={<Swap />} />
+              <Route path="liquidity/*" element={<Liquidity />} />
+              <Route path="limit/*" element={<Limit />} />
+              <Route path="pool/*" element={<Pool />} />
+              <Route path="bridge/*" element={<Bridge />} />
             </Routes>
           </div>
         </div>

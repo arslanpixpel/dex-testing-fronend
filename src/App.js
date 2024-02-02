@@ -57,12 +57,22 @@ function Test() {
 }
 
 function App() {
+  const currentPath = window.location.pathname;
   useWalletConnect();
+  console.log(currentPath, "current path");
 
   return (
     <div className="App">
       {/* <Header /> */}
-      <PixpelHeader />
+      {currentPath === "/swap-master/swap/player" ||
+      currentPath === "/swap-master/limit/player" ||
+      currentPath === "/swap-master/liquidity/player" ? (
+        <PixpelHeader />
+      ) : (
+        <DeveloperHeaderPixpel />
+      )}
+
+      {/* <PixpelHeader /> */}
       {/* <DeveloperHeaderPixpel /> */}
 
       <Routes>
