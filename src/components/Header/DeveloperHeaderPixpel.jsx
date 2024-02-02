@@ -44,6 +44,8 @@ const DeveloperHeaderPixpel = () => {
           alt="logo"
           onClick={() => (window.location.href = "https://home.pixpel.io/developer")}
           className="cursor-pointer"
+          width={220}
+          height={62}
         />
         <div className="hidden xl:flex gap-4 ">
           {/* <Market />
@@ -256,7 +258,7 @@ const DeveloperHeaderPixpel = () => {
           <div
             className=" cursor-pointer"
             onClick={() => {
-              window.location.href = "https://home.pixpel.io/developer/notverified";
+              window.location.href = "https://home.pixpel.io/developer/profile";
               context.setDeveloperHeader(6);
             }}
           >
@@ -290,7 +292,7 @@ const DeveloperHeaderPixpel = () => {
           <h1>LOGOUT</h1>
         </div>
       </div>
-      <div className="xl:hidden flex" onClick={() => setOpenMenu(!openMenu)}>
+      <div className="xl:hidden flex cursor-pointer" onClick={() => setOpenMenu(!openMenu)}>
         <img src={Iconmenu} alt="menu" />
       </div>
       <div
@@ -389,7 +391,7 @@ const DeveloperHeaderPixpel = () => {
               alt="profile"
               onClick={() => {
                 setOpenMenu(false);
-                window.location.href = "https://home.pixpel.io/developer/notverified";
+                window.location.href = "https://home.pixpel.io/developer/profile";
               }}
             />
           </div>

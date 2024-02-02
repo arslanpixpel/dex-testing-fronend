@@ -74,6 +74,8 @@ const PlayerHeaderPixpel = () => {
           alt="logo"
           onClick={() => (window.location.href = "https://home.pixpel.io/player/account")}
           className="cursor-pointer"
+          width={220}
+          height={62}
         />
 
         <div className="hidden xl:flex gap-4 ">
@@ -304,7 +306,7 @@ const PlayerHeaderPixpel = () => {
           <h1>LOGOUT</h1>
         </div>
       </div>
-      <div className="xl:hidden flex" onClick={() => setOpenMenu(!openMenu)}>
+      <div className="xl:hidden flex cursor-pointer" onClick={() => setOpenMenu(!openMenu)}>
         <img src={Iconmenu} alt="menu" />
       </div>
       <div
