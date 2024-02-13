@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Notification from "./Notification";
+// import Notification from "./Notification";
 // import Market from "./Market";
 // import Trade from "./Trade";
 //import cart from "../../asssets/images/shopping-cart.svg";
@@ -12,13 +12,13 @@ import profile from "../../asssets/images/profile.svg";
 import profileBlue from "../../asssets/images/profile-blue.svg";
 import logo from "../../asssets/images/logo.svg";
 //import notification from "../../asssets/images/notification.svg";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Iconmenu from "../../asssets/images/menu.svg";
 import { useAppContext } from "../../contexts/AppContext";
 import launchpad from "../../asssets/images/launchpad.svg";
 import launchpadBlue from "../../asssets/images/launchpad-blue.svg";
-import marketplace from "../../asssets/images/marketplace.svg";
-import marketplaceblue from "../../asssets/images/marketplace-blue.svg";
+// import marketplace from "../../asssets/images/marketplace.svg";
+// import marketplaceblue from "../../asssets/images/marketplace-blue.svg";
 import gamedashboard from "../../asssets/images/gamedashboard.svg";
 import gamedashboardblue from "../../asssets/images/gamedashboard-blue.svg";
 import nftfactory from "../../asssets/images/nftfactory.svg";
@@ -29,11 +29,11 @@ import nftfactoryblue from "../../asssets/images/nftfactory-blue.svg";
 const DeveloperHeaderPixpel = () => {
   const context = useAppContext();
   const [openMenu, setOpenMenu] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handlelogout = () => {
     localStorage.clear();
-    window.location.href = "https://home.pixpel.io";
+    window.location.href = "https://home.pixpel.io/?logout=true";
   };
 
   return (

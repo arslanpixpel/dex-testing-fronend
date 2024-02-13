@@ -62,7 +62,8 @@ const PlayerHeaderPixpel = () => {
 
   const handlelogout = () => {
     localStorage.clear();
-    window.location.href = "https://home.pixpel.io";
+    // window.location.href = "https://home.pixpel.io";
+    window.location.href = "https://home.pixpel.io/?logout=true";
   };
 
   return (
