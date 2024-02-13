@@ -52,14 +52,13 @@ export async function invokeContract(
         })
       : undefined);
   // const client = provider?.getJsonRpcClient() || customRpcClient;
-  const client = provider?.getGrpcClient() || customRpcClient;
-
-  // const client = new ConcordiumGRPCClient(provider.grpcTransport);
+  // const client = provider?.getGrpcClient() || customRpcClient;
 
   if (!provider) {
     provider = await detectConcordiumProvider();
   }
 
+  const client = new ConcordiumGRPCClient(provider.grpcTransport);
   // const client = provider?.getGrpcClient() || customRpcClient;
 
   const contractContext = {
@@ -143,12 +142,11 @@ export async function invokeContract2(
   // const client = provider?.getJsonRpcClient() || customRpcClient;
   // const client = provider?.getGrpcClient() || customRpcClient;
 
-  const client = new ConcordiumGRPCClient(provider.grpcTransport);
-
   if (!provider) {
     provider = await detectConcordiumProvider();
   }
 
+  const client = new ConcordiumGRPCClient(provider.grpcTransport);
   // const client = provider?.getGrpcClient() || customRpcClient;
 
   const contractContext = {
