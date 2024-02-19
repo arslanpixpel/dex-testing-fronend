@@ -169,6 +169,9 @@ const PlayerHeaderPixpel = () => {
               alt="cart"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={launchpadBlue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
 
@@ -182,7 +185,7 @@ const PlayerHeaderPixpel = () => {
           <div
             className="w-8 h-8 cursor-pointer"
             onClick={() => {
-              window.location.href = "https://nft.pixpel.io";
+              window.location.href = "https://nft.pixpel.io/player/store";
               context.setPlayerHeader(2);
             }}
           >
@@ -193,6 +196,32 @@ const PlayerHeaderPixpel = () => {
             />
           </div>
         </div> */}
+
+        <div className="relative inline-flex flex-col items-start ">
+          {context.playerHeader === 2 && (
+            <div
+              className="w-2 h-2 bg-green-500 rounded-full -mt-[10px] mb-1"
+              style={{ zIndex: 1 }}
+            />
+          )}
+          <div
+            className="w-8 h-8 cursor-pointer relative"
+            onClick={() => {
+              window.location.href = "https://nft.pixpel.io/player/store";
+              context.setPlayerHeader(2);
+            }}
+          >
+            <img
+              src={context.playerHeader === 2 ? marketplaceblue : marketplace}
+              alt="cart"
+              className="w-full h-full"
+            />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={marketplaceblue} alt="hover-image" className="w-full h-full" />
+            </div>
+          </div>
+        </div>
+
         {/* <div className="relative inline-flex flex-col items-start ">
           {context.playerHeader === 3 && (
             <div
@@ -258,6 +287,9 @@ const PlayerHeaderPixpel = () => {
               alt="wallet"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={walletBlue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
 
@@ -282,6 +314,9 @@ const PlayerHeaderPixpel = () => {
               alt="profile"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={profileBlue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
         <div

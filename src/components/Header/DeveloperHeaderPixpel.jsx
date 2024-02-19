@@ -147,6 +147,9 @@ const DeveloperHeaderPixpel = () => {
               alt="cart"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={launchpadBlue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
 
@@ -169,6 +172,9 @@ const DeveloperHeaderPixpel = () => {
               alt="cart"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={nftfactoryblue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
 
@@ -213,6 +219,9 @@ const DeveloperHeaderPixpel = () => {
               alt="cart"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={gamedashboardblue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
 
@@ -235,6 +244,9 @@ const DeveloperHeaderPixpel = () => {
               alt="wallet"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={walletBlue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
         {/* <Notification /> */}
@@ -267,6 +279,9 @@ const DeveloperHeaderPixpel = () => {
               alt="profile"
               className="cursor-pointer"
             />
+            <div className="absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">
+              <img src={profileBlue} alt="hover-image" className="w-full h-full" />
+            </div>
           </div>
         </div>
         <div
